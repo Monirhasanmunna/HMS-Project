@@ -58,6 +58,30 @@
             </li>
           </ul>
         </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-user-doctor"></i>
+            <p>
+              Assistant
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{Route('app.assistant.create')}}" class="nav-link">
+                <i class="fa-solid fa-circle-plus"></i>
+                <p>Assistant Add</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{Route('app.assistant.index')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Assistant List</p>
+              </a>
+            </li>
+          </ul>
+        </li>
         <li class="nav-header">MISCELLANEOUS</li>
       </ul>
     </nav>

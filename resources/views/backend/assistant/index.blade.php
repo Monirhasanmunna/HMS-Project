@@ -26,7 +26,7 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title text-primary"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Doctor's</span></h3>
+                      <h3 class="card-title text-primary"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Assistant's</span></h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -36,32 +36,30 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Assistant Of</th>
                             <th>Degrees</th>
-                            <th>Specialist</th>
-                            <th>Consultant Of Collage</th>
                             <th>Mobile</th>
                             <th class="text-center">Action</th>
                           </tr>
                           </thead>
                           <tbody>
-                        @foreach ($doctors as $key=>$doctor)
+                        @foreach ($assistants as $key=>$assistant)
                           <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$doctor->name}}</td>
-                            <td>{{$doctor->email}}</td>
-                            <td>{{$doctor->degrees}}</td>
-                            <td>{{$doctor->specialist}}</td>
-                            <td>{{$doctor->consultant_of_college}}</td>
-                            <td>{{$doctor->mobile}}</td>
+                            <td>{{$assistant->name}}</td>
+                            <td>{{$assistant->email}}</td>
+                            <td>{{$assistant->doctor->name}}</td>
+                            <td>{{$assistant->degrees}}</td>
+                            <td>{{$assistant->mobile}}</td>
                             <td class="text-center">
                                 <div class="dropdown show dropleft ">
                                     <a class="btn btn-sm btn-primary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a href="javascript:void(0)" onclick="doctorShow({{$doctor->id}})" class="btn-sm btn-info dropdown-item">Show</a>
-                                        <a href="{{Route('app.doctor.edit',[$doctor->id])}}" class="btn-sm btn-primary dropdown-item">Edit</a>
-                                        <a href="javascript:void(0)" onclick="doctorDelete({{$doctor->id}})" class="btn-sm btn-danger dropdown-item">Delete</a>
+                                        <a href="javascript:void(0)" onclick="assistantShow({{$assistant->id}})" class="btn-sm btn-info dropdown-item">Show</a>
+                                        <a href="{{Route('app.assistant.edit',[$assistant->id])}}" class="btn-sm btn-primary dropdown-item">Edit</a>
+                                        <a href="javascript:void(0)" onclick="assistantDelete({{$assistant->id}})" class="btn-sm btn-danger dropdown-item">Delete</a>
                                     </div>
                                   </div>
                             </td>
@@ -70,14 +68,13 @@
                           </tbody>
                           <tfoot>
                             <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Degrees</th>
-                                <th>Specialist</th>
-                                <th>Consultant Of Collage</th>
-                                <th>Mobile</th>
-                                <th>Action</th>
+                              <th>#</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th>Assistant Of</th>
+                              <th>Degrees</th>
+                              <th>Mobile</th>
+                              <th class="text-center">Action</th>
                               </tr>
                           </tfoot>
                         </table>
@@ -94,10 +91,10 @@
 
 
 <!-- Large modal -->
-<div id="doctorModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id="assistantModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Doctor Details</span></h5>
+        <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Assistant Details</span></h5>
         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -120,16 +117,12 @@
                         <td id="email"></td>
                         </tr>
                         <tr>
+                        <th>Assistant Of:</th>
+                        <td id="assistant_of"></td>
+                        </tr>
+                        <tr>
                         <th>Degrees:</th>
                         <td id="degrees"></td>
-                        </tr>
-                        <tr>
-                        <th>Specialist:</th>
-                        <td id="specialist"></td>
-                        </tr>
-                        <tr>
-                        <th>Consultant Of Collage:</th>
-                        <td id="coc"></td>
                         </tr>
                         <tr>
                         <th>Mobile:</th>
@@ -179,7 +172,7 @@
       </script>
 
       <script>
-        function doctorDelete(id){
+        function assistantDelete(id){
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -197,7 +190,7 @@
                     'success'
                     )
                     $.ajax({
-                    url      : '/app/doctor/delete/'+id,
+                    url      : '/app/assistant/delete/'+id,
                     dataType : 'json',
                     Type     : 'Delete',
                     success  : function(response){
@@ -212,19 +205,18 @@
       </script>
 
       <script>
-        function doctorShow(id){
+        function assistantShow(id){
             $.ajax({
-                url         : '/app/doctor/show/'+id,
+                url         : '/app/assistant/show/'+id,
                 Type        : 'GET',
                 dataType    : 'json',
                 success     : function(response){
                     $("#name").html(response.name);
                     $("#email").html(response.email);
+                    $("#assistant_of").html(response.doctor.name);
                     $("#degrees").html(response.degrees);
-                    $("#specialist").html(response.specialist);
-                    $("#coc").html(response.consultant_of_college);
                     $("#mobile").html(response.mobile);
-                    $("#doctorModal").modal('show');
+                    $("#assistantModal").modal('show');
                 }
             });
         }
