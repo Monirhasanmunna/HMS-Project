@@ -37,17 +37,23 @@
         
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-chart-pie"></i>
+            <i class="fa-solid fa-user-doctor"></i>
             <p>
-              Charts
+              Doctor
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="pages/charts/chartjs.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>ChartJS</p>
+              <a href="{{Route('app.doctor.create')}}" class="nav-link">
+                <i class="fa-solid fa-circle-plus"></i>
+                <p>Doctor Add</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{Route('app.doctor.index')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Doctor List</p>
               </a>
             </li>
           </ul>

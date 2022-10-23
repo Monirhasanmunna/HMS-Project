@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\DoctorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,17 @@ Route::get('/', function () {
 Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>['auth','verified']],function(){
 
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+
+    Route::group(['as'=>'doctor.','prefix'=>'doctor'],function(){
+
+        Route::get('/index',[DoctorController::class,'index'])->name('index');
+        Route::get('/create',[DoctorController::class,'create'])->name('create');
+        Route::post('/store',[DoctorController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[DoctorController::class,'edit'])->name('edit');
+        Route::get('/show/{id}',[DoctorController::class,'show'])->name('show');
+        Route::put('/update/{id}',[DoctorController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[DoctorController::class,'destroy'])->name('delete');
+    });
     
 });
 
