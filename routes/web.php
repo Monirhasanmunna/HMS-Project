@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Backend\AssistantController;
+use App\Http\Controllers\Backend\BloodController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DiseaseController;
 use App\Http\Controllers\Backend\DoctorController;
+use App\Http\Controllers\Backend\PatientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,7 +64,26 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
     });
 
 
+    Route::group(['as'=>'blood.','prefix'=>'blood'],function(){
 
+        Route::get('/index',[BloodController::class,'index'])->name('index');
+        Route::get('/create',[BloodController::class,'create'])->name('create');
+        Route::post('/store',[BloodController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[BloodController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[BloodController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[BloodController::class,'destroy'])->name('delete');
+    });
+
+
+    Route::group(['as'=>'patient.','prefix'=>'patient'],function(){
+
+        Route::get('/index',[PatientController::class,'index'])->name('index');
+        Route::get('/create',[PatientController::class,'create'])->name('create');
+        Route::post('/store',[PatientController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[PatientController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[PatientController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[PatientController::class,'destroy'])->name('delete');
+    });
     
 });
 
