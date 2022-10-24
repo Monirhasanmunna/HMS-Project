@@ -48,12 +48,12 @@
                                 <div class="form-row">
                                     <div class="form-group col-4">
                                         <label>Doctor</label>
-                                        <select name="doctor" class="js-example-placeholder-single js-states form-control @error('doctor') is-invalid @enderror" style="width: 100%">
+                                        <select name="doctor_id" class="js-example-placeholder-single js-states form-control @error('doctor') is-invalid @enderror" style="width: 100%">
                                             <option></option>
                                             @foreach ($doctors as $doctor)
                                                <option value="{{$doctor->id}}"
-                                                @if(isset($assistant))
-                                                {{($assistant->doctor_id == $doctor->id)?'selected':''}}
+                                                @if(isset($patient))
+                                                {{($patient->doctor_id == $doctor->id)?'selected':''}}
                                                 @endif
                                                 >{{$doctor->name}}</option> 
                                             @endforeach
@@ -65,7 +65,7 @@
 
                                     <div class="form-group col-4">
                                         <label for="name">Name</label>
-                                        <input type="text" name="name" class="form-control form-control-sm @error('name') is-invalid @enderror" id="name" placeholder="Enter Name" value="{{ $assistant->name ?? old('name') }}">
+                                        <input type="text" name="name" class="form-control form-control-sm @error('name') is-invalid @enderror" id="name" placeholder="Enter Name" value="{{ $patient->name ?? old('name') }}">
                                         @error('name')
                                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
@@ -73,7 +73,7 @@
 
                                     <div class="form-group col-4">
                                         <label for="age">Age</label>
-                                        <input type="number" name="age" class="form-control form-control-sm @error('age') is-invalid @enderror" id="age" placeholder="Enter Age" value="{{ $assistant->name ?? old('name') }}">
+                                        <input type="number" name="age" class="form-control form-control-sm @error('age') is-invalid @enderror" id="age" placeholder="Enter Age" value="{{ $patient->age ?? old('age') }}">
                                         @error('name')
                                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
@@ -83,7 +83,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-4">
                                         <label for="address">Address</label>
-                                        <input type="text" name="address" class="form-control form-control-sm @error('address') is-invalid @enderror" id="address" placeholder="Enter Address" value="{{ $assistant->address ?? old('address') }}">
+                                        <input type="text" name="address" class="form-control form-control-sm @error('address') is-invalid @enderror" id="address" placeholder="Enter Address" value="{{ $patient->address ?? old('address') }}">
                                         @error('address')
                                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
@@ -91,7 +91,7 @@
 
                                     <div class="form-group col-4">
                                         <label for="mobile">Mobile</label>
-                                        <input type="number" name="mobile" class="form-control form-control-sm @error('mobile') is-invalid @enderror" id="mobile" placeholder="Enter Mobile" value="{{ $assistant->mobile ?? old('mobile') }}">
+                                        <input type="number" name="mobile" class="form-control form-control-sm @error('mobile') is-invalid @enderror" id="mobile" placeholder="Enter Mobile" value="{{ $patient->mobile ?? old('mobile') }}">
                                         @error('mobile')
                                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
@@ -99,7 +99,7 @@
 
                                     <div class="form-group col-4">
                                         <label for="weight">Weight</label>
-                                        <input type="number" name="weight" class="form-control form-control-sm @error('weight') is-invalid @enderror" id="weight" placeholder="Enter Weight" value="{{ $assistant->weight ?? old('weight') }}">
+                                        <input type="number" name="weight" class="form-control form-control-sm @error('weight') is-invalid @enderror" id="weight" placeholder="Enter Weight" value="{{ $patient->weight ?? old('weight') }}">
                                         @error('weight')
                                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
@@ -109,7 +109,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-4">
                                         <label for="temp">Temprature</label>
-                                        <input type="number" name="temprature" class="form-control form-control-sm @error('temprature') is-invalid @enderror" id="temp" placeholder="Enter temprature" value="{{ $assistant->temprature ?? old('temprature') }}">
+                                        <input type="number" name="temprature" class="form-control form-control-sm @error('temprature') is-invalid @enderror" id="temp" placeholder="Enter temprature" value="{{ $patient->temprature ?? old('temprature') }}">
                                         @error('temprature')
                                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
@@ -117,7 +117,7 @@
 
                                     <div class="form-group col-4">
                                         <label for="bp">Blood Pressure</label>
-                                        <input type="text" name="blood_pressure" class="form-control form-control-sm @error('blood_pressure') is-invalid @enderror" id="temp" placeholder="Enter blood_pressure" value="{{ $assistant->blood_pressure ?? old('blood_pressure') }}">
+                                        <input type="text" name="blood_pressure" class="form-control form-control-sm @error('blood_pressure') is-invalid @enderror" id="temp" placeholder="Enter blood_pressure" value="{{ $patient->blood_pressure ?? old('blood_pressure') }}">
                                         @error('blood_pressure')
                                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
@@ -125,7 +125,7 @@
 
                                     <div class="form-group col-4">
                                         <label for="pulse">Pulse</label>
-                                        <input type="number" name="pulse" class="form-control form-control-sm @error('pulse') is-invalid @enderror" id="temp" placeholder="Enter pulse" value="{{ $assistant->pulse ?? old('pulse') }}">
+                                        <input type="number" name="pulse" class="form-control form-control-sm @error('pulse') is-invalid @enderror" id="temp" placeholder="Enter pulse" value="{{ $patient->pulse ?? old('pulse') }}">
                                         @error('pulse')
                                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
@@ -133,80 +133,81 @@
                                 </div>
 
                                 <div class="form-row">
-                                    <div class="form-group clearfix col-4 pt-2">
+                                    <div class="form-group clearfix col-4 pt-4">
                                         <label for="pulse" class="pr-3">Sex:</label>
                                         <div class="icheck-primary d-inline">
-                                          <input type="checkbox" id="checkboxPrimary1">
+                                          <input type="checkbox" id="checkboxPrimary1" value="male" name="sex" @if(isset($patient)){{($patient->sex == 'male')? 'checked' : ''}}@endif>
                                           <label for="checkboxPrimary1">
                                             Male
                                           </label>
                                         </div>
                                         <div class="icheck-primary d-inline">
-                                          <input type="checkbox" id="checkboxPrimary2">
+                                          <input type="checkbox" id="checkboxPrimary2" value="female" name="sex" @if(isset($patient)){{($patient->sex == 'female')? 'checked' : ''}}@endif>
                                           <label for="checkboxPrimary2">
                                             Female
                                           </label>
                                         </div>
                                         <div class="icheck-primary d-inline">
-                                          <input type="checkbox" id="checkboxPrimary3">
+                                          <input type="checkbox" id="checkboxPrimary3" value="others" name="sex" @if(isset($patient)){{($patient->sex == 'others')? 'checked' : ''}}@endif>
                                           <label for="checkboxPrimary3">
                                             Others
                                           </label>
                                         </div>
                                       </div>
 
-                                      <div class="form-group clearfix col-4 pt-2">
-                                        <label for="pulse" class="pr-3">Maritial Status:</label>
+                                      <div class="form-group clearfix col-4 pt-4">
+                                        <label for="married" class="pr-3">Maritial Status:</label>
                                         <div class="icheck-primary d-inline">
-                                          <input type="checkbox" id="maride">
-                                          <label for="maride">
-                                            Maride
+                                          <input type="checkbox" id="married" value="married" name="maritial_status" @if(isset($patient)){{($patient->maritial_status == 'married')? 'checked' : ''}}@endif>
+                                          <label for="married">
+                                            Married
                                           </label>
                                         </div>
                                         <div class="icheck-primary d-inline">
-                                          <input type="checkbox" id="single">
+                                          <input type="checkbox" id="single" value="single" name="maritial_status" @if(isset($patient)){{($patient->maritial_status == 'single')? 'checked' : ''}}@endif>
                                           <label for="single">
                                             Single
                                           </label>
                                         </div>
                                       </div>
 
-                                      <div class="form-group clearfix col-4 pt-2">
-                                        <label for="pulse" class="pr-3">Maritial Status:</label>
-                                        <div class="icheck-primary d-inline">
-                                          <input type="checkbox" id="maride">
-                                          <label for="maride">
-                                            Maride
-                                          </label>
-                                        </div>
-                                        <div class="icheck-primary d-inline">
-                                          <input type="checkbox" id="single">
-                                          <label for="single">
-                                            Single
-                                          </label>
-                                        </div>
-                                      </div>
+                                      <div class="form-group col-4">
+                                        <label>Blood Group</label>
+                                        <select name="blood_id" class="js-example-placeholder-single js-states form-control @error('blood_group') is-invalid @enderror" style="width: 100%">
+                                            <option></option>
+                                            @foreach ($bloods as $blood)
+                                               <option value="{{$blood->id}}"
+                                                @if(isset($patient))
+                                                {{($patient->blood_id == $blood->id)?'selected':''}}
+                                                @endif
+                                                >{{$blood->name}}</option> 
+                                            @endforeach
+                                        </select>
+                                        @error('blood')
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group col-4">
                                         <label for="ocupation">Ocupation</label>
-                                        <input type="text" name="ocupation" class="form-control form-control-sm @error('ocupation') is-invalid @enderror" id="temp" placeholder="Enter Ocupation" value="{{ $assistant->ocupation ?? old('ocupation') }}">
+                                        <input type="text" name="ocupation" class="form-control form-control-sm @error('ocupation') is-invalid @enderror" id="temp" placeholder="Enter Ocupation" value="{{ $patient->ocupation ?? old('ocupation') }}">
                                         @error('ocupation')
                                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
                                     </div>
                                     <div class="form-group col-4">
                                         <label for="religion">Religion</label>
-                                        <input type="text" name="ocupation" class="form-control form-control-sm @error('ocupation') is-invalid @enderror" id="temp" placeholder="Enter Ocupation" value="{{ $assistant->ocupation ?? old('ocupation') }}">
-                                        @error('ocupation')
+                                        <input type="text" name="religion" class="form-control form-control-sm @error('religion') is-invalid @enderror" id="temp" placeholder="Enter religion" value="{{ $patient->religion ?? old('religion') }}">
+                                        @error('religion')
                                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
                                     </div>
                                 </div>
                                 
                     
-                                @if(!isset($assistant))
+                                @if(!isset($patient))
                                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i><span class="pl-1">Submit</span></button>
                                 @else
                                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-spinner"></i><span class="pl-1">Update</span></button>

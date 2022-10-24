@@ -9,4 +9,9 @@ class Blood extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function patients()
+    {
+        return $this->hasMany(Patient::class);
+    }
 }

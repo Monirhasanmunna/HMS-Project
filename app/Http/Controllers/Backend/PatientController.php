@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blood;
 use App\Models\Disease;
 use App\Models\Doctor;
 use App\Models\Patient;
@@ -30,7 +31,8 @@ class PatientController extends Controller
     {
         $doctors = Doctor::all();
         $disease = Disease::all();
-        return view('backend.patient.create',compact('doctors','disease'));
+        $bloods = Blood::all();
+        return view('backend.patient.create',compact('doctors','disease','bloods'));
     }
 
     /**
@@ -41,7 +43,44 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $request->validate([
+            'doctor_id'         => 'required',
+            'blood_id'          => 'required',
+            'name'              => 'required|string',
+            'age'               => 'required',
+            'address'           => 'required',
+            'mobile'            => 'required',
+            'weight'            => 'required',
+            'temprature'        => 'required',
+            'blood_pressure'    => 'required',
+            'pulse'             => 'required',
+            'ocupation'         => 'required',
+            'religion'          => 'required',
+            'sex'               => 'required',
+            'maritial_status'   => 'required'
+        ]);
+
+
+        Patient::create([
+            'name'              => $request->name,
+            'doctor_id'         => $request->doctor_id,
+            'age'               => $request->age,
+            'address'           => $request->address,
+            'mobile'            => $request->mobile,
+            'blood_id'          => $request->blood_id,
+            'weight'            => $request->weight,
+            'maritial_status'   => $request->maritial_status,
+            'ocupation'         => $request->ocupation,
+            'religion'          => $request->religion,
+            'temprature'        => $request->temprature,
+            'blood_pressure'    => $request->blood_pressure,
+            'pulse'             => $request->pulse,
+            'sex'               => $request->sex
+        ]);
+
+        notify()->success('Patient Created Successfully');
+        return redirect()->route('app.patient.index');
     }
 
     /**
@@ -62,8 +101,10 @@ class PatientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   $doctors = Doctor::all();
+        $bloods  = Blood::all();
+        $patient = Patient::findOrfail($id);
+        return view('backend.patient.create',compact('patient','doctors','bloods'));
     }
 
     /**
@@ -75,7 +116,43 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'doctor_id'         => 'required',
+            'blood_id'          => 'required',
+            'name'              => 'required|string',
+            'age'               => 'required',
+            'address'           => 'required',
+            'mobile'            => 'required',
+            'weight'            => 'required',
+            'temprature'        => 'required',
+            'blood_pressure'    => 'required',
+            'pulse'             => 'required',
+            'ocupation'         => 'required',
+            'religion'          => 'required',
+            'sex'               => 'required',
+            'maritial_status'   => 'required'
+        ]);
+
+
+        Patient::findOrfail($id)->update([
+            'name'              => $request->name,
+            'doctor_id'         => $request->doctor_id,
+            'age'               => $request->age,
+            'address'           => $request->address,
+            'mobile'            => $request->mobile,
+            'blood_id'          => $request->blood_id,
+            'weight'            => $request->weight,
+            'maritial_status'   => $request->maritial_status,
+            'ocupation'         => $request->ocupation,
+            'religion'          => $request->religion,
+            'temprature'        => $request->temprature,
+            'blood_pressure'    => $request->blood_pressure,
+            'pulse'             => $request->pulse,
+            'sex'               => $request->sex
+        ]);
+
+        notify()->success('Patient Updated Successfully');
+        return redirect()->route('app.patient.index');
     }
 
     /**
@@ -86,6 +163,9 @@ class PatientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $patient = Patient::findOrfail($id);
+        $patient->delete();
+        return response()->json($patient);
+
     }
 }

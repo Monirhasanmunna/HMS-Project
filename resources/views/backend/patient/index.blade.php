@@ -56,12 +56,11 @@
                             <td>{{$patient->sex}}</td>
                             <td>{{$patient->doctor->name}}</td>
                             <td>{{$patient->mobile}}</td>
-                            <td>{{$patient->blood_group}}</td>
+                            <td>{{$patient->blood->name}}ve</td>
                             <td>{{$patient->weight}}</td>
                             <td>{{$patient->temprature}}</td>
                             <td>{{$patient->blood_pressure}}</td>
                             <td>{{$patient->pulse}}</td>
-                            <td>{{$patient->religion}}</td>
                             <td class="text-center">
                                 <div class="dropdown show dropleft ">
                                     <a class="btn btn-sm btn-primary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -107,7 +106,7 @@
 
 
 <!-- Large modal -->
-<div id="assistantModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+{{-- <div id="assistantModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-header bg-primary text-white">
         <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Assistant Details</span></h5>
@@ -122,7 +121,7 @@
                 {{-- <div class="card-header">
                   <h3 class="card-title text-primary"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Doctor</span></h3>
                 </div> --}}
-                <div class="card-body">
+                {{--<div class="card-body">
                     <table style="width:100%">
                         <tr>
                         <th>Name:</th>
@@ -151,7 +150,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 @endsection
 
@@ -189,7 +188,7 @@
       </script>
 
       <script>
-        function assistantDelete(id){
+        function patientDelete(id){
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -207,7 +206,7 @@
                     'success'
                     )
                     $.ajax({
-                    url      : '/app/assistant/delete/'+id,
+                    url      : '/app/patient/delete/'+id,
                     dataType : 'json',
                     Type     : 'Delete',
                     success  : function(response){
@@ -221,7 +220,7 @@
         }
       </script>
 
-      <script>
+      {{-- <script>
         function assistantShow(id){
             $.ajax({
                 url         : '/app/assistant/show/'+id,
@@ -237,5 +236,5 @@
                 }
             });
         }
-      </script>
+      </script> --}}
 @endpush

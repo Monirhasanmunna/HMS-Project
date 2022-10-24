@@ -20,4 +20,9 @@ class Patient extends Model
     {
         return $this->belongsToMany(Disease::class);
     }
+
+    public function blood()
+    {
+        return $this->belongsTo(Blood::class,'blood_id');
+    }
 }
