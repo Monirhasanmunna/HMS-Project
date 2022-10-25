@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\DoctorController;
 use App\Http\Controllers\Backend\FrequencyController;
 use App\Http\Controllers\Backend\PatientController;
 use App\Http\Controllers\Backend\QuantityController;
+use App\Http\Controllers\Backend\QuantityTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -107,6 +108,16 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/edit/{id}',[QuantityController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[QuantityController::class,'update'])->name('update');
         Route::get('/delete/{id}',[QuantityController::class,'destroy'])->name('delete');
+    });
+
+    Route::group(['as'=>'quantity.type.','prefix'=>'quantity/type'],function(){
+
+        Route::get('/index',[QuantityTypeController::class,'index'])->name('index');
+        Route::get('/create',[QuantityTypeController::class,'create'])->name('create');
+        Route::post('/store',[QuantityTypeController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[QuantityTypeController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[QuantityTypeController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[QuantityTypeController::class,'destroy'])->name('delete');
     });
     
 });
