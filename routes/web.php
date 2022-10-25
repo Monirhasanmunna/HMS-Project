@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\AdviceController;
 use App\Http\Controllers\Backend\AssistantController;
 use App\Http\Controllers\Backend\BloodController;
 use App\Http\Controllers\Backend\DashboardController;
@@ -129,6 +130,16 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/edit/{id}',[EatingTimeController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[EatingTimeController::class,'update'])->name('update');
         Route::get('/delete/{id}',[EatingTimeController::class,'destroy'])->name('delete');
+    });
+
+    Route::group(['as'=>'advice.','prefix'=>'advice'],function(){
+
+        Route::get('/index',[AdviceController::class,'index'])->name('index');
+        Route::get('/create',[AdviceController::class,'create'])->name('create');
+        Route::post('/store',[AdviceController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[AdviceController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[AdviceController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[AdviceController::class,'destroy'])->name('delete');
     });
     
 });

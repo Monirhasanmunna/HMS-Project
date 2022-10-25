@@ -177,14 +177,14 @@
                 <p>Eating Time</p>
               </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a href="{{Route('app.disease.index')}}" class="nav-link">
                 <i class="fa-solid fa-list"></i>
                 <p>Test</p>
               </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
-              <a href="{{Route('app.disease.index')}}" class="nav-link">
+              <a href="{{Route('app.advice.index')}}" class="nav-link">
                 <i class="fa-solid fa-list"></i>
                 <p>Advice</p>
               </a>
