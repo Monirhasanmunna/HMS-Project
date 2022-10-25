@@ -73,7 +73,7 @@
 
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="fa-solid fa-user-nurse"></i>
+            <i class="fa-sharp fa-solid fa-wheelchair"></i>
             <p>
               Patient
               <i class="right fas fa-angle-left"></i>
@@ -139,6 +139,54 @@
               <a href="{{Route('app.disease.index')}}" class="nav-link">
                 <i class="fa-solid fa-list"></i>
                 <p>Disease List</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-list-check"></i>
+            <p>
+              Manage
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{Route('app.frequency.index')}}" class="nav-link">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <p>Frequency</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{Route('app.disease.index')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Quantity</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{Route('app.disease.index')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Qty Type</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{Route('app.disease.index')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Eating Time</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{Route('app.disease.index')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Test</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{Route('app.disease.index')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Advice</p>
               </a>
             </li>
           </ul>

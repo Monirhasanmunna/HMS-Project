@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\BloodController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DiseaseController;
 use App\Http\Controllers\Backend\DoctorController;
+use App\Http\Controllers\Backend\FrequencyController;
 use App\Http\Controllers\Backend\PatientController;
 use Illuminate\Support\Facades\Route;
 
@@ -83,6 +84,17 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/edit/{id}',[PatientController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[PatientController::class,'update'])->name('update');
         Route::get('/delete/{id}',[PatientController::class,'destroy'])->name('delete');
+    });
+
+
+    Route::group(['as'=>'frequency.','prefix'=>'frequency'],function(){
+
+        Route::get('/index',[FrequencyController::class,'index'])->name('index');
+        Route::get('/create',[FrequencyController::class,'create'])->name('create');
+        Route::post('/store',[FrequencyController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[FrequencyController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[FrequencyController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[FrequencyController::class,'destroy'])->name('delete');
     });
     
 });
