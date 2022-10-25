@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\BloodController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DiseaseController;
 use App\Http\Controllers\Backend\DoctorController;
+use App\Http\Controllers\Backend\EatingTimeController;
 use App\Http\Controllers\Backend\FrequencyController;
 use App\Http\Controllers\Backend\PatientController;
 use App\Http\Controllers\Backend\QuantityController;
@@ -118,6 +119,16 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/edit/{id}',[QuantityTypeController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[QuantityTypeController::class,'update'])->name('update');
         Route::get('/delete/{id}',[QuantityTypeController::class,'destroy'])->name('delete');
+    });
+
+    Route::group(['as'=>'eatingtime.','prefix'=>'eating/time'],function(){
+
+        Route::get('/index',[EatingTimeController::class,'index'])->name('index');
+        Route::get('/create',[EatingTimeController::class,'create'])->name('create');
+        Route::post('/store',[EatingTimeController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[EatingTimeController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[EatingTimeController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[EatingTimeController::class,'destroy'])->name('delete');
     });
     
 });

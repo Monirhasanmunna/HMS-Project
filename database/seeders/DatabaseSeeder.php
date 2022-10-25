@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FrequencySeeder::class);
         $this->call(QuantitySeeder::class);
         $this->call(QuantityTypeSeeder::class);
+        $this->call(EatingTimeSeeder::class);
     }
 }
