@@ -160,7 +160,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{Route('app.disease.index')}}" class="nav-link">
+              <a href="{{Route('app.quantity.index')}}" class="nav-link">
                 <i class="fa-solid fa-list"></i>
                 <p>Quantity</p>
               </a>

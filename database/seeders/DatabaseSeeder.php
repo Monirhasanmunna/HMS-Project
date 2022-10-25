@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DiseaseSeeder::class);
         $this->call(BloodSeeder::class);
         $this->call(FrequencySeeder::class);
+        $this->call(QuantitySeeder::class);
     }
 }
