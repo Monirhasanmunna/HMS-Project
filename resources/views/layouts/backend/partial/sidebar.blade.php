@@ -1,16 +1,16 @@
 <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
         <img src="{{asset('backend/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
         <a href="#" class="d-block">Alexander Pierce</a>
       </div>
-    </div>
+    </div> --}}
 
     <!-- Sidebar Menu -->
-    <nav class="mt-2">
+    <nav class="mt-3">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
@@ -22,7 +22,59 @@
             </p>
           </a>
         </li>
+
+        <li class="nav-header">User Management</li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-sharp fa-solid fa-person"></i>
+            <p>
+              Role
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-person-circle-plus"></i>
+                <p>Role Add</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fa-sharp fa-solid fa-users"></i>
+                <p>Role List</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-user"></i>
+            <p>
+              User
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-user-plus"></i>
+                <p>User Add</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-users"></i>
+                <p>User List</p>
+              </a>
+            </li>
+          </ul>
+        </li>
         
+        <li class="nav-header">Patient Management</li>
+
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="fa-solid fa-user-doctor"></i>
@@ -95,50 +147,28 @@
           </ul>
         </li>
 
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="fa-solid fa-user-nurse"></i>
-            <p>
-              Disease
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{Route('app.disease.create')}}" class="nav-link">
-                <i class="fa-solid fa-circle-plus"></i>
-                <p>Disease Add</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{Route('app.disease.index')}}" class="nav-link">
-                <i class="fa-solid fa-list"></i>
-                <p>Disease List</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-header">Settings</li>
+
+        <li class="nav-header">Prescription Management</li>
 
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="fa-solid fa-gear"></i>
+            <i class="fa-solid fa-file-prescription"></i>
             <p>
-              Settings
+              Prescription
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{Route('app.blood.index')}}" class="nav-link">
-                <i class="fa-solid fa-hand-holding-heart"></i>
-                <p>Blood Group</p>
+              <a href="{{Route('app.prescription.create')}}" class="nav-link">
+                <i class="fa-solid fa-circle-plus"></i>
+                <p>Prescription Add</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{Route('app.disease.index')}}" class="nav-link">
+              <a href="{{Route('app.patient.index')}}" class="nav-link">
                 <i class="fa-solid fa-list"></i>
-                <p>Disease List</p>
+                <p>Prescription List</p>
               </a>
             </li>
           </ul>
@@ -155,54 +185,103 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="{{Route('app.medicinegroup.index')}}" class="nav-link">
-                <i class="fa-solid fa-list"></i>
+                <i class="fa-solid fa-bars"></i>
                 <p>Medicine Group</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{Route('app.medicine.index')}}" class="nav-link">
-                <i class="fa-solid fa-list"></i>
+                <i class="fa-solid fa-bars"></i>
                 <p>Medicine</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{Route('app.frequency.index')}}" class="nav-link">
-                <i class="fa-solid fa-hand-holding-heart"></i>
+                <i class="fa-solid fa-bars"></i>
                 <p>Frequency</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{Route('app.quantity.index')}}" class="nav-link">
-                <i class="fa-solid fa-list"></i>
+                <i class="fa-solid fa-bars"></i>
                 <p>Quantity</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{Route('app.quantity.type.index')}}" class="nav-link">
-                <i class="fa-solid fa-list"></i>
+                <i class="fa-solid fa-bars"></i>
                 <p>Qty Type</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{Route('app.eatingtime.index')}}" class="nav-link">
-                <i class="fa-solid fa-list"></i>
+                <i class="fa-solid fa-bars"></i>
                 <p>Eating Time</p>
               </a>
             </li>
-            {{-- <li class="nav-item">
-              <a href="{{Route('app.disease.index')}}" class="nav-link">
-                <i class="fa-solid fa-list"></i>
-                <p>Test</p>
-              </a>
-            </li> --}}
             <li class="nav-item">
               <a href="{{Route('app.advice.index')}}" class="nav-link">
-                <i class="fa-solid fa-list"></i>
+                <i class="fa-solid fa-bars"></i>
                 <p>Advice</p>
               </a>
             </li>
           </ul>
         </li>
+
+        
+
+      <li class="nav-header">Bed Management</li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fa-solid fa-bed"></i>
+              <p>Bed</p>
+            </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-bed-pulse"></i>
+              <p>Bed Type</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-sitemap"></i>
+              <p>Bed Group</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-building"></i>
+              <p>Floor</p>
+          </a>
+        </li>
+
+        <li class="nav-header">Settings</li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-gear"></i>
+            <p>
+              Setting
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{Route('app.disease.index')}}" class="nav-link">
+                <i class="fa-solid fa-bars"></i>
+                <p>Disease</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{Route('app.blood.index')}}" class="nav-link">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <p>Blood Group</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

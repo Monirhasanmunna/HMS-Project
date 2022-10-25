@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\FrequencyController;
 use App\Http\Controllers\Backend\MedicineController;
 use App\Http\Controllers\Backend\MedicineGroupController;
 use App\Http\Controllers\Backend\PatientController;
+use App\Http\Controllers\Backend\PrescriptionController;
 use App\Http\Controllers\Backend\QuantityController;
 use App\Http\Controllers\Backend\QuantityTypeController;
 use Illuminate\Support\Facades\Route;
@@ -163,6 +164,21 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/edit/{id}',[MedicineController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[MedicineController::class,'update'])->name('update');
         Route::get('/delete/{id}',[MedicineController::class,'destroy'])->name('delete');
+    });
+
+
+    Route::group(['as'=>'prescription.','prefix'=>'prescription'],function(){
+
+        Route::get('/index',[PrescriptionController::class,'index'])->name('index');
+        Route::get('/create',[PrescriptionController::class,'create'])->name('create');
+        Route::post('/store',[PrescriptionController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[PrescriptionController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[PrescriptionController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[PrescriptionController::class,'destroy'])->name('delete');
+
+        // ajax route
+        Route::get('patient/info/{id}',[PrescriptionController::class,'patient_info']);
+        Route::get('medicine/info/{id}',[PrescriptionController::class,'medicine_info']);
     });
     
 });

@@ -25,4 +25,9 @@ class Patient extends Model
     {
         return $this->belongsTo(Blood::class,'blood_id');
     }
+
+    public function prescriptionDetails()
+    {
+        return $this->belongsTo(PrescriptionDetails::class);
+    }
 }

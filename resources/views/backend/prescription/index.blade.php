@@ -26,9 +26,9 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title text-primary"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Disease's</span></h3>
+                      <h3 class="card-title text-primary"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Blood Group's</span></h3>
                       <div class="text-right">
-                        <a href="{{Route('app.disease.create')}}" class="btn btn-sm btn-primary pull-right">Add New</a>
+                        <a href="{{Route('app.blood.create')}}" class="btn btn-sm btn-primary pull-right">Add New</a>
                       </div>
                     </div>
                     <!-- /.card-header -->
@@ -36,31 +36,28 @@
                         <table id="example2" class="table table-bordered table-hover ">
                           <thead>
                           <tr>
-                            <th>#</th>
+                            <th style="width: 100px">#</th>
                             <th>Name</th>
-                            <th>Code</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center" style="width: 170px">Action</th>
                           </tr>
                           </thead>
                           <tbody>
-                        @foreach ($diseases as $key=>$disease)
+                        @foreach ($bloods as $key=>$blood)
                           <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$disease->name}}</td>
-                            <td>{{$disease->code}}</td>
+                            <td>{{$blood->name}}</td>
                             <td class="text-center">
-                              <a href="{{Route('app.disease.edit',[$disease->id])}}" class="btn btn-sm btn-primary">Edit</a>
-                              <a href="javascript:void(0)" onclick="diseaseDelete({{$disease->id}})" class="btn btn-sm btn-danger">Delete</a>
+                              <a href="{{Route('app.blood.edit',[$blood->id])}}" class="btn btn-sm btn-primary">Edit</a>
+                              <a href="javascript:void(0)" onclick="bloodDelete({{$blood->id}})" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                           </tr>
                         @endforeach
                           </tbody>
                           <tfoot>
                             <tr>
-                              <th>#</th>
+                              <th style="width: 100px">#</th>
                               <th>Name</th>
-                              <th>Code</th>
-                              <th class="text-center">Action</th>
+                              <th class="text-center" style="width: 170px">Action</th>
                               </tr>
                           </tfoot>
                         </table>
@@ -110,7 +107,7 @@
       </script>
 
       <script>
-        function diseaseDelete(id){
+        function bloodDelete(id){
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -128,7 +125,7 @@
                     'success'
                     )
                     $.ajax({
-                    url      : '/app/disease/delete/'+id,
+                    url      : '/app/blood/delete/'+id,
                     dataType : 'json',
                     Type     : 'Delete',
                     success  : function(response){
