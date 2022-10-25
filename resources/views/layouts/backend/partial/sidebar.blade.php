@@ -154,6 +154,18 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
+              <a href="{{Route('app.medicinegroup.index')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Medicine Group</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{Route('app.medicine.index')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Medicine</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{Route('app.frequency.index')}}" class="nav-link">
                 <i class="fa-solid fa-hand-holding-heart"></i>
                 <p>Frequency</p>

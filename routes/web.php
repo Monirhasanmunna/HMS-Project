@@ -8,6 +8,8 @@ use App\Http\Controllers\Backend\DiseaseController;
 use App\Http\Controllers\Backend\DoctorController;
 use App\Http\Controllers\Backend\EatingTimeController;
 use App\Http\Controllers\Backend\FrequencyController;
+use App\Http\Controllers\Backend\MedicineController;
+use App\Http\Controllers\Backend\MedicineGroupController;
 use App\Http\Controllers\Backend\PatientController;
 use App\Http\Controllers\Backend\QuantityController;
 use App\Http\Controllers\Backend\QuantityTypeController;
@@ -140,6 +142,27 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/edit/{id}',[AdviceController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[AdviceController::class,'update'])->name('update');
         Route::get('/delete/{id}',[AdviceController::class,'destroy'])->name('delete');
+    });
+
+
+    Route::group(['as'=>'medicinegroup.','prefix'=>'medicine/group'],function(){
+
+        Route::get('/index',[MedicineGroupController::class,'index'])->name('index');
+        Route::get('/create',[MedicineGroupController::class,'create'])->name('create');
+        Route::post('/store',[MedicineGroupController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[MedicineGroupController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[MedicineGroupController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[MedicineGroupController::class,'destroy'])->name('delete');
+    });
+
+    Route::group(['as'=>'medicine.','prefix'=>'medicine'],function(){
+
+        Route::get('/index',[MedicineController::class,'index'])->name('index');
+        Route::get('/create',[MedicineController::class,'create'])->name('create');
+        Route::post('/store',[MedicineController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[MedicineController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[MedicineController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[MedicineController::class,'destroy'])->name('delete');
     });
     
 });
