@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdviceController;
 use App\Http\Controllers\Backend\AssistantController;
+use App\Http\Controllers\Backend\Bed\FloorController;
 use App\Http\Controllers\Backend\BloodController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DiseaseController;
@@ -179,6 +180,17 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         // ajax route
         Route::get('patient/info/{id}',[PrescriptionController::class,'patient_info']);
         Route::get('medicine/info/{id}',[PrescriptionController::class,'medicine_info']);
+    });
+
+
+
+    Route::group(['as'=>'floor.','prefix'=>'floor','namespace'=>'Bed'],function(){
+
+        Route::get('/index',[FloorController::class,'index'])->name('index');
+        Route::post('/store',[FloorController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[FloorController::class,'edit'])->name('edit');
+        Route::post('/update/{id}',[FloorController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[FloorController::class,'destroy'])->name('delete');
     });
     
 });
