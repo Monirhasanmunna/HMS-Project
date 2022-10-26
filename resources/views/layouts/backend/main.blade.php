@@ -28,6 +28,8 @@
   <link rel="stylesheet" href="{{asset('backend/plugins/summernote/summernote-bs4.min.css')}}"> --}}
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="{{ asset('css/iziToast.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+
 
   @stack('css')
 </head>
@@ -107,6 +109,7 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('backend/dist/js/pages/dashboard.js')}}"></script>
 <script src="{{ asset('js/iziToast.js') }}"></script>
+
 @include('vendor.lara-izitoast.toast')
 @stack('js')
 </body>

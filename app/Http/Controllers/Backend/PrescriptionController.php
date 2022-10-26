@@ -63,6 +63,7 @@ class PrescriptionController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'patient_id'    => 'required',
             'medicine_id'   => 'required',
