@@ -25,10 +25,10 @@
                 <div class="col-lg-2">
                     <div class="card">
                         <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action text-primary {{Request::is('')?'activate':''}}">Bed</a>
-                            <a href="{{Route('app.bedtype.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/bed/type/index')?'activate text-white':''}}">Bed Type</a>
-                            <a href="{{Route('app.bedgroup.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/setting/bed/group/index')?'activate':''}}">Bed Group</a>
-                            <a href="{{Route('app.floor.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/floor/index')?'activate text-white':''}}">Floor</a>
+                          <a href="{{Route('app.bed.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/bed/index')?'activate text-white':''}}">Bed</a>
+                          <a href="{{Route('app.bedtype.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/bed/type/index')?'activate text-white':''}}">Bed Type</a>
+                          <a href="{{Route('app.bedgroup.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/bed/group/index')?'activate text-white':''}}">Bed Group</a>
+                          <a href="{{Route('app.floor.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/floor/index')?'activate text-white':''}}">Floor</a>
                         </div>
                     </div>
                 </div>

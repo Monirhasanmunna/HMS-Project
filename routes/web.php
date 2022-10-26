@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdviceController;
 use App\Http\Controllers\Backend\AssistantController;
+use App\Http\Controllers\Backend\Bed\BedController;
 use App\Http\Controllers\Backend\Bed\BedGroupController;
 use App\Http\Controllers\Backend\Bed\BedTypeController;
 use App\Http\Controllers\Backend\Bed\FloorController;
@@ -212,6 +213,16 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/edit/{id}',[BedTypeController::class,'edit'])->name('edit');
         Route::post('/update/{id}',[BedTypeController::class,'update'])->name('update');
         Route::get('/delete/{id}',[BedTypeController::class,'destroy'])->name('delete');
+    });
+
+
+    Route::group(['as'=>'bed.','prefix'=>'bed','namespace'=>'Bed'],function(){
+
+        Route::get('/index',[BedController::class,'index'])->name('index');
+        Route::post('/store',[BedController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[BedController::class,'edit'])->name('edit');
+        Route::post('/update/{id}',[BedController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[BedController::class,'destroy'])->name('delete');
     });
     
 });

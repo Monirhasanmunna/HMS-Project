@@ -242,13 +242,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{Route('app.bed.index')}}" class="nav-link">
                 <i class="fa-solid fa-bed"></i>
                 <p>Bed</p>
               </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="" class="nav-link">
               <i class="fa-solid fa-bed-pulse"></i>
                 <p>Bed Type</p>
             </a>
