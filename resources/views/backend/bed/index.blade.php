@@ -142,7 +142,7 @@
                         </div>
                       </div>
                       
-                      {{-- edit bedgroup modal --}}
+                      {{-- edit bed modal --}}
                       <div class="modal fade bd-example-modal-lg" id="bedEditModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-md">
                           <div class="modal-content">
@@ -150,7 +150,7 @@
                               <div class="col-lg-12">
                                   <div class="card mb-4">
                                     <div class="modal-header bg-primary text-white">
-                                      <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-building"></i><span class="pl-1">Floor Edit</span></h5>
+                                      <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-sitemap"></i><span class="pl-1">Bed Edit</span></h5>
                                       <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
