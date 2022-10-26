@@ -254,7 +254,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{Route('app.bedgroup.index')}}" class="nav-link">
               <i class="fa-solid fa-sitemap"></i>
                 <p>Bed Group</p>
             </a>

@@ -1,24 +1,12 @@
 @extends('layouts.backend.main')
 
 @push('css')
- {{-- <!-- Select2 -->
- <link rel="stylesheet" href="{{asset('backend/plugins/select2/css/select2.min.css')}}">
- <link rel="stylesheet" href="{{asset('backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}"> --}}
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="crossorigin="anonymous" referrerpolicy="no-referrer" />
  <style>
-    .select2-container--default .select2-selection--single {
-    background-color: #fff;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    padding-top: 2px;
-}
-
-.list-group-item.activate {
-    background-color: #007bff;
-    border-color: #007bff;
-}
-
- </style>
+  .list-group-item.activate {
+      background-color: #007bff;
+      border-color: #007bff;
+  }
+</style>
 @endpush
 
 @section('content')
@@ -31,7 +19,7 @@
                         <div class="list-group">
                             <a href="#" class="list-group-item list-group-item-action text-primary {{Request::is('')?'activate':''}}">Bed</a>
                             <a href="#" class="list-group-item list-group-item-action text-primary {{Request::is('app/setting/bed/type/index')?'activate':''}}">Bed Type</a>
-                            <a href="{{Route('app.bedgroup.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/setting/bed/group/index')?'activate':''}}">Bed Group</a>
+                            <a href="{{Route('app.bedgroup.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/bed/group/index')?'activate text-white':''}}">Bed Group</a>
                             <a href="{{Route('app.floor.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/floor/index')?'activate text-white':''}}">Floor</a>
                         </div>
                     </div>
@@ -39,7 +27,7 @@
                 <div class="col-lg-10">
                     <div class="card mb-4">
                         <span class="text-right mb-3">
-                            <button class="btn btn-sm btn-primary mt-2 mr-2" id="floorAddBtn"><i class="fa-solid fa-circle-plus"></i><span class="pl-1">Add New</span></button>
+                            <button class="btn btn-sm btn-primary mt-2 mr-2" id="bedGroupAddBtn"><i class="fa-solid fa-circle-plus"></i><span class="pl-1">Add New</span></button>
                           </span>
                         <div class="table-responsive p-3">
                           <table class="table align-items-center table-flush table-hover" id="dataTableHover">
@@ -47,24 +35,26 @@
                               <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Floor</th>
                                 <th>Description</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
                             <tbody>
-                              @foreach ($floors as $key=>$floor)
+                              @foreach ($bedgroups as $key=>$bedgroup)
                               <tr>
                                 <td>{{$key+1}}</td>
-                                <td><span class="text-primary">{{$floor->name}}</span></td>
-                                <td>{{$floor->description}}</td>
+                                <td><span class="text-primary">{{$bedgroup->name}}</span></td>
+                                <td>{{$bedgroup->floor->name}}</td>
+                                <td>{{$bedgroup->description}}</td>
                                 <td>
                                   <div class="dropdown">
                                     <button class="btn btn-sm btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <a class=" btn-sm btn-primary dropdown-item" onclick = "editFloor({{$floor->id}})" href="javascript:void(0)"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
-                                      <a class=" btn-sm btn-danger dropdown-item"  onclick = 'deleteFloor({{$floor->id}})' href="javascript:void(0)"><i class="fa-solid fa-trash"></i>Delete</a>
+                                      <a class=" btn-sm btn-primary dropdown-item" onclick = "editBedGroup({{$bedgroup->id}})" href="javascript:void(0)"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
+                                      <a class=" btn-sm btn-danger dropdown-item"  onclick = 'deleteBedGroup({{$bedgroup->id}})' href="javascript:void(0)"><i class="fa-solid fa-trash"></i>Delete</a>
                                     </div>
                                   </div>
                                 </td>
@@ -75,22 +65,35 @@
                         </div>
                       </div>
                     
-                      {{-- add floor modal --}}
-                    <div class="modal fade bd-example-modal-lg" id="FloorAddModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      {{-- add bedgroup modal --}}
+                    <div class="modal fade bd-example-modal-lg" id="bedGroupAddModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-md">
                           <div class="modal-content">
                             <div class="row">
                               <div class="col-lg-12">
                                   <div class="card mb-0">
                                     <div class="modal-header bg-primary text-white">
-                                      <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-building"></i><span class="pl-1">Floor Add</span></h5>
+                                      <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-sitemap"></i><span class="pl-1">Bed Group Add</span></h5>
                                       <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
                                       <div class="card-body">
-                                          <form action="{{route('app.floor.store')}}" method="POST">
+                                          <form action="{{route('app.bedgroup.store')}}" method="POST">
                                               @csrf
+                                              <div class="form-group">
+                                                  <label>Floor</label>
+                                                  <select name="floor_id" class="form-control @error('floor') is-invalid @enderror">
+                                                      <option selected hidden>--Select One--</option>
+                                                      @foreach ($floors as $floor)
+                                                        <option value="{{$floor->id}}">{{$floor->name}}</option> 
+                                                      @endforeach
+                                                  </select>
+                                                  @error('floor')
+                                                  <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                                  @enderror
+                                              </div>
+
                                                 <div class="form-group">
                                                   <label for="floorName">Name</label>
                                                   <input id="" type="text" class="form-control" name="name" required>
@@ -111,8 +114,8 @@
                         </div>
                       </div>
                       
-                      {{-- edit floor modal --}}
-                      <div class="modal fade bd-example-modal-lg" id="FlooreditModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      {{-- edit bedgroup modal --}}
+                      <div class="modal fade bd-example-modal-lg" id="bedGroupEditModel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-md">
                           <div class="modal-content">
                             <div class="row">
@@ -125,17 +128,29 @@
                                       </button>
                                     </div>
                                       <div class="card-body">
-                                          <form action="{{route('app.floor.update',[1])}}" method="POST">
+                                          <form action="{{route('app.bedgroup.update',[1])}}" method="POST">
                                               @csrf
-                                                <input type="number" hidden name="floor_id" id="floor_id">
+                                                <input type="number" hidden name="bedgroup_id" id="bedgroup_id"> 
                                                 <div class="form-group">
-                                                  <label for="floorName">Name</label>
-                                                  <input id="floor_name" type="text" class="form-control" name="name" required>
+                                                  <label>Floor</label>
+                                                  <select name="floor_id" id="floor_option" class="form-control @error('floor') is-invalid @enderror">
+                                                      <option selected hidden>--Select One--</option>
+                                                      @foreach ($floors as $floor)
+                                                        <option value="{{$floor->id}}">{{$floor->name}}</option> 
+                                                      @endforeach
+                                                  </select>
+                                                  @error('floor')
+                                                  <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                                  @enderror
+                                              </div> 
+                                                <div class="form-group">
+                                                  <label for="bedgroup_name">Name</label>
+                                                  <input id="bedgroup_name" type="text" class="form-control" name="name" required>
                                                 </div>
                       
                                                 <div class="form-group">
-                                                  <label for="description">Description</label>
-                                                  <textarea id="floor_description" type="text" class="form-control" name="description"></textarea>
+                                                  <label for="bedgroup_description">Description</label>
+                                                  <textarea id="bedgroup_description" type="text" class="form-control" name="description"></textarea>
                                                 </div>
                                       
                                                 <button type="submit" class="btn btn-primary">Update</button>
@@ -168,29 +183,34 @@
 </script>
 
 <script>
-    $("#floorAddBtn").click(function(){
-        $("#FloorAddModel").modal('show');
+    $("#bedGroupAddBtn").click(function(){
+        $("#bedGroupAddModel").modal('show');
     });
 </script>
 
 <script>
-  function editFloor(id){
+  function editBedGroup(id){
     $.ajax({
-      url         : '/app/floor/edit/'+id,
+      url         : '/app/bed/group/edit/'+id,
       type        : 'GET',
       dataType    : 'json',
       success     : function(response){
-        $("#floor_id").val(response.id);
-        $("#floor_name").val(response.name);
-        $("#floor_description").val(response.description);
-        $("#FlooreditModel").modal('show');
+        console.log(response);
+        $("#bedgroup_id").val(response.id);
+        var data = `
+          <option selected hidden value="${response.floor.id}">${response.floor.name}</option>
+        `;
+        $("#floor_option").append(data);
+        $("#bedgroup_name").val(response.name);
+        $("#bedgroup_description").val(response.description);
+        $("#bedGroupEditModel").modal('show');
       }
     });
   }
 </script>
 
 <script>
-  function deleteFloor(id){
+  function deleteBedGroup(id){
 
       Swal.fire({
           title: 'Are you sure?',
@@ -208,7 +228,7 @@
               'success'
               )
               $.ajax({
-              url      : '/app/floor/delete/'+id,
+              url      : '/app/bed/group/delete/'+id,
               dataType : 'json',
               Type     : 'Delete',
               success  : function(response){
