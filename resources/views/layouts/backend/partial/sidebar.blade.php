@@ -231,29 +231,41 @@
         
 
       <li class="nav-header">Bed Management</li>
+        
         <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-bed"></i>
+            <p>
+              Bed
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-bed"></i>
+                <p>Bed</p>
+              </a>
+          </li>
+          <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="fa-solid fa-bed"></i>
-              <p>Bed</p>
+              <i class="fa-solid fa-bed-pulse"></i>
+                <p>Bed Type</p>
             </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="fa-solid fa-bed-pulse"></i>
-              <p>Bed Type</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="fa-solid fa-sitemap"></i>
-              <p>Bed Group</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="fa-solid fa-building"></i>
-              <p>Floor</p>
-          </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{Route('app.bedgroup.index')}}" class="nav-link">
+              <i class="fa-solid fa-sitemap"></i>
+                <p>Bed Group</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{Route('app.floor.index')}}" class="nav-link">
+              <i class="fa-solid fa-building"></i>
+                <p>Floor</p>
+            </a>
+          </li>
+          </ul>
         </li>
 
         <li class="nav-header">Settings</li>
