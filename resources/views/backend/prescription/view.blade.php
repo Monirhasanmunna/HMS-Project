@@ -241,6 +241,16 @@
                 
               </ol>
             </div>
+            <div>
+              <h4>Test</h4>
+
+              <ol>
+                @foreach($prescription->test as $test)
+                <li>{{$test->name}}</li>
+                @endforeach
+                
+              </ol>
+            </div>
           </div>
           <!-- Advice -->
           <!-- end of  right side   -->
