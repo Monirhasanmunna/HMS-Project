@@ -1,10 +1,6 @@
 @extends('layouts.backend.main')
 
 @push('css')
- {{-- <!-- Select2 -->
- <link rel="stylesheet" href="{{asset('backend/plugins/select2/css/select2.min.css')}}">
- <link rel="stylesheet" href="{{asset('backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}"> --}}
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="crossorigin="anonymous" referrerpolicy="no-referrer" />
  <style>
     .select2-container--default .select2-selection--single {
     background-color: #fff;
@@ -13,12 +9,12 @@
     padding-top: 2px;
 }
 
+
 .list-group-item.activate {
     background-color: #007bff;
     border-color: #007bff;
 }
-
- </style>
+</style>
 @endpush
 
 @section('content')
@@ -29,17 +25,17 @@
                 <div class="col-lg-2">
                     <div class="card">
                         <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action text-primary {{Request::is('')?'activate':''}}">Bed</a>
-                            <a href="#" class="list-group-item list-group-item-action text-primary {{Request::is('app/setting/bed/type/index')?'activate':''}}">Bed Type</a>
-                            <a href="{{Route('app.bedgroup.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/setting/bed/group/index')?'activate':''}}">Bed Group</a>
-                            <a href="{{Route('app.floor.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/floor/index')?'activate text-white':''}}">Floor</a>
+                          <a href="{{Route('app.bed.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/bed/index')?'activate text-white':''}}">Bed</a>
+                          <a href="{{Route('app.bedtype.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/bed/type/index')?'activate text-white':''}}">Bed Type</a>
+                          <a href="{{Route('app.bedgroup.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/bed/group/index')?'activate text-white':''}}">Bed Group</a>
+                          <a href="{{Route('app.floor.index')}}" class="list-group-item list-group-item-action text-primary {{Request::is('app/floor/index')?'activate text-white':''}}">Floor</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-10">
                     <div class="card mb-4">
-                        <span class="text-right mb-3">
-                            <button class="btn btn-sm btn-primary mt-2 mr-2" id="floorAddBtn"><i class="fa-solid fa-circle-plus"></i><span class="pl-1">Add New</span></button>
+                        <span class="text-right mb-1">
+                            <button class="btn btn-sm btn-primary mt-3 mr-3" id="floorAddBtn"><i class="fa-solid fa-circle-plus"></i><span class="pl-1">Add New</span></button>
                           </span>
                         <div class="table-responsive p-3">
                           <table class="table align-items-center table-flush table-hover" id="dataTableHover">

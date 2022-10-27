@@ -29,5 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MedicineSeeder::class);
         $this->call(FloorSeeder::class);
         $this->call(BedGroupSeeder::class);
+        $this->call(BedTypeSeeder::class);
+        $this->call(BedSeeder::class);
     }
 }
