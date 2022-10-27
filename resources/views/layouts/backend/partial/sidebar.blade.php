@@ -166,7 +166,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{Route('app.patient.index')}}" class="nav-link">
+              <a href="{{Route('app.prescription.index')}}" class="nav-link">
                 <i class="fa-solid fa-list"></i>
                 <p>Prescription List</p>
               </a>
