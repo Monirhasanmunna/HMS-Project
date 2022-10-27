@@ -49,7 +49,7 @@
                             <td class="text-center">
                               <!-- <a href="{{Route('app.prescription.edit',[$pres->id])}}" class="btn btn-sm btn-primary">Edit</a> -->
                               <a href="{{Route('app.prescription.view',[$pres->id])}}" class="btn btn-sm btn-primary">View</a>
-                              <a href="{{Route('app.prescription.edit',[$pres->id])}}" class="btn btn-sm btn-primary">Print</a>
+                              <!-- <a href="{{Route('app.prescription.edit',[$pres->id])}}" class="btn btn-sm btn-primary">Print</a> -->
                               <!-- <a href="javascript:void(0)" onclick="bloodDelete({{$pres->id}})" class="btn btn-sm btn-danger">Delete</a> -->
                             </td>
                           </tr>
