@@ -16,19 +16,58 @@ class QuantitySeeder extends Seeder
     public function run()
     {
         Quantity::updateOrCreate([
-            'name'  => '১+২+৩'
+            'name'  => '১/২'
         ]);
-
         Quantity::updateOrCreate([
-            'name'  => '১৪+০+২৪'
+            'name'  => '৩/৪'
         ]);
-
+        Quantity::updateOrCreate([
+            'name'  => '১'
+        ]);
+        Quantity::updateOrCreate([
+            'name'  => '২'
+        ]);
+        Quantity::updateOrCreate([
+            'name'  => '২.১/২'
+        ]);
+        Quantity::updateOrCreate([
+            'name'  => '৩'
+        ]);
+        Quantity::updateOrCreate([
+            'name'  => '৩-৪'
+        ]);
+        Quantity::updateOrCreate([
+            'name'  => '৮-১০'
+        ]);
+        Quantity::updateOrCreate([
+            'name'  => '১২+০+১০'
+        ]);
+        Quantity::updateOrCreate([
+            'name'  => '১.১/২'
+        ]);
+        Quantity::updateOrCreate([
+            'name'  => '১০+০+৮'
+        ]);
+        Quantity::updateOrCreate([
+            'name'  => '১২+০+৮'
+        ]);
+        Quantity::updateOrCreate([
+            'name'  => '১৫'
+        ]);
+        Quantity::updateOrCreate([
+            'name'  => '৮'
+        ]);
+        Quantity::updateOrCreate([
+            'name'  => '১০'
+        ]);
         Quantity::updateOrCreate([
             'name'  => '২৬'
         ]);
-
         Quantity::updateOrCreate([
-            'name'  => '১০'
+            'name'  => '১৪+০+২৪'
+        ]);
+        Quantity::updateOrCreate([
+            'name'  => '১+২+৩'
         ]);
     }
 }

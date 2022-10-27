@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Advice;
+use App\Models\Doctor;
 use App\Models\Eatingtime;
 use App\Models\Frequency;
+use App\Models\MedicalTest;
 use App\Models\Medicine;
 use App\Models\Patient;
 use App\Models\Prescription;
+use App\Models\PrescriptionAdvice;
 use App\Models\PrescriptionDetails;
+use App\Models\PrescriptionMedicine;
+use App\Models\PrescriptionTest;
 use App\Models\Quantity;
 use App\Models\QuantityType;
 use Illuminate\Http\Request;
@@ -22,9 +28,14 @@ class PrescriptionController extends Controller
      */
     public function index()
     {
-        
+        $prescriptions=Prescription::all();
+        return view('backend.prescription.index', compact('prescriptions'));
     }
 
+    public function view(Request $request, Prescription $prescription){
+        // dd($prescription->patient);
+        return view('backend.prescription.view', compact('prescription'));
+    }
 
     public function patient_info($id)
     {
@@ -33,14 +44,14 @@ class PrescriptionController extends Controller
     }
 
     public function medicine_info($id)
-    {   
+    {
         $medicin = Medicine::findOrfail($id);
         $quantities = Quantity::all();
         $qtytypies  = QuantityType::all();
         $eatingTimes = Eatingtime::all();
-        $frequencies = Frequency::all(); 
+        $frequencies = Frequency::all();
 
-        return response()->json(['medicine' => $medicin, 'frequencies' => $frequencies, 'quantities'=> $quantities,'qtytypies'=> $qtytypies,'eatingTimes'=> $eatingTimes]);
+        return response()->json(['medicine' => $medicin, 'frequencies' => $frequencies, 'quantities' => $quantities, 'qtytypies' => $qtytypies, 'eatingTimes' => $eatingTimes]);
     }
 
     /**
@@ -52,7 +63,10 @@ class PrescriptionController extends Controller
     {
         $patients = Patient::all();
         $medicines = Medicine::all();
-        return view('backend.prescription.create',compact('patients','medicines'));
+        $medicalTest = MedicalTest::where('status', 1)->get();
+        $advice = Advice::all();
+        $doctors = Doctor::all();
+        return view('backend.prescription.create', compact('patients', 'medicines', 'medicalTest', 'advice', 'doctors'));
     }
 
     /**
@@ -63,70 +77,84 @@ class PrescriptionController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+
+        
+        // dd($request->all());
         $request->validate([
             'patient_id'    => 'required',
             'medicine_id'   => 'required',
-            'frequency'     => 'required',
-            'qty'           => 'required',
-            'qtyType'       => 'required',
-            'eatingType'    => 'required',
+            'doctor_id'     => 'required',            
         ]);
 
 
-         //medicine_id inputs string to number array create
-        $stringSplit = str_split($request->medicine_id);
-        $removeComas =  str_replace(',', '', $stringSplit);
-        $stringToNumber = array_map(function($removeComas) {
-            return intval($removeComas);
-        },$removeComas);
-        $medicine_id = array_diff($stringToNumber, array(0));
-        //medicine_id inputs string to number array create
+        $prescription =  Prescription::create([
+            "mem_type" => $request->mem_type,
+            "education" => $request->education,
+            "sbp" => $request->sbp,
+            "dbp" => $request->dbp,
+            "oxygen" => $request->oxygen,
+            "pulse" => $request->pulse,
+            "temp" => $request->temp,
+            "edima" => $request->edima,
+            "anemia" => $request->anemia,
+            "jaundice" => $request->jaundice,
+            "weight" => $request->weight,
+            "height" => $request->height,
+            "bmi" => $request->bmi,
+            "blgr" => $request->blgr,
+            "heart" => $request->heart,
+            "lungs" => $request->lungs,
+            "diabeties" => $request->diabeties,
+            "hp" => $request->hp,
+            "ihd" => $request->ihd,
+            "strk" => $request->strk,
+            "copd" => $request->copd,
+            "cancer" => $request->cancer,
+            "ckd" => $request->ckd,
+            "salt" => $request->salt,
+            "smoke" => $request->smoke,
+            "smoking" => $request->smoking,
+            "cc" => $request->cc,
+            "diagnosis" => $request->diagnosis,
+            "sec_diagnosis" => $request->sec_diagnosis,
+            "sec_dx2" => $request->sec_dx2,
+            "next_meet" => $request->next_meet,
+            "meet_day" => $request->meet_day,
+            "patient_id" => $request->patient_id,
+            "doctor_id" => $request->doctor_id
+        ]);
 
+
+        // dd($prescription->id);
+        $medId=explode(',', $request->medicine_id);
+        foreach($request->frequency as $key=>$freq){
+            PrescriptionMedicine::create([
+               'frequency_id' =>$freq,
+                'qty_id'=>$request->qty[$key],
+                'qtyType_id'=>$request->qtyType[$key],
+                'eatingType_id'=>$request->eatingType[$key],
+                'eatDuration'=>$request->eatDuration[$key],
+                'medicine_id'=>$medId[$key],
+                'prescription_id'=>$prescription->id
+            ]);
+        }
         
-         //frequency inputs string to number array create
-        $removeComas =  str_replace(',', '', $request->frequency);
-        $frequency_id = array_map(function($removeComas) {
-            return intval($removeComas);
-        },$removeComas);
-        //frequency inputs string to number array create
-
-        //Qty inputs string to number array create
-        $removeComas =  str_replace(',', '', $request->qty);
-        $qty_id = array_map(function($removeComas) {
-            return intval($removeComas);
-        },$removeComas);
-        //Qty inputs string to number array create
-
-        //QtyType inputs string to number array create
-        $removeComas =  str_replace(',', '', $request->qtyType);
-        $qtyType_id = array_map(function($removeComas) {
-            return intval($removeComas);
-        },$removeComas);
-        //QtyType inputs string to number array create
-
-        //eatingTime inputs string to number array create
-        $removeComas =  str_replace(',', '', $request->eatingType);
-        $eatingTime_id = array_map(function($removeComas) {
-            return intval($removeComas);
-        },$removeComas);
-        //eatingTime inputs string to number array create
-
-       $prescription =  Prescription::create([
-            'medicine_id'       => $medicine_id,
-            'frequency_id'      => $frequency_id,
-            'quantity_id'       => $qty_id,
-            'quantity_type_id'  => $qtyType_id,
-            'eatingtime_id'     => $eatingTime_id
-        ]);
-
-
-        PrescriptionDetails::create([
-            'prescription_id' => $request->prescription->id,
-            'patient_id' => $request->patient_id
-        ]);
-
+        foreach($request->advice as $key=>$adv){
+            PrescriptionAdvice::create([
+               'advice_id' =>$adv,                
+                'prescription_id'=>$prescription->id
+            ]);
+        }
         
+        foreach($request->suggest_test as $key=>$test){
+            PrescriptionTest::create([
+               'medical_test_id' =>$test,                
+                'prescription_id'=>$prescription->id
+            ]);
+        }
+        
+
+
         notify()->success('Prescription Created');
         return redirect()->route('app.prescription.index');
     }

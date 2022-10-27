@@ -28,7 +28,7 @@
                     <div class="card-header">
                       <h3 class="card-title text-primary"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Blood Group's</span></h3>
                       <div class="text-right">
-                        <a href="{{Route('app.blood.create')}}" class="btn btn-sm btn-primary pull-right">Add New</a>
+                        <a href="{{Route('app.prescription.create')}}" class="btn btn-sm btn-primary pull-right">Add New</a>
                       </div>
                     </div>
                     <!-- /.card-header -->
@@ -37,18 +37,20 @@
                           <thead>
                           <tr>
                             <th style="width: 100px">#</th>
-                            <th>Name</th>
+                            <th>ID</th>
                             <th class="text-center" style="width: 170px">Action</th>
                           </tr>
                           </thead>
                           <tbody>
-                        @foreach ($bloods as $key=>$blood)
-                          <tr>
+                        @foreach ($prescriptions as $key=>$pres)
+                     <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$blood->name}}</td>
+                            <td>{{$pres->id}}</td>
                             <td class="text-center">
-                              <a href="{{Route('app.blood.edit',[$blood->id])}}" class="btn btn-sm btn-primary">Edit</a>
-                              <a href="javascript:void(0)" onclick="bloodDelete({{$blood->id}})" class="btn btn-sm btn-danger">Delete</a>
+                              <!-- <a href="{{Route('app.prescription.edit',[$pres->id])}}" class="btn btn-sm btn-primary">Edit</a> -->
+                              <a href="{{Route('app.prescription.view',[$pres->id])}}" class="btn btn-sm btn-primary">View</a>
+                              <!-- <a href="{{Route('app.prescription.edit',[$pres->id])}}" class="btn btn-sm btn-primary">Print</a> -->
+                              <!-- <a href="javascript:void(0)" onclick="bloodDelete({{$pres->id}})" class="btn btn-sm btn-danger">Delete</a> -->
                             </td>
                           </tr>
                         @endforeach

@@ -9,30 +9,36 @@ class Prescription extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     public function medicines()
     {
-        return $this->hasMany(Medicine::class,'medicine_id');
+        return $this->hasMany(PrescriptionMedicine::class, 'prescription_id', 'id')
+        ->join('medicines', 'medicines.id', '=', 'prescription_medicines.medicine_id')
+        ->join('frequencies', 'frequencies.id', '=', 'prescription_medicines.frequency_id')
+        ->join('quantities', 'quantities.id', '=', 'prescription_medicines.qty_id')
+        ->join('quantity_types', 'quantity_types.id', '=', 'prescription_medicines.qtyType_id')
+        ->join('eatingtimes', 'eatingtimes.id', '=', 'prescription_medicines.eatingType_id')
+        ->selectRaw('prescription_medicines.*,frequencies.name as frequencies, quantities.name as quantities,  quantity_types.name as quantity_types, eatingtimes.name as eatingtimes, medicines.name as medicines');
     }
 
-    public function frequency()
-    {
-        return $this->belongsTo(Frequency::class,'frequency_id');
+    
+    public function advice(){
+        return $this->hasMany(PrescriptionAdvice::class, 'prescription_id', 'id')
+        ->join('advice', 'advice.id', '=', 'prescription_advice.advice_id');        
+    }
+    
+    public function test(){
+        return $this->hasMany(PrescriptionTest::class, 'prescription_id', 'id')
+        ->join('medical_tests', 'medical_tests.id', '=', 'prescription_tests.medical_test_id');        
     }
 
-    public function eatingTime()
-    {
-        return $this->belongsTo(Eatingtime::class,'eatingtime_id');
+
+    public function doctor(){
+        return $this->belongsTo(Doctor::class, 'doctor_id', 'id');
     }
 
-    public function quantity()
-    {
-        return $this->belongsTo(Quantity::class,'quantity_id');
-    }
-
-    public function quantityType()
-    {
-        return $this->belongsTo(QuantityType::class,'quantity_type_id');
+    public function patient(){
+        return $this->belongsTo(Patient::class, 'patient_id', 'id');
     }
 }

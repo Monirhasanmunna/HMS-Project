@@ -180,7 +180,8 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/edit/{id}',[PrescriptionController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[PrescriptionController::class,'update'])->name('update');
         Route::get('/delete/{id}',[PrescriptionController::class,'destroy'])->name('delete');
-
+        
+        Route::get('/view/{prescription}',[PrescriptionController::class,'view'])->name('view');
         // ajax route
         Route::get('patient/info/{id}',[PrescriptionController::class,'patient_info']);
         Route::get('medicine/info/{id}',[PrescriptionController::class,'medicine_info']);
