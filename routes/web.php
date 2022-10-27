@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdviceController;
 use App\Http\Controllers\Backend\AssistantController;
 use App\Http\Controllers\Backend\Bed\BedController;
+use App\Http\Controllers\Backend\Bed\BedDashboardController;
 use App\Http\Controllers\Backend\Bed\BedGroupController;
 use App\Http\Controllers\Backend\Bed\BedTypeController;
 use App\Http\Controllers\Backend\Bed\FloorController;
@@ -185,6 +186,11 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('medicine/info/{id}',[PrescriptionController::class,'medicine_info']);
     });
 
+
+    Route::group(['as'=>'beddashboard.','prefix'=>'bed/dashboard','namespace'=>'Bed'],function(){
+
+        Route::get('/index',[BedDashboardController::class,'index'])->name('index');
+    });
 
 
     Route::group(['as'=>'floor.','prefix'=>'floor','namespace'=>'Bed'],function(){

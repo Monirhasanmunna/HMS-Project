@@ -231,7 +231,8 @@
         
 
       <li class="nav-header">Bed Management</li>
-        
+
+      
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="fa-solid fa-bed"></i>
@@ -242,12 +243,18 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
+              <a href="{{Route('app.beddashboard.index')}}" class="nav-link">
+                <i class="fa-solid fa-bed"></i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{Route('app.bed.index')}}" class="nav-link">
                 <i class="fa-solid fa-bed"></i>
                 <p>Bed</p>
               </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="" class="nav-link">
               <i class="fa-solid fa-bed-pulse"></i>
                 <p>Bed Type</p>
@@ -264,7 +271,7 @@
               <i class="fa-solid fa-building"></i>
                 <p>Floor</p>
             </a>
-          </li>
+          </li> --}}
           </ul>
         </li>
 
@@ -293,8 +300,19 @@
             </li>
           </ul>
         </li>
-
       </ul>
     </nav>
+    <div class="mt-3 space-y-1">
+      <!-- Authentication -->
+      <form method="POST" action="{{ route('logout') }}">
+          @csrf
+
+          <x-responsive-nav-link :href="route('logout')"
+                  onclick="event.preventDefault();
+                              this.closest('form').submit();">
+              {{ __('Log Out') }}
+          </x-responsive-nav-link>
+      </form>
+  </div>
     <!-- /.sidebar-menu -->
   </div>
