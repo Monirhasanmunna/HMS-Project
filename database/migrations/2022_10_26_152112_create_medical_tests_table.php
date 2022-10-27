@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('medicines', function (Blueprint $table) {
+        Schema::create('medical_tests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('medicinegroup_id')->constrained('medicinegroups')->onDelete('cascade');
             $table->string('name');
-            $table->string('mg');
+            $table->decimal('cost', 9, 3)->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medicines');
+        Schema::dropIfExists('medical_tests');
     }
 };

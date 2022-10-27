@@ -15,11 +15,50 @@ return new class extends Migration
     {
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->id();
-            $table->integer('frequency_id');
-            $table->integer('quantity_id');
-            $table->integer('quantity_type_id');
-            $table->integer('medicine_id');
-            $table->integer('eatingtime_id');
+            $table->string("mem_type" )->nullable();
+            $table->string("education" )->nullable();
+            $table->string("sbp" )->nullable();
+            $table->string("dbp" )->nullable();
+            $table->string("oxygen" )->nullable();
+            $table->string("pulse" )->nullable();
+            $table->string("temp" )->nullable();
+            $table->string("edima" )->nullable();
+            $table->string("anemia" )->nullable();
+            $table->string("jaundice" )->nullable();
+            $table->string("weight" )->nullable();
+            $table->string("height" )->nullable();
+            $table->string("bmi" )->nullable();
+            $table->string("blgr" )->nullable();
+            $table->string("heart" )->nullable();
+            $table->string("lungs" )->nullable();
+            $table->string("diabeties" )->nullable();
+            $table->string("hp" )->nullable();
+            $table->string("ihd" )->nullable();
+            $table->string("strk" )->nullable();
+            $table->string("copd" )->nullable();
+            $table->string("cancer" )->nullable();
+            $table->string("ckd" )->nullable();
+            $table->string("salt" )->nullable();
+            $table->string("smoke" )->nullable();
+            $table->string("smoking" )->nullable();
+            $table->string("cc" )->nullable();
+            $table->string("diagnosis" )->nullable();
+            $table->string("sec_diagnosis" )->nullable();
+            $table->string("sec_dx2" )->nullable();
+
+            $table->string("next_meet" )->nullable();
+            $table->string("meet_day" )->nullable();
+            $table->unsignedBigInteger("patient_id" );
+            $table->unsignedBigInteger("doctor_id" );
+
+
+            $table->foreign('patient_id')->references('id')->on('patients');
+            $table->foreign('doctor_id')->references('id')->on('doctors');
+
+
+
+
+
             $table->timestamps();
         });
     }

@@ -44,8 +44,20 @@
 
                             <div class="form-row">
                                 <div class="form-group col-12">
+                                    <label>Doctor</label>
+                                    <select  id="doctor" class=" form-control @error('doctor') is-invalid @enderror">
+                                        <option></option>
+                                        @foreach ($doctors as $doctor)
+                                        <option value="{{$doctor->id}}" >{{$doctor->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('doctor')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-12">
                                     <label>Patient</label>
-                                    <select name="patient_id" id="patient" class="js-example-placeholder-single js-states form-control @error('doctor') is-invalid @enderror" style="width: 100%">
+                                    <select  id="patient" class="js-example-placeholder-single js-states form-control @error('doctor') is-invalid @enderror" style="width: 100%">
                                         <option></option>
                                         @foreach ($patients as $patient)
                                         <option value="{{$patient->id}}" @if(isset($prescription)) {{($prescription->patient_id == $patient->id)?'selected':''}} @endif>{{$patient->name}}</option>
@@ -186,7 +198,7 @@
                                                 <tr>
                                                     <td width="40%">Pt. Type</td>
                                                     <td>
-                                                        
+
                                                         <select class="form-control" name="mem_type" required="">
                                                             <option selected="false" disabled="">Select One</option>
                                                             <option value="OPD">OPD</option>
@@ -200,120 +212,132 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Edu. Year</td>
-                                                    <td> <input type="text" name="education"  class="form-control"></td>
+                                                    <td> <input type="text" name="education" class="form-control"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>SBP (mm of Hg)</td>
-                                                    <td> <input type="text" name="sbp"  class="form-control"> </td>
+                                                    <td> <input type="text" name="sbp" class="form-control"> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>DBP (mm of Hg)</td>
-                                                    <td> <input type="text" name="dbp"  class="form-control"> </td>
+                                                    <td> <input type="text" name="dbp" class="form-control"> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>O<sub>2</sub> Satu. (%)</td>
-                                                    <td> <input type="text" name="oxygen"  class="form-control"> </td>
+                                                    <td> <input type="text" name="oxygen" class="form-control"> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Pulse (/min)</td>
-                                                    <td> <input type="text" name="pulse"  class="form-control"> </td>
+                                                    <td> <input type="text" name="pulse" class="form-control"> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Temp. (°F)</td>
-                                                    <td> <input type="text" name="temp"  class="form-control"> </td>
+                                                    <td> <input type="text" name="temp" class="form-control"> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Edema</td>
                                                     <td>
-                                                        <input type="radio" name="edima" value="Y"> Y 
+                                                        <input type="radio" name="edima" value="Y"> Y
                                                         <input type="radio" name="edima" value="N"> N
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Anemia</td>
                                                     <td>
-                                                        <input type="radio" name="anemia" value="Y"> Y 
+                                                        <input type="radio" name="anemia" value="Y"> Y
                                                         <input type="radio" name="anemia" value="N"> N
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Jaundice </td>
                                                     <td>
-                                                        <input type="radio" name="jaundice" value="Y"> Yes 
+                                                        <input type="radio" name="jaundice" value="Y"> Yes
                                                         <input type="radio" name="jaundice" value="N"> No
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Weight (Kg)</td>
-                                                    <td> <input type="text" name="weight"  id="weight" class="form-control"> </td>
+                                                    <td> <input type="text" name="weight" id="weight" class="form-control"> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Height (cm)</td>
-                                                    <td> <input type="text" name="height"  id="height" class="form-control"> </td>
+                                                    <td> <input type="text" name="height" id="height" class="form-control"> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>BMI </td>
                                                     <td>
                                                         <span id="bmi"></span>
                                                         <input type="text" name="bmi" class="form-control">
-                                                        
+
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Bl. Gr. </td>
-                                                    <td >
-                                                    <input type="text" name="blgr" class="form-control">
+                                                    <td>
+                                                        <input type="text" name="blgr" class="form-control">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Heart </td>
-                                                    <td > <input type="text" name="heart" class="form-control " ></td>
+                                                    <td> <input type="text" name="heart" class="form-control "></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Lungs </td>
-                                                    <td> <input type="text" name="lungs" class="form-control " ></td>
+                                                    <td> <input type="text" name="lungs" class="form-control "></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                         <b>Disease History:</b>
                                         <hr>
-                                        <table style="margin-bottom: 10px;">
+                                        <table class="table">
                                             <tbody>
                                                 <tr>
-                                                    <td>Diabetes </td>
+                                                    <td width="40%">Diabetes </td>
                                                     <td>
-                                                        <input type="radio" name="diabeties"  value="Y"> Y 
+                                                        <input type="radio" name="diabeties" value="Y"> Y
                                                         <input type="radio" name="diabeties" value="N"> N
                                                     </td>
+                                                </tr>
+                                                <tr>
                                                     <td> HTN </td>
                                                     <td>
-                                                        <input type="radio" name="hp" value="Y"> Y 
+                                                        <input type="radio" name="hp" value="Y"> Y
                                                         <input type="radio" name="hp" value="N"> N
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>IHD</b> </td>
-                                                    <td> 
-                                                        <input type="radio" name="ihd" value="Y"> Y 
-                                                        <input type="radio" name="ihd" value="N"> N 
-                                                    </td>
-                                                    <td>Stroke</td>
-                                                    <td> 
-                                                        <input type="radio" name="strk" value="Y"> Y 
-                                                        <input type="radio" name="strk" value="N"> N 
+                                                    <td>IHD</td>
+                                                    <td>
+                                                        <input type="radio" name="ihd" value="Y"> Y
+                                                        <input type="radio" name="ihd" value="N"> N
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><b>COPD</b> </td>
-                                                    <td> <input type="radio" name="copd" value="Y"> Y <input type="radio" name="copd" value="N"> N </td>
+                                                    <td>Stroke</td>
+                                                    <td>
+                                                        <input type="radio" name="strk" value="Y"> Y
+                                                        <input type="radio" name="strk" value="N"> N
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>COPD</td>
+                                                    <td>
+                                                        <input type="radio" name="copd" value="Y"> Y
+                                                        <input type="radio" name="copd" value="N"> N
+                                                    </td>
+                                                </tr>
+                                                <tr>
                                                     <td>Cancer </td>
-                                                    <td> <input type="radio" name="cancer" value="Y"> Y <input type="radio" name="cancer" checked="" value="N"> N </td>
+                                                    <td>
+                                                        <input type="radio" name="cancer" value="Y"> Y
+                                                        <input type="radio" name="cancer" value="N"> N
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>CKD </td>
-                                                    <td> 
-                                                        <input type="radio" name="ckd" value="Y"> Y 
-                                                        <input type="radio" name="ckd" value="N"> N 
+                                                    <td>
+                                                        <input type="radio" name="ckd" value="Y"> Y
+                                                        <input type="radio" name="ckd" value="N"> N
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -321,28 +345,32 @@
 
                                         <b>Behavioural History:</b>
                                         <hr>
-                                        <table style="margin-bottom: 10px;">
+                                        <table class="table">
                                             <tbody>
                                                 <tr>
                                                     <td>Salt </td>
-                                                    <td> 
-                                                        <input type="radio" name="salt"  value="Y"> Y 
+                                                    <td>
+                                                        <input type="radio" name="salt" value="Y"> Y
                                                         <input type="radio" name="salt" value="N"> N
                                                     </td>
+                                                </tr>
+                                                <tr>
                                                     <td> SLT </td>
                                                     <td>
-                                                        <input type="radio" name="smoke" value="Y"> Y 
-                                                        <input type="radio" name="smoke"  value="N"> No
+                                                        <input type="radio" name="smoke" value="Y"> Y
+                                                        <input type="radio" name="smoke" value="N"> No
                                                     </td>
+                                                </tr>
+                                                <tr>
                                                     <td>Smoking </td>
                                                     <td>
-                                                        <input type="radio" name="smoking" value="Y"> Y 
+                                                        <input type="radio" name="smoking" value="Y"> Y
                                                         <input type="radio" name="smoking" value="N"> N
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        
+
                                         <div class="row mb-2">
                                             <div class="col-sm-12 col-md-12">
                                                 <b for="">Chief Complaints:</b>
@@ -355,8 +383,8 @@
                                             <div class="col-sm-12 col-md-12">
                                                 <label for="" class="font-weight-bold">Inv. Finding(s):</label>
                                                 <hr>
-                                                
-                                                
+
+
                                             </div>
                                         </div>
                                         <div class="row mb-2">
@@ -408,6 +436,7 @@
                                                     <th scope="col">Qty</th>
                                                     <th scope="col">Qty Type</th>
                                                     <th scope="col">Eating Time</th>
+                                                    <th scope="col">Duration</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
@@ -430,94 +459,10 @@
                                                 <hr>
 
                                                 <div style="overflow-y: scroll;	max-height: 300px;">
-                                                    <input id="1"  type="checkbox" name="advice[]" value="1">
-                                                    <label for="1">প্রচুর পরিমাণ পানি পান করবেন।</label><br>
-
-                                                    <input id="2"  type="checkbox" name="advice[]" value="2">
-                                                    <label for="2">প্রতিদিন কিছু শাক-সবজি ও দেশী ফল খাবেন।</label><br>
-
-                                                    <input id="3"  type="checkbox" name="advice[]" value="3">
-                                                    <label for="3">ধূমপান করবেন না।</label><br>
-
-                                                    <input id="4" type="checkbox" name="advice[]" value="4">
-                                                    <label for="4">পাতে লবণ খাবেন না।</label><br>
-
-                                                    <input id="5" type="checkbox" name="advice[]" value="5">
-                                                    <label for="5">চিনি ও চিনিজাতীয় খাবার কম খাবেন।</label><br>
-
-                                                    <input id="6"  type="checkbox" name="advice[]" value="6">
-                                                    <label for="6">ভারী কাজ করবেন না।</label><br>
-
-                                                    <input id="7"  type="checkbox" name="advice[]" value="7">
-                                                    <label for="7">নিয়মিত ঔষধ খাবেন।</label><br>
-
-                                                    <input id="8" type="checkbox" name="advice[]" value="8">
-                                                    <label for="8">জর্দ্দা, সাদা পাতা, গুল ইত্যাদি খাবেন না।</label><br>
-
-                                                    <input id="9" type="checkbox" name="advice[]" value="9">
-                                                    <label for="9">পরিমিত খাবার খাবেন, নিয়মিত সকাল-সন্ধ্যা হাঁটবেন।</label><br>
-
-                                                    <input id="10" type="checkbox" name="advice[]" value="10">
-                                                    <label for="10">প্রতিদিন ডিম খাবেন।</label><br>
-
-                                                    <input id="11" type="checkbox" name="advice[]" value="11">
-                                                    <label for="11">প্রতিদিন দুধ খাবেন।</label><br>
-
-                                                    <input id="12"  type="checkbox" name="advice[]" value="12">
-                                                    <label for="12">কুসুম গরম পানিতে লবণ মিশিয়ে গড়্গড়া করবেন।</label><br>
-
-                                                    <input id="13" type="checkbox" name="advice[]" value="13">
-                                                    <label for="13">গরম পানিতে গোসল করবেন।</label><br>
-
-                                                    <input id="14" type="checkbox" name="advice[]" value="14">
-                                                    <label for="14">গরম সেঁক নিবেন।</label><br>
-
-                                                    <input id="15" type="checkbox" name="advice[]" value="15">
-                                                    <label for="15">বিশ্রামের সময় পায়ের নিচে বালিশ দিয়ে রাখবেন।</label><br>
-
-                                                    <input id="16" type="checkbox" name="advice[]" value="16">
-                                                    <label for="16">প্রতিদিন ইনফ্রারেড থেরাপি নিবেন।</label><br>
-
-                                                    <input id="17" type="checkbox" name="advice[]" value="17">
-                                                    <label for="17">গরম পানি বা মেনথল এর ধোঁয়া নাকে টানবেন।</label><br>
-
-                                                    <input id="18" type="checkbox" name="advice[]" value="18">
-                                                    <label for="18">পরবর্তী সাক্ষাতের সময় ঔষধের পাতা নিয়ে আসবেন।</label><br>
-
-                                                    <input id="19" type="checkbox" name="advice[]" value="19">
-                                                    <label for="19">১৫ দিন বিশ্রামে থাকবেন।</label><br>
-
-                                                    <input id="20" type="checkbox" name="advice[]" value="20">
-                                                    <label for="20">জ্বর মেপে লিখে রাখবেন।</label><br>
-
-                                                    <input id="21" type="checkbox" name="advice[]" value="21">
-                                                    <label for="21">শক্ত বিছানায় ঘুমাবেন।</label><br>
-
-                                                    <input id="22" type="checkbox" name="advice[]" value="22">
-                                                    <label for="22">ইনহেলার ব্যবহারের পর কুলি করবেন।</label><br>
-
-                                                    <input id="23" type="checkbox" name="advice[]" value="23">
-                                                    <label for="23">প্রতিদিন ৩০ মিনিটের বেশি করে দ্রুত গতিতে হাঁটবেন।</label><br>
-
-                                                    <input id="24" type="checkbox" name="advice[]" value="24">
-                                                    <label for="24">ডায়াবেটিসের ঔষধ ব্যবহারকারীদের বেশি ঘাম বা অজ্ঞান ভাব হলে 
-                                                        (বিশেষত খালি পেটে থাকা অবস্থায়), অনতিবিলম্বে চিনির শরবত বা মিষ্টি কিছু খাবেন।</label><br>
-
-                                                    <input id="25" type="checkbox" name="advice[]" value="25">
-                                                    <label for="25">শ্বাস-প্রশ্বাসের ব্যায়াম করবেন।</label><br>
-
-                                                    <input id="26" type="checkbox" name="advice[]" value="26">
-                                                    <label for="26">ঠান্ডা পানি,আইসক্রিম সহ সকল প্রকার শীতল খাবার থেকে বিরত থাকবেন।</label><br>
-
-                                                    <input id="28" type="checkbox" name="advice[]" value="28">
-                                                    <label for="28">আজ রাতে ও ৭ দিন পর রাতে।</label><br>
-
-                                                    <input id="29" type="checkbox" name="advice[]" value="29">
-                                                    <label for="29">ব্যাক্তিগত পরিষ্কার পরিচ্ছন্নতা ও স্বাস্থ্যবিধি মেনে চলবেন।</label><br>
-
-                                                    <input id="30" type="checkbox" name="advice[]" value="30">
-                                                    <label for="30">যে সমস্ত খাবার খেলে চুলকানি হয় (যেমন- হাঁসের ডিম, গরুর গোশত, বেগুন ইত্যাদি), সেগুলো পরিহার করবেন।</label><br>
-
+                                                    @foreach($advice as $key => $ad)
+                                                    <input id="{{$key}}" type="checkbox" name="advice[]" value="{{$ad->id}}">
+                                                    <label for="{{$key}}">{{$ad->name}}</label><br>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
@@ -528,75 +473,11 @@
                                         <b for="">Follow-up Investigation(s):</b>
                                         <hr>
                                         <select id="testFollowup" class="form-control  form-control-sm " name="suggest_test[]" multiple="" style="width: 100%;" data-select2-id="5" tabindex="-1" aria-hidden="true">
-                                            <option value="5" data-select2-id="15">ASO Titre</option>
-                                            <option value="47" data-select2-id="16">Barium Swallow X-Ray</option>
-                                            <option value="19" data-select2-id="17">Bilirubin</option>
-                                            <option value="13" data-select2-id="18">Blood Glucose, 2h After 75g Glucose Intake</option>
-                                            <option value="12" data-select2-id="19">Blood Glucose, 2h After Breakfast</option>
-                                            <option value="10" data-select2-id="20">Blood Glucose, Fasting</option>
-                                            <option value="11" data-select2-id="21">Blood Glucose, Random</option>
-                                            <option value="8" data-select2-id="22">Blood Grouping</option>
-                                            <option value="50" data-select2-id="23">CA-125</option>
-                                            <option value="1" data-select2-id="24">CBC</option>
-                                            <option value="16" data-select2-id="25">Cholesterol Total</option>
-                                            <option value="34" data-select2-id="26">Coronary Angiogram</option>
-                                            <option value="14" data-select2-id="27">Creatinine</option>
-                                            <option value="36" data-select2-id="28">CRP</option>
-                                            <option value="54" data-select2-id="29">CT-Scan of Brain</option>
-                                            <option value="23" data-select2-id="30">Delete</option>
-                                            <option value="63" data-select2-id="31">Delete</option>
-                                            <option value="64" data-select2-id="32">Delete</option>
-                                            <option value="65" data-select2-id="33">Delete</option>
-                                            <option value="69" data-select2-id="34">Delete</option>
-                                            <option value="33" data-select2-id="35">ECG</option>
-                                            <option value="42" data-select2-id="36">Echocardiography (2D)</option>
-                                            <option value="43" data-select2-id="37">Echocardiography (Doppler)</option>
-                                            <option value="20" data-select2-id="38">Electrolytes</option>
-                                            <option value="3" data-select2-id="39">ESR</option>
-                                            <option value="44" data-select2-id="40">Free T3</option>
-                                            <option value="45" data-select2-id="41">Free T4</option>
-                                            <option value="37" data-select2-id="42">HbA1C</option>
-                                            <option value="9" data-select2-id="43">HBsAg</option>
-                                            <option value="2" data-select2-id="44">Hemoglobin</option>
-                                            <option value="62" data-select2-id="45">Infrared Therapy</option>
-                                            <option value="21" data-select2-id="46">Lipid Profile</option>
-                                            <option value="53" data-select2-id="47">MRI of L/S Spine (Plain)</option>
-                                            <option value="61" data-select2-id="48">Nebulization</option>
-                                            <option value="24" data-select2-id="49">Pregnancy Test</option>
-                                            <option value="57" data-select2-id="50">PSA</option>
-                                            <option value="6" data-select2-id="51">RA/RF</option>
-                                            <option value="38" data-select2-id="52">RT-PCR for COVID-19</option>
-                                            <option value="68" data-select2-id="53">Serum Amylase</option>
-                                            <option value="58" data-select2-id="54">Serum Ig E</option>
-                                            <option value="67" data-select2-id="55">Serum Lipase</option>
-                                            <option value="18" data-select2-id="56">SGOT</option>
-                                            <option value="17" data-select2-id="57">SGPT/ALT</option>
-                                            <option value="59" data-select2-id="58">Sputum for AFB</option>
-                                            <option value="4" data-select2-id="59">TC/DC</option>
-                                            <option value="70" data-select2-id="60">TG</option>
-                                            <option value="35" data-select2-id="61">Troponin-I</option>
-                                            <option value="40" data-select2-id="62">TSH</option>
-                                            <option value="15" data-select2-id="63">Uric Acid</option>
-                                            <option value="22" data-select2-id="64">Urine R/E</option>
-                                            <option value="27" data-select2-id="65">USG of KUB region</option>
-                                            <option value="28" data-select2-id="66">USG of KUB region &amp; Prostate</option>
-                                            <option value="26" data-select2-id="67">USG of Pregnancy Profile</option>
-                                            <option value="25" data-select2-id="68">USG of Whole Abdomen</option>
-                                            <option value="49" data-select2-id="69">VDRL</option>
-                                            <option value="7" data-select2-id="70">Widal Test</option>
-                                            <option value="32" data-select2-id="71">X-Ray Abdomen erect posture A/P view</option>
-                                            <option value="51" data-select2-id="72">X-Ray Cervical Spine both view</option>
-                                            <option value="55" data-select2-id="73">X-ray Chest A/P view</option>
-                                            <option value="29" data-select2-id="74">X-Ray Chest P/A view</option>
-                                            <option value="46" data-select2-id="75">X-Ray Foot both view (Right/Left)</option>
-                                            <option value="48" data-select2-id="76">X-Ray Knee both view</option>
-                                            <option value="30" data-select2-id="77">X-Ray L/S spine both view</option>
-                                            <option value="52" data-select2-id="78">X-Ray Leg both view</option>
-                                            <option value="41" data-select2-id="79">X-ray of wrist joint of left side</option>
-                                            <option value="39" data-select2-id="80">X-Ray Pelvis A/P view</option>
-                                            <option value="31" data-select2-id="81">X-Ray PNS O/M view</option>
-                                            <option value="56" data-select2-id="82">X-Ray right ankle joint both view</option>
-                                            <option value="60" data-select2-id="83">X-Ray right wrist joint both view</option>
+
+                                            @foreach($medicalTest as $test)
+                                            <option value="{{$test->id}}">{{$test->name}}</option>
+                                            @endforeach
+
                                         </select>
                                     </div>
 
@@ -606,7 +487,7 @@
                                             <select name="next_meet">
                                                 <option selected="false" disabled="">Select</option>
                                                 <option value="0">0</option>
-                                                <option value="1" >১</option>
+                                                <option value="1">১</option>
                                                 <option value="2">২</option>
                                                 <option value="3">৩</option>
                                                 <option value="4">৪</option>
@@ -635,6 +516,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" name="doctor_id" id="doctor_id">
                                 <input type="hidden" name="patient_id" id="patient_id">
                                 @if(!isset($prescription))
 
@@ -651,49 +533,7 @@
         <section>
 </div>
 
-<!-- 
-  "mem_type" => "HCU"
-  "education" => "1"
-  "sbp" => "2"
-  "dbp" => "3"
-  "oxygen" => "4"
-  "pulse" => "5"
-  "temp" => "6"
-  "edima" => "Y"
-  "anemia" => "Y"
-  "jaundice" => "Y"
-  "weight" => "10"
-  "height" => "11"
-  "bmi" => "12"
-  "blgr" => "13"
-  "heart" => "14"
-  "lungs" => "15"
-  "diabeties" => "Y"
-  "hp" => "Y"
-  "ihd" => "Y"
-  "strk" => "Y"
-  "copd" => "Y"
-  "cancer" => "Y"
-  "ckd" => "Y"
-  "salt" => "Y"
-  "smoke" => "Y"
-  "smoking" => "Y"
-  "cc" => "26"
-  "diagnosis" => "27"
-  "sec_diagnosis" => "28"
-  "sec_dx2" => "29"
-  "medicine" => "3"
-  "medicine_id" => "2,3"
-  "frequency" => array:2 [▶]
-  "qty" => array:2 [▶]
-  "qtyType" => array:2 [▶]
-  "eatingType" => array:2 [▶]
-  "advice" => array:3 [▶]
-  "suggest_test" => array:2 [▶]
-  "next_meet" => "15"
-  "meet_day" => "day"
-  "patient_id" => "1" 
--->
+
 
 
 
@@ -711,10 +551,15 @@
 </script>
 
 <script>
+
+$("#doctor").on('change', function() {
+        var doctor_id = $(this).val();
+        $("#doctor_id").val(doctor_id);
+});
+
     $("#patient").on('change', function() {
         var patient_id = $(this).val();
-
-        $("#patient_id").val( patient_id);
+        $("#patient_id").val(patient_id);
 
         $.ajax({
             url: '/app/prescription/patient/info/' + patient_id,
@@ -801,6 +646,33 @@
                         <select class="form-control"  name="eatingType[]">
                             ${eatingTimes}
                         </select>
+                        </td>
+                        <td>
+                        <select name="eatDuration[]" class="form-control " >
+			                          <option selected="false" disabled="">Select</option>
+			                            <option value="0">0</option>
+			                            <option value="1">১</option>
+			                            <option value="2">২</option>
+			                            <option value="3">৩</option>
+			                            <option value="4">৪</option>
+			                            <option value="5">৫</option>
+			                            <option value="6">৬</option>
+			                            <option value="7" selected="">৭</option>
+			                            <option value="8">৮</option>
+			                            <option value="9">৯</option>
+			                            <option value="10">১০</option>
+			                            <option value="11">১১</option>
+			                            <option value="12">১২</option>
+			                            <option value="13">১৩</option>
+			                            <option value="14">১৪</option>
+			                            <option value="15">১৫</option>
+			                            <option value="16">১৬</option>
+			                            <option value="17">১৭</option>
+			                            <option value="18">১৮</option>
+			                            <option value="19">১৯</option>
+			                            <option value="20">২০</option>
+			                            <option value="21">২১</option>
+			                        </select>
                       </td>
 
                       <td>
@@ -822,9 +694,9 @@
 </script>
 
 <script>
-//   $("#testFollowup").select2({
-//       placeholder: "--Select One--",
-//       allowClear: true
-//   });
+    //   $("#testFollowup").select2({
+    //       placeholder: "--Select One--",
+    //       allowClear: true
+    //   });
 </script>
 @endpush
