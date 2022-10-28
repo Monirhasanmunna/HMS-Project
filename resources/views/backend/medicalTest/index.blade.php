@@ -26,9 +26,9 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title text-primary"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Blood Group's</span></h3>
+                      <h3 class="card-title text-primary"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Medicine's</span></h3>
                       <div class="text-right">
-                        <a href="{{Route('app.prescription.create')}}" class="btn btn-sm btn-primary pull-right">Add New</a>
+                        <a href="{{Route('app.medical.test.create')}}" class="btn btn-sm btn-primary pull-right">Add New</a>
                       </div>
                     </div>
                     <!-- /.card-header -->
@@ -37,31 +37,33 @@
                           <thead>
                           <tr>
                             <th style="width: 100px">#</th>
-                            <th>Patient</th>
-                            <th>Test Given</th>
-                            <th>Next Visit</th>
+                            <th>Name</th>
+                            
                             <th class="text-center" style="width: 170px">Action</th>
                           </tr>
                           </thead>
                           <tbody>
-                        @foreach ($prescriptions as $key=>$pres)
-                     <tr>
+                        @foreach ($medicalTests as $key=>$test)
+                          <tr>
                             <td>{{$key+1}}</td>
+                            <td>{{$test->name}}</td>
                             
-                            <td>{{$pres->patient->name}}</td>
-                            <td>{{$pres->test->count()}}</td>
-                            <td>{{$pres->created_at->format('d-m-Y')}} + {{$pres->next_meet}} {{$pres->meet_day}} </td>
-
                             <td class="text-center">
-                              <a href="{{Route('app.prescription.edit',[$pres->id])}}" class="btn btn-sm btn-primary">Edit</a>
-                              <a href="{{Route('app.prescription.view',[$pres->id])}}" class="btn btn-sm btn-primary">View</a>
-                              <!-- <a href="{{Route('app.prescription.edit',[$pres->id])}}" class="btn btn-sm btn-primary">Print</a> -->
-                              <a href="javascript:void(0)" onclick="presDelete({{$pres->id}})" class="btn btn-sm btn-danger">Delete</a>
+                              <a href="{{Route('app.medical.test.edit',[$test->id])}}" class="btn btn-sm btn-primary">Edit</a>
+                              <a href="javascript:void(0)" onclick="testDelete({{$test->id}})" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                           </tr>
                         @endforeach
                           </tbody>
-                          
+                          <tfoot>
+                            <tr>
+                              <th style="width: 100px">#</th>
+                              <th>Name</th>
+                              <th>Group</th>
+                              <th>Mg</th>
+                              <th class="text-center" style="width: 170px">Action</th>
+                              </tr>
+                          </tfoot>
                         </table>
                       </div>
                     <!-- /.card-body -->
@@ -109,7 +111,7 @@
       </script>
 
       <script>
-        function presDelete(id){
+        function testDelete(id){
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -127,7 +129,7 @@
                     'success'
                     )
                     $.ajax({
-                    url      : '/app/prescription/delete/'+id,
+                    url      : '/app/medical-test/delete/'+id,
                     dataType : 'json',
                     Type     : 'Delete',
                     success  : function(response){

@@ -20,8 +20,12 @@ class DoctorSeeder extends Seeder
             'email'                 => 'sharmin@gmail.com',
             'degrees'               => 'MBBS,MPCS,DGO,FCPS',
             'specialist'            => 'GYNAE & OBS',
+            'designation'           => 'Consultant',
             'consultant_of_college' => 'USTC Medical College & Hospital',
-            'mobile'                => 1754874782
+            'mobile'                => '01754874782',
+            'firstVisit'            => 1000,
+            'nextVisit'             => 800,
+            'reportOnly'            => 600
         ]);
 
         Doctor::updateOrCreate([
@@ -30,7 +34,11 @@ class DoctorSeeder extends Seeder
             'degrees'               => 'MBBS,MPCS,DGO,FCPS',
             'specialist'            => 'GYNAE & OBS',
             'consultant_of_college' => 'USTC Medical College & Hospital',
-            'mobile'                => 1754874782
+            'designation'           => 'Professor',
+            'mobile'                => '01754874782',
+            'firstVisit'            => 800,
+            'nextVisit'             => 600,
+            'reportOnly'            => 400
         ]);
     }
 }

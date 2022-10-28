@@ -68,6 +68,13 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="designation">Designation</label>
+                                    <input type="text" name="designation" class="form-control  @error('designation') is-invalid @enderror" id="designation" placeholder="Enter Email" value="{{ $doctor->designation ?? old('designation') }}">
+                                    @error('designation')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="coc">Consultant Of College</label>
                                     <input type="text" name="consultant_of_college" class="form-control  @error('consultant_of_college') is-invalid @enderror" id="coc" placeholder="Enter College Name" value="{{ $doctor->consultant_of_college ?? old('consultant_of_college') }}">
                                     @error('consultant_of_college')
@@ -81,19 +88,27 @@
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                     @enderror
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label for="image">Image</label>
-                                    <input type="file"   name="image" class="dropify">
-                                    @isset($user)
-                                        <h5 class="m-2">Old Image</h5>
-                                        <img width="200" class="img-thumbnail" src="{{isset($user->image)? asset($user->image):'default.png'}}" alt="User Image">
-                                    @endisset
-                                    @error('image')
-                                    <span class="text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                     </span>
+                                <div class="form-group">
+                                    <label for="firstVisit">First Visit</label>
+                                    <input type="text" name="firstVisit" class="form-control  @error('firstVisit') is-invalid @enderror" id="firstVisit" placeholder="Enter Email" value="{{ $doctor->firstVisit ?? old('firstVisit') }}">
+                                    @error('firstVisit')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                     @enderror
-                                </div> --}}
+                                </div>
+                                <div class="form-group">
+                                    <label for="nextVisit">Next Visit</label>
+                                    <input type="text" name="nextVisit" class="form-control  @error('nextVisit') is-invalid @enderror" id="nextVisit" placeholder="Enter Email" value="{{ $doctor->nextVisit ?? old('nextVisit') }}">
+                                    @error('nextVisit')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="reportOnly">Report Only</label>
+                                    <input type="text" name="reportOnly" class="form-control  @error('reportOnly') is-invalid @enderror" id="reportOnly" placeholder="Enter Email" value="{{ $doctor->reportOnly ?? old('reportOnly') }}">
+                                    @error('reportOnly')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    @enderror
+                                </div>
                                 @if(!isset($doctor))
                                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i><span class="pl-1">Submit</span></button>
                                 @else

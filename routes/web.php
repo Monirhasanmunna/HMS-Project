@@ -8,11 +8,13 @@ use App\Http\Controllers\Backend\Bed\BedGroupController;
 use App\Http\Controllers\Backend\Bed\BedTypeController;
 use App\Http\Controllers\Backend\Bed\FloorController;
 use App\Http\Controllers\Backend\BloodController;
+use App\Http\Controllers\Backend\ComplaintController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DiseaseController;
 use App\Http\Controllers\Backend\DoctorController;
 use App\Http\Controllers\Backend\EatingTimeController;
 use App\Http\Controllers\Backend\FrequencyController;
+use App\Http\Controllers\Backend\MedicalTestController;
 use App\Http\Controllers\Backend\MedicineController;
 use App\Http\Controllers\Backend\MedicineGroupController;
 use App\Http\Controllers\Backend\PatientController;
@@ -162,13 +164,30 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
     });
 
     Route::group(['as'=>'medicine.','prefix'=>'medicine'],function(){
-
         Route::get('/index',[MedicineController::class,'index'])->name('index');
         Route::get('/create',[MedicineController::class,'create'])->name('create');
         Route::post('/store',[MedicineController::class,'store'])->name('store');
         Route::get('/edit/{id}',[MedicineController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[MedicineController::class,'update'])->name('update');
         Route::get('/delete/{id}',[MedicineController::class,'destroy'])->name('delete');
+    });
+
+    Route::group(['as'=>'medical.test.','prefix'=>'medical-test'],function(){
+        Route::get('/index',[MedicalTestController::class,'index'])->name('index');
+        Route::get('/create',[MedicalTestController::class,'create'])->name('create');
+        Route::post('/store',[MedicalTestController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[MedicalTestController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[MedicalTestController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[MedicalTestController::class,'destroy'])->name('delete');
+    });
+    
+    Route::group(['as'=>'complaint.','prefix'=>'complaint'],function(){
+        Route::get('/index',[ComplaintController::class,'index'])->name('index');
+        Route::get('/create',[ComplaintController::class,'create'])->name('create');
+        Route::post('/store',[ComplaintController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[ComplaintController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[ComplaintController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[ComplaintController::class,'destroy'])->name('delete');
     });
 
 

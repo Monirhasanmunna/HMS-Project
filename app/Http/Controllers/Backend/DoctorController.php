@@ -49,10 +49,14 @@ class DoctorController extends Controller
        Doctor::create([
         'name'                  => $request->name,
         'email'                 => $request->email,
+        'mobile'                => $request->mobile,
         'degrees'               => $request->degrees,
         'specialist'            => $request->specialist,
+        'designation'            => $request->designation,
         'consultant_of_college' => $request->consultant_of_college,
-        'mobile'                => $request->mobile
+        'firstVisit'            => $request->firstVisit,
+        'nextVisit'            => $request->nextVisit,
+        'reportOnly'            => $request->reportOnly
        ]);
 
        notify()->success('Doctor Create Successfully');
@@ -107,8 +111,12 @@ class DoctorController extends Controller
             'email'                 => $request->email,
             'degrees'               => $request->degrees,
             'specialist'            => $request->specialist,
+            'designation'            => $request->designation,
             'consultant_of_college' => $request->consultant_of_college,
-            'mobile'                => $request->mobile
+            'mobile'                => $request->mobile,
+            'firstVisit'            => $request->firstVisit,
+            'nextVisit'            => $request->nextVisit,
+            'reportOnly'            => $request->reportOnly
            ]);
     
            notify()->success('Doctor Update Successfully');

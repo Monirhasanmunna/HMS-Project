@@ -40,10 +40,7 @@
                             <th>Doctor</th>
                             <th>Mobile</th>
                             <th>B/G</th>
-                            <th>Weight</th>
-                            <th>Temprature</th>
-                            <th>BP</th>
-                            <th>Pulse</th>
+                            <th>Weight</th>                            
                             <th class="text-center">Action</th>
                           </tr>
                           </thead>
@@ -56,11 +53,9 @@
                             <td>{{$patient->sex}}</td>
                             <td>{{$patient->doctor->name}}</td>
                             <td>{{$patient->mobile}}</td>
-                            <td>{{$patient->blood->name}}ve</td>
+                            <td>{{$patient->blood_group}}</td>
                             <td>{{$patient->weight}}</td>
-                            <td>{{$patient->temprature}}</td>
-                            <td>{{$patient->blood_pressure}}</td>
-                            <td>{{$patient->pulse}}</td>
+                            
                             <td class="text-center">
                                 <div class="dropdown show dropleft ">
                                     <a class="btn btn-sm btn-primary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -86,9 +81,7 @@
                             <th>Mobile</th>
                             <th>B/G</th>
                             <th>Weight</th>
-                            <th>Temprature</th>
-                            <th>BP</th>
-                            <th>Pulse</th>
+                            
                             <th class="text-center">Action</th>
                               </tr>
                           </tfoot>

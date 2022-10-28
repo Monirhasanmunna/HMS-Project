@@ -16,19 +16,16 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->foreignId('doctor_id')->constrained('doctors')->onDelete('cascade');
-            $table->integer('blood_id');
+            $table->string('blood_group')->nullable();
             $table->string('name');
-            $table->integer('age');
+            $table->string('age');
             $table->string('sex');
             $table->string('address');
             $table->string('mobile');
-            $table->string('weight');
-            $table->string('maritial_status');
-            $table->string('ocupation');
-            $table->string('religion');
-            $table->string('temprature');
-            $table->string('blood_pressure');
-            $table->string('pulse');
+            $table->string('weight')->nullable();
+            $table->string('maritial_status')->nullable();
+            $table->string('ocupation')->nullable();
+            $table->string('religion')->nullable();
             $table->timestamps();
         });
     }

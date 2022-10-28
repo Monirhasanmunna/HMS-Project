@@ -17,10 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('mobile');
             $table->string('degrees');
             $table->string('specialist');
-            $table->string('consultant_of_college');
-            $table->string('mobile');
+            $table->string('designation')->nullable();
+            $table->string('consultant_of_college')->nullable();
+            $table->double('firstVisit', 8, 2)->nullable();
+            $table->double('nextVisit', 8, 2)->nullable();
+            $table->double('reportOnly', 8, 2)->nullable();
             $table->timestamps();
         });
     }

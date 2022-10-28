@@ -1,13 +1,6 @@
 <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
-    {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="{{asset('backend/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
-      </div>
-      <div class="info">
-        <a href="#" class="d-block">Alexander Pierce</a>
-      </div>
-    </div> --}}
+
 
     <!-- Sidebar Menu -->
     <nav class="mt-3">
@@ -171,62 +164,74 @@
                 <p>Prescription List</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-list-check"></i>
+                <p>
+                  Manage
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{Route('app.medicinegroup.index')}}" class="nav-link">
+                    <i class="fa-solid fa-bars"></i>
+                    <p>Medicine Group</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{Route('app.medicine.index')}}" class="nav-link">
+                    <i class="fa-solid fa-bars"></i>
+                    <p>Medicine</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{Route('app.frequency.index')}}" class="nav-link">
+                    <i class="fa-solid fa-bars"></i>
+                    <p>Frequency</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{Route('app.quantity.index')}}" class="nav-link">
+                    <i class="fa-solid fa-bars"></i>
+                    <p>Quantity</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{Route('app.quantity.type.index')}}" class="nav-link">
+                    <i class="fa-solid fa-bars"></i>
+                    <p>Qty Type</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{Route('app.eatingtime.index')}}" class="nav-link">
+                    <i class="fa-solid fa-bars"></i>
+                    <p>Eating Time</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{Route('app.advice.index')}}" class="nav-link">
+                    <i class="fa-solid fa-bars"></i>
+                    <p>Advice</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{Route('app.medical.test.index')}}" class="nav-link">
+                    <i class="fa-solid fa-bars"></i>
+                    <p>Medical Test</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{Route('app.complaint.index')}}" class="nav-link">
+                    <i class="fa-solid fa-bars"></i>
+                    <p>Complaint</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
           </ul>
         </li>
 
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="fa-solid fa-list-check"></i>
-            <p>
-              Manage
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{Route('app.medicinegroup.index')}}" class="nav-link">
-                <i class="fa-solid fa-bars"></i>
-                <p>Medicine Group</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{Route('app.medicine.index')}}" class="nav-link">
-                <i class="fa-solid fa-bars"></i>
-                <p>Medicine</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{Route('app.frequency.index')}}" class="nav-link">
-                <i class="fa-solid fa-bars"></i>
-                <p>Frequency</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{Route('app.quantity.index')}}" class="nav-link">
-                <i class="fa-solid fa-bars"></i>
-                <p>Quantity</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{Route('app.quantity.type.index')}}" class="nav-link">
-                <i class="fa-solid fa-bars"></i>
-                <p>Qty Type</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{Route('app.eatingtime.index')}}" class="nav-link">
-                <i class="fa-solid fa-bars"></i>
-                <p>Eating Time</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{Route('app.advice.index')}}" class="nav-link">
-                <i class="fa-solid fa-bars"></i>
-                <p>Advice</p>
-              </a>
-            </li>
-          </ul>
-        </li>
 
         
 

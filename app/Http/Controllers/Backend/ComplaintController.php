@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\MedicalTest;
+use App\Models\Complaint;
 use Illuminate\Http\Request;
 
-class MedicalTestController extends Controller
+class ComplaintController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class MedicalTestController extends Controller
      */
     public function index()
     {
-        $medicalTests = MedicalTest::all();
-        return view('backend.medicalTest.index',compact('medicalTests'));
+        $complaints = Complaint::all();
+        return view('backend.complaint.index',compact('complaints'));
     }
 
     /**
@@ -27,7 +27,7 @@ class MedicalTestController extends Controller
     public function create()
     {
       
-        return view('backend.medicalTest.create');
+        return view('backend.complaint.create');
     }
 
     /**
@@ -42,12 +42,12 @@ class MedicalTestController extends Controller
             'name'            => 'required',          
         ]);
 
-        MedicalTest::create([
+        Complaint::create([
             'name'             => $request->name,
         ]);
 
-        notify()->success('Medicine Created Successfully');
-        return redirect()->route('app.medical.test.index');
+        notify()->success('complaint Created Successfully');
+        return redirect()->route('app.complaint.index');
     }
 
     /**
@@ -56,7 +56,7 @@ class MedicalTestController extends Controller
      * @param  \App\Models\MedicalTest  $medicalTest
      * @return \Illuminate\Http\Response
      */
-    public function show(MedicalTest $medicalTest)
+    public function show($id)
     {
         //
     }
@@ -69,8 +69,8 @@ class MedicalTestController extends Controller
      */
     public function edit($id)
     {
-        $medicalTest = MedicalTest::findOrfail($id);                
-        return view('backend.medicalTest.create',compact('medicalTest'));
+        $complaint = Complaint::findOrfail($id);                
+        return view('backend.complaint.create',compact('complaint'));
     }
 
     /**
@@ -86,12 +86,12 @@ class MedicalTestController extends Controller
             'name'            => 'required',
         ]);
 
-        MedicalTest::findOrfail($id)->update([
+        Complaint::findOrfail($id)->update([
             'name'             => $request->name,
         ]);
 
-        notify()->success('Medicine Updated Successfully');
-        return redirect()->route('app.medical.test.index');
+        notify()->success('Complaint Updated Successfully');
+        return redirect()->route('app.complaint.index');
     }
 
     /**
@@ -102,8 +102,8 @@ class MedicalTestController extends Controller
      */
     public function destroy($id)
     {
-        $medicalTest = MedicalTest::findOrfail($id);
-        $medicalTest->delete();
-        return response()->json($medicalTest);
+        $complaint = Complaint::findOrfail($id);
+        $complaint->delete();
+        return response()->json($complaint);
     }
 }

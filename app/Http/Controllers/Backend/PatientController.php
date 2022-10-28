@@ -45,38 +45,27 @@ class PatientController extends Controller
     {
         
         $request->validate([
-            'doctor_id'         => 'required',
-            'blood_id'          => 'required',
+            'doctor_id'         => 'required',            
             'name'              => 'required|string',
             'age'               => 'required',
             'address'           => 'required',
             'mobile'            => 'required',
-            'weight'            => 'required',
-            'temprature'        => 'required',
-            'blood_pressure'    => 'required',
-            'pulse'             => 'required',
-            'ocupation'         => 'required',
-            'religion'          => 'required',
             'sex'               => 'required',
-            'maritial_status'   => 'required'
         ]);
 
 
         Patient::create([
-            'name'              => $request->name,
             'doctor_id'         => $request->doctor_id,
+            'blood_group'       => $request->blood_group,
+            'name'              => $request->name,
             'age'               => $request->age,
+            'sex'               => $request->sex,
             'address'           => $request->address,
             'mobile'            => $request->mobile,
-            'blood_id'          => $request->blood_id,
             'weight'            => $request->weight,
             'maritial_status'   => $request->maritial_status,
             'ocupation'         => $request->ocupation,
-            'religion'          => $request->religion,
-            'temprature'        => $request->temprature,
-            'blood_pressure'    => $request->blood_pressure,
-            'pulse'             => $request->pulse,
-            'sex'               => $request->sex
+            'religion'          => $request->religion
         ]);
 
         notify()->success('Patient Created Successfully');
@@ -118,25 +107,17 @@ class PatientController extends Controller
     {
         $request->validate([
             'doctor_id'         => 'required',
-            'blood_id'          => 'required',
             'name'              => 'required|string',
             'age'               => 'required',
             'address'           => 'required',
             'mobile'            => 'required',
-            'weight'            => 'required',
-            'temprature'        => 'required',
-            'blood_pressure'    => 'required',
-            'pulse'             => 'required',
-            'ocupation'         => 'required',
-            'religion'          => 'required',
-            'sex'               => 'required',
-            'maritial_status'   => 'required'
+            'sex'               => 'required'
         ]);
 
 
         Patient::findOrfail($id)->update([
             'name'              => $request->name,
-            'doctor_id'         => $request->doctor_id,
+            'doctor_group'      => $request->doctor_group,
             'age'               => $request->age,
             'address'           => $request->address,
             'mobile'            => $request->mobile,
@@ -144,10 +125,7 @@ class PatientController extends Controller
             'weight'            => $request->weight,
             'maritial_status'   => $request->maritial_status,
             'ocupation'         => $request->ocupation,
-            'religion'          => $request->religion,
-            'temprature'        => $request->temprature,
-            'blood_pressure'    => $request->blood_pressure,
-            'pulse'             => $request->pulse,
+            'religion'          => $request->religion,            
             'sex'               => $request->sex
         ]);
 

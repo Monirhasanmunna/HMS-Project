@@ -39,7 +39,7 @@ class PrescriptionController extends Controller
 
     public function patient_info($id)
     {
-        $patient = Patient::with('blood')->findOrfail($id);
+        $patient = Patient::findOrfail($id);
         return response()->json($patient);
     }
 
@@ -83,7 +83,8 @@ class PrescriptionController extends Controller
         $request->validate([
             'patient_id'    => 'required',
             'medicine_id'   => 'required',
-            'doctor_id'     => 'required',            
+            'doctor_id'     => 'required',  
+            'cc'            => 'required'          
         ]);
 
 
@@ -139,18 +140,24 @@ class PrescriptionController extends Controller
             ]);
         }
         
-        foreach($request->advice as $key=>$adv){
-            PrescriptionAdvice::create([
-               'advice_id' =>$adv,                
-                'prescription_id'=>$prescription->id
-            ]);
+        if($request->advice){
+
+            foreach($request->advice as $key=>$adv){
+                PrescriptionAdvice::create([
+                   'advice_id' =>$adv,                
+                    'prescription_id'=>$prescription->id
+                ]);
+            }
         }
         
-        foreach($request->suggest_test as $key=>$test){
-            PrescriptionTest::create([
-               'medical_test_id' =>$test,                
-                'prescription_id'=>$prescription->id
-            ]);
+        if($request->suggest_test){
+
+            foreach($request->suggest_test as $key=>$test){
+                PrescriptionTest::create([
+                   'medical_test_id' =>$test,                
+                    'prescription_id'=>$prescription->id
+                ]);
+            }
         }
         
 
@@ -178,7 +185,13 @@ class PrescriptionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $patients = Patient::all();
+        $medicines = Medicine::all();
+        $medicalTest = MedicalTest::where('status', 1)->get();
+        $advice = Advice::all();
+        $doctors = Doctor::all();
+        $prescription=Prescription::findOrfail($id);
+        return view('backend.prescription.create', compact('patients', 'medicines', 'medicalTest', 'advice', 'doctors', 'prescription'));
     }
 
     /**
@@ -201,6 +214,14 @@ class PrescriptionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $prescription = Prescription::findOrfail($id);
+        $prescriptionMedicine=PrescriptionMedicine::where('prescription_id', $id)->get();
+        $prescriptionMedicine->each->delete();
+        $prescriptionAdvice=PrescriptionAdvice::where('prescription_id', $id)->get();
+        $prescriptionAdvice->each->delete();
+        $prescriptionTest=PrescriptionTest::where('prescription_id', $id)->get();
+        $prescriptionTest->each->delete();
+        $prescription->delete();
+        return response()->json($prescription);
     }
 }
