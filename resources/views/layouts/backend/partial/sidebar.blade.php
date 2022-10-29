@@ -150,15 +150,15 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item ml-2">
-              <a href="{{Route('app.admition.index')}}" class="nav-link">
-                <i class="fa-solid fa-list"></i>
-                <p>Patient List</p>
+              <a href="{{Route('app.admition.create')}}" class="nav-link">
+                <i class="fa-solid fa-circle-plus"></i>
+                <p>New Admission</p>
               </a>
             </li>
             <li class="nav-item ml-2">
-              <a href="{{Route('app.admition.create')}}" class="nav-link">
+              <a href="{{Route('app.admition.index')}}" class="nav-link">
                 <i class="fa-solid fa-list"></i>
-                <p>New Admission</p>
+                <p>Patient List</p>
               </a>
             </li>
           </ul>
@@ -260,6 +260,18 @@
                 <p>Complaint</p>
               </a>
             </li>
+            <li class="nav-item ml-2">
+              <a href="{{Route('app.disease.index')}}" class="nav-link">
+                <i class="fa-solid fa-bars"></i>
+                <p>Disease</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="{{Route('app.blood.index')}}" class="nav-link">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <p>Blood Group</p>
+              </a>
+            </li>
           </ul>
         </li>
 
@@ -293,7 +305,7 @@
           </ul>
         </li>
 
-        <li class="nav-header">Settings</li>
+        {{-- <li class="nav-header">Settings</li>
 
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -317,7 +329,108 @@
               </a>
             </li>
           </ul>
+        </li> --}}
+
+        <li class="nav-header">Pathology</li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-flask"></i>
+            <p>
+              Lab Test
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                 <i class="fa-solid fa-circle-plus"></i>
+                <p>Test Add</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-bars"></i>
+                <p>Test List</p>
+              </a>
+            </li>
+          </ul>
         </li>
+
+        <li class="nav-header">Report</li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-receipt"></i>
+            <p>
+              Reports
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-bars"></i>
+                <p>Financial Report</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <p>User Activity Report</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <p>Daily Income</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <p>Monthly Income</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <p>Income Vs Expense</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <p>Birth Report</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <p>Operation Report</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-header">Settings</li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-gear"></i>
+            <p>
+              Settings
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-bars"></i>
+                <p>User Settings</p>
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+
       </ul>
     </nav>
     
@@ -326,6 +439,6 @@
 
       </form>
 
-  <button type="submit" class="btn btn-danger" style="width: 100%" onclick="$('#logoutForm').submit();">Log Out</button>
+  <button type="submit" class="btn btn-danger" style="width: 100%; margin-bottom: 10px;" onclick="$('#logoutForm').submit();">Log Out</button>
     <!-- /.sidebar-menu -->
   </div>

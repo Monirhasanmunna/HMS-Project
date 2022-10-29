@@ -7,10 +7,13 @@
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="col-sm-4 col-4">
             <h1 class="m-0">Dashboard</h1>
           </div><!-- /.col -->
-          <div class="col-sm-6">
+          <div class="col-sm-4 col-4">
+            <h1 class="m-0">𝒲𝑒𝓁𝒸𝑜𝓂𝑒 𝒯𝑜 𝒬𝐵 𝐻𝑀𝒮</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-4 col-4">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Dashboard v1</li>
