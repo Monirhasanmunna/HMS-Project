@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Backend\AdviceController;
 use App\Http\Controllers\Backend\AssistantController;
 use App\Http\Controllers\Backend\Bed\BedController;
@@ -34,11 +35,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
+Route::get('/', [AuthenticatedSessionController::class, 'create'])->middleware('guest');
 
 Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>['auth','verified']],function(){
 
@@ -98,6 +100,9 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/edit/{id}',[PatientController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[PatientController::class,'update'])->name('update');
         Route::get('/delete/{id}',[PatientController::class,'destroy'])->name('delete');
+
+        //ajax route
+        Route::get('bedgroup/info/{id}',[PatientController::class,'bedgroup_info']);
     });
 
 

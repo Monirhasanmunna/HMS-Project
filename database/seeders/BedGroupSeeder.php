@@ -18,19 +18,22 @@ class BedGroupSeeder extends Seeder
         BedGroup::updateOrCreate([
             'floor_id'      => 1,
             'name'          => 'General Ward',
-            'description'   => 'The operating room (OR) is where both inpatient and outpatient surgeries are performed.'
+            'description'   => 'The operating room (OR) is where both inpatient and outpatient surgeries are performed.',
+            'price'         => 500,
         ]);
 
         BedGroup::updateOrCreate([
             'floor_id'      => 2,
             'name'          => 'VIP Ward',
-            'description'   => 'The operating room (OR) is where both inpatient and outpatient surgeries are performed.'
+            'description'   => 'The operating room (OR) is where both inpatient and outpatient surgeries are performed.',
+            'price'         => 2000,
         ]);
 
         BedGroup::updateOrCreate([
             'floor_id'      => 3,
             'name'          => 'Private Ward',
-            'description'   => 'The operating room (OR) is where both inpatient and outpatient surgeries are performed.'
+            'description'   => 'The operating room (OR) is where both inpatient and outpatient surgeries are performed.',
+            'price'         => 3000,
         ]);
     }
 }

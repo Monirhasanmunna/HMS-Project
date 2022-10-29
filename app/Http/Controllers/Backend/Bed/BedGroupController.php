@@ -42,13 +42,15 @@ class BedGroupController extends Controller
        $request->validate([
         'floor_id'      =>'required',
         'name'          => 'required|unique:bed_groups',
-        'description'   => 'sometimes|max:500'
+        'description'   => 'sometimes|max:500',
+        'price'         => 'required'
        ]);
 
        BedGroup::create([
         'floor_id'   => $request->floor_id,
         'name'       => $request->name,
-        'description'=> $request->description
+        'description'=> $request->description,
+        'price'      => $request->price
        ]);
 
        notify()->success('Bed Group Created Successfully');
@@ -96,7 +98,8 @@ class BedGroupController extends Controller
            BedGroup::findOrfail($request->bedgroup_id)->update([
             'floor_id'   => $request->floor_id,
             'name'       => $request->name,
-            'description'=> $request->description
+            'description'=> $request->description,
+            'price'      => $request->price
            ]);
     
            notify()->success('Bed Group Updated Successfully');

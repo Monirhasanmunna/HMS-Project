@@ -35,6 +35,7 @@
                               <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Price</th>
                                 <th>Floor</th>
                                 <th>Description</th>
                                 <th>Action</th>
@@ -45,6 +46,7 @@
                               <tr>
                                 <td>{{$key+1}}</td>
                                 <td><span class="text-primary">{{$bedgroup->name}}</span></td>
+                                <td><span class="badge badge-warning">{{$bedgroup->price}}</span></td>
                                 <td>{{$bedgroup->floor->name}}</td>
                                 <td>{{$bedgroup->description}}</td>
                                 <td>
@@ -98,6 +100,11 @@
                                                   <label for="floorName">Name</label>
                                                   <input id="" type="text" class="form-control" name="name" required>
                                                 </div>
+
+                                                <div class="form-group">
+                                                  <label for="floorPrice">Price</label>
+                                                  <input id="floorPrice" type="number" class="form-control" name="price" required>
+                                                </div>
                       
                                                 <div class="form-group">
                                                   <label for="description">Description</label>
@@ -146,6 +153,11 @@
                                                 <div class="form-group">
                                                   <label for="bedgroup_name">Name</label>
                                                   <input id="bedgroup_name" type="text" class="form-control" name="name" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                  <label for="BedGroupPrice">Price</label>
+                                                  <input id="bedGroupPrice" type="number" class="form-control" name="price" required>
                                                 </div>
                       
                                                 <div class="form-group">
@@ -203,6 +215,7 @@
         $("#floor_option").append(data);
         $("#bedgroup_name").val(response.name);
         $("#bedgroup_description").val(response.description);
+        $("#bedGroupPrice").val(response.price);
         $("#bedGroupEditModel").modal('show');
       }
     });

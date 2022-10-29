@@ -21,10 +21,18 @@ class Patient extends Model
         return $this->belongsToMany(Disease::class);
     }
 
-    
-
     public function prescriptionDetails()
     {
         return $this->belongsTo(PrescriptionDetails::class);
+    }
+
+    public function bedgroup()
+    {
+        return $this->belongsTo(BedGroup::class,'bedgroup_id');
+    }
+
+    public function bed()
+    {
+        return $this->belongsTo(Bed::class,'bed_id');
     }
 }

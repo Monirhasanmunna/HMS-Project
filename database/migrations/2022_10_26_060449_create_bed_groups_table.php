@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('floor_id')->constrained('floors')->onDelete('cascade');
             $table->string('name')->unique();
             $table->text('description');
+            $table->integer('price');
             $table->timestamps();
         });
     }

@@ -186,6 +186,56 @@
                                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
                                     </div>
+                                    <div class="form-group col-4">
+                                        <label>Bed Group</label>
+                                        <select name="bed_group" id="bed_group" class="js-example-placeholder-single js-states form-control @error('bed_group') is-invalid @enderror" style="width: 100%">
+                                            <option></option>
+                                            @foreach ($bedgroups as $bedgroup)
+                                               <option value="{{$bedgroup->id}}"
+                                                @if(isset($patient))
+                                                {{($patient->bedgroup->id == $bedgroup->id)?'selected':''}}
+                                                @endif
+                                                >{{$bedgroup->name}}</option> 
+                                            @endforeach
+                                        </select>
+                                        @error('bed_group')
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <label>Bed</label>
+                                        <select name="bed" id="bed" class="js-example-placeholder-single js-states form-control @error('bed') is-invalid @enderror" style="width: 100%">
+                                            <option></option>
+                                        </select>
+                                        @error('bed')
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <label for="price">Price</label>
+                                        <input type="number" name="price" class="form-control form-control-sm @error('price') is-invalid @enderror" id="price" readonly>
+                                        @error('price')
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <label for="paid">Paid</label>
+                                        <input type="number" name="paid" class="form-control form-control-sm @error('paid') is-invalid @enderror" id="paid">
+                                        @error('paid')
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <label for="paid">Due</label>
+                                        <input type="number" name="due" class="form-control form-control-sm @error('paid') is-invalid @enderror" id="due" readonly>
+                                        @error('due')
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
                                 </div>
                                 
                     
@@ -215,5 +265,38 @@
       placeholder: "--Select One--",
       allowClear: true
   });
+</script>
+
+<script>
+    $("#bed_group").on('change',function(){
+        var id = $(this).val();
+        $.ajax({
+            url         : '/app/patient/bedgroup/info/'+id,
+            type        : 'GET',
+            success     : function(response){
+
+                $("#price").val(response.bedgroup.price);
+                $("#due").val(0);
+
+                $("#bed").empty();
+                $(response.bed).each(function(index, element){
+                    var bed = `
+                        <option value='${element.id}'>${element.name}</option>
+                    `;
+                    $("#bed").append(bed);
+                });
+            }
+        });
+    });
+
+    $("#paid").on('change, keyup',function(){
+        
+       var price = parseInt($("#price").val());
+       var paid_amount = parseInt($(this).val());
+
+       var due_cal = price-paid_amount;
+       $("#due").val(due_cal);
+       
+    });
 </script>
 @endpush
