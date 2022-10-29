@@ -26,13 +26,9 @@ class Patient extends Model
         return $this->belongsTo(PrescriptionDetails::class);
     }
 
-    public function bedgroup()
+    public function admition()
     {
-        return $this->belongsTo(BedGroup::class,'bedgroup_id');
+        return $this->belongsTo(AdmittedPatient::class);
     }
 
-    public function bed()
-    {
-        return $this->belongsTo(Bed::class,'bed_id');
-    }
 }

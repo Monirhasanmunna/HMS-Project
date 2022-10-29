@@ -73,31 +73,13 @@ class PatientController extends Controller
             'maritial_status'   => $request->maritial_status,
             'ocupation'         => $request->ocupation,
             'religion'          => $request->religion,
-            'bedgroup_id'       => $request->bed_group,
-            'bed_id'            => $request->bed,
-            'paid'              => $request->paid,
-            'due'               => $request->due
         ]);
 
-
-        if($request->bed){
-          $bed = Bed::findOrfail($request->bed);
-          $bed->status = true;
-          $bed->save();
-        }
-          
         
         notify()->success('Patient Created Successfully');
         return redirect()->route('app.patient.index');
     }
 
-
-    public function bedgroup_info($id)
-    {
-        $bed = Bed::where('bedgroup_id',$id)->where('status',false)->get();
-        $bedgroup = BedGroup::where('id',$id)->first();
-        return response()->json(['bed'=>$bed, 'bedgroup'=>$bedgroup]);
-    }
 
     /**
      * Display the specified resource.

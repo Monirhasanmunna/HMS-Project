@@ -26,7 +26,7 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title text-primary"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Patient's</span></h3>
+                      <h3 class="card-title text-primary"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Admitted Patient's</span></h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -35,36 +35,31 @@
                           <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Age</th>
-                            <th>Sex</th>
-                            <th>Doctor</th>
-                            <th>Mobile</th>
-                            <th>B/G</th>
-                            <th>Weight</th>                            
+                            <th>Bed</th>
+                            <th>Price</th>
+                            <th>Paid</th>
+                            <th>Due</th>                           
                             <th class="text-center">Action</th>
                           </tr>
                           </thead>
                           <tbody>
-                        @foreach ($patients as $key=>$patient)
+                        @foreach ($admitions as $key=>$admition)
                           <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$patient->name}}</td>
-                            <td>{{$patient->age}}</td>
-                            <td>{{$patient->sex}}</td>
-                            <td>{{$patient->doctor->name}}</td>
-                            <td>{{$patient->mobile}}</td>
-                            <td>{{$patient->blood_group}}</td>
-                            <td>{{$patient->weight}}</td>
-                            
+                            <td>{{$admition->patients->name}}</td>
+                            <td>{{$admition->bed->name }} - {{ $admition->bedgroup->name }} - {{ $admition->bedgroup->floor->name}}</td>
+                            <td>{{$admition->bedgroup->price}}</td>
+                            <td>{{$admition->paid}}</td>
+                            <td>{{$admition->due}}</td>
                             <td class="text-center">
                                 <div class="dropdown show dropleft ">
                                     <a class="btn btn-sm btn-primary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a href="javascript:void(0)" onclick="assistantShow({{$patient->id}})" class="btn-sm btn-info dropdown-item">Show</a>
-                                        <a href="{{Route('app.patient.edit',[$patient->id])}}" class="btn-sm btn-primary dropdown-item">Edit</a>
-                                        <a href="javascript:void(0)" onclick="patientDelete({{$patient->id}})" class="btn-sm btn-danger dropdown-item">Delete</a>
+                                        <a href="javascript:void(0)" onclick="assistantShow({{$admition->id}})" class="btn-sm btn-info dropdown-item">Show</a>
+                                        <a href="{{Route('app.patient.edit',[$admition->id])}}" class="btn-sm btn-primary dropdown-item">Edit</a>
+                                        <a href="javascript:void(0)" onclick="patientDelete({{$admition->id}})" class="btn-sm btn-danger dropdown-item">Delete</a>
                                     </div>
                                   </div>
                             </td>
@@ -74,15 +69,12 @@
                           <tfoot>
                             <tr>
                               <th>#</th>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Sex</th>
-                            <th>Doctor</th>
-                            <th>Mobile</th>
-                            <th>B/G</th>
-                            <th>Weight</th>
-                            
-                            <th class="text-center">Action</th>
+                              <th>Name</th>
+                              <th>Bed</th>
+                              <th>Price</th>
+                              <th>Paid</th>
+                              <th>Due</th>                           
+                              <th class="text-center">Action</th>
                               </tr>
                           </tfoot>
                         </table>

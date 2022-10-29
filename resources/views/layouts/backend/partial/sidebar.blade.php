@@ -137,6 +137,42 @@
                 <p>Patient List</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{Route('app.admition.index')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Admitted Patient List</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{Route('app.admition.create')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Patient Admition</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-sharp fa-solid fa-wheelchair"></i>
+            <p>
+              Patient Admission
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{Route('app.admition.index')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Patient List</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{Route('app.admition.create')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>New Admission</p>
+              </a>
+            </li>
           </ul>
         </li>
 
@@ -152,6 +188,13 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+
+            <li class="nav-item">
+              <a href="{{Route('app.prescription.dashboard')}}" class="nav-link">
+                <i class="fa-solid fa-circle-plus"></i>
+                <p>Dashboard</p>
+              </a>
+            </li>
             <li class="nav-item">
               <a href="{{Route('app.prescription.create')}}" class="nav-link">
                 <i class="fa-solid fa-circle-plus"></i>

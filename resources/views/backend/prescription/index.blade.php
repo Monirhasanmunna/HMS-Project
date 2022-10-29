@@ -26,7 +26,7 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title text-primary"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Blood Group's</span></h3>
+                      <h3 class="card-title text-primary"><i class="fa-solid fa-file-lines"></i><span class="pl-1">Prescription's</span></h3>
                       <div class="text-right">
                         <a href="{{Route('app.prescription.create')}}" class="btn btn-sm btn-primary pull-right">Add New</a>
                       </div>

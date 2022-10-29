@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Backend\AdmittedPatientController;
 use App\Http\Controllers\Backend\AdviceController;
 use App\Http\Controllers\Backend\AssistantController;
 use App\Http\Controllers\Backend\Bed\BedController;
@@ -106,6 +107,20 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
     });
 
 
+    Route::group(['as'=>'admition.','prefix'=>'admition'],function(){
+
+        Route::get('/index',[AdmittedPatientController::class,'index'])->name('index');
+        Route::get('/create',[AdmittedPatientController::class,'create'])->name('create');
+        Route::post('/store',[AdmittedPatientController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[AdmittedPatientController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[AdmittedPatientController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[AdmittedPatientController::class,'destroy'])->name('delete');
+
+        //ajax route
+        Route::get('bedgroup/info/{id}',[AdmittedPatientController::class,'bedgroup_info']);
+    });
+
+
     Route::group(['as'=>'frequency.','prefix'=>'frequency'],function(){
 
         Route::get('/index',[FrequencyController::class,'index'])->name('index');
@@ -198,6 +213,7 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
 
     Route::group(['as'=>'prescription.','prefix'=>'prescription'],function(){
 
+        Route::get('/dashboard',[PrescriptionController::class,'dashboard'])->name('dashboard');
         Route::get('/index',[PrescriptionController::class,'index'])->name('index');
         Route::get('/create',[PrescriptionController::class,'create'])->name('create');
         Route::post('/store',[PrescriptionController::class,'store'])->name('store');

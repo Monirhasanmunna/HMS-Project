@@ -9,6 +9,7 @@ class BedDashboardController extends Controller
 {
     public function index()
     {
+        
         return view('backend.beddashboard.index');
     }
 }

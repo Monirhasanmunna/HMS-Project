@@ -21,6 +21,12 @@ use Illuminate\Http\Request;
 
 class PrescriptionController extends Controller
 {
+
+    public function dashboard()
+    {
+        return view('backend.prescription.dashboard');
+    }
+
     /**
      * Display a listing of the resource.
      *
