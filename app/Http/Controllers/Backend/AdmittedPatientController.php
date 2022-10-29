@@ -94,7 +94,11 @@ class AdmittedPatientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $admission = AdmittedPatient::findOrfail($id);
+        $patients  = Patient::all();
+        $bedgroups = BedGroup::all();
+        $beds      = Bed::all();
+        return view('backend.admittedPatient.create',compact('patients','bedgroups','beds','admission'));
     }
 
     /**
@@ -106,7 +110,36 @@ class AdmittedPatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'patient_id'    => 'required',
+            'bedgroup_id'   => 'required',
+            'bed_id'        => 'required',
+            'paid'          => 'required',
+            'due'           => 'sometimes'
+        ]);
+
+
+        
+        $admission = AdmittedPatient::findOrfail($id);
+        $bed = Bed::findOrfail($admission->bed_id);
+        $bed->status = false;
+        $bed->save();
+
+        $admission->patient_id  = $request->patient_id;
+        $admission->bedgroup_id = $request->bedgroup_id;
+        $admission->bed_id      = $request->bed_id;
+        $admission->paid        = $request->paid;
+        $admission->due         = $request->due;
+
+
+        $bed = Bed::findOrfail($request->bed_id);
+        $bed->status = true;
+        $bed->save();
+        $admission->save();
+
+
+        notify()->success('New Admition Created');
+        return redirect()->route('app.admition.index');
     }
 
     /**
@@ -117,6 +150,8 @@ class AdmittedPatientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $admission = AdmittedPatient::findOrfail($id)->delete();
+        return response()->json($admission);
+
     }
 }

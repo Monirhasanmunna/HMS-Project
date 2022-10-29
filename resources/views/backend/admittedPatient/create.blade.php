@@ -25,14 +25,14 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title text-primary ">
-                            @if(!isset($admition))
+                            @if(!isset($admission))
                             <i class="fa-solid fa-circle-plus"></i>
                             @else
                             <i class="fa-solid fa-spinner"></i>
                             @endif
 
                             <span class="pl-1">
-                            @if(!isset($admition))
+                            @if(!isset($admission))
                             New Admittion
                             @else
                             Admittion Update
@@ -40,8 +40,8 @@
                             </span></h3>
                         </div>
                         <div class="card-body">
-                            <form action="{{isset($admition)? Route('app.admition.update',[$admition->id]): Route('app.admition.store')}}" method="POST">
-                                @if(isset($patient))
+                            <form action="{{isset($admission)? Route('app.admition.update',[$admission->id]): Route('app.admition.store')}}" method="POST">
+                                @if(isset($admission))
                                     @method('PUT')
                                 @endif
                                 @csrf
@@ -52,8 +52,8 @@
                                             <option></option>
                                             @foreach ($patients as $patient)
                                                <option value="{{$patient->id}}"
-                                                @if(isset($admition))
-                                                {{($admition->patient_id == $patient->id)?'selected':''}}
+                                                @if(isset($admission))
+                                                {{($admission->patient_id == $patient->id)?'selected':''}}
                                                 @endif
                                                 >{{$patient->name}}</option> 
                                             @endforeach
@@ -69,8 +69,8 @@
                                             <option></option>
                                             @foreach ($bedgroups as $bedgroup)
                                                <option value="{{$bedgroup->id}}"
-                                                @if(isset($admition))
-                                                {{($admition->bedgroup_id == $bedgroup->id)?'selected':''}}
+                                                @if(isset($admission))
+                                                {{($admission->bedgroup_id == $bedgroup->id)?'selected':''}}
                                                 @endif
                                                 >{{$bedgroup->name}}</option> 
                                             @endforeach
@@ -86,8 +86,8 @@
                                             <option></option>
                                             @foreach ($beds as $bed)
                                                <option value="{{$bed->id}}"
-                                                @if(isset($admition))
-                                                {{($admition->bed_id == $bed->id)?'selected':''}}
+                                                @if(isset($admission))
+                                                {{($admission->bed_id == $bed->id)?'selected':''}}
                                                 @endif
                                                 >{{$bed->name}}</option> 
                                             @endforeach
@@ -101,12 +101,12 @@
                                 <div class="form-row">
                                     <div class="form-group col-4">
                                         <label for="price">Price</label>
-                                        <input type="number" name="price" id="price" class="form-control form-control-sm id="price" readonly>
+                                        <input type="number" name="price" id="price" class="form-control form-control-sm" id="price" value="{{ $admission->bedgroup->price}}" readonly>
                                     </div>
 
                                     <div class="form-group col-4">
                                         <label for="paid">Paid</label>
-                                        <input type="number" name="paid" class="form-control form-control-sm @error('paid') is-invalid @enderror" id="paid" placeholder="Enter Amount" value="{{ $admition->paid ?? old('paid') }}">
+                                        <input type="number" name="paid" class="form-control form-control-sm @error('paid') is-invalid @enderror" id="paid" placeholder="Enter Amount" value="{{ $admission->paid ?? old('paid') }}">
                                         @error('paid')
                                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                         @enderror
@@ -114,11 +114,11 @@
 
                                     <div class="form-group col-4">
                                         <label for="due">Due</label>
-                                        <input type="number" name="due" class="form-control form-control-sm" id="due" readonly>
+                                        <input type="number" name="due" class="form-control form-control-sm" id="due" value="{{ $admission->due}}" readonly>
                                     </div>
                                 </div>
                     
-                                @if(!isset($admition))
+                                @if(!isset($admission))
                                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i><span class="pl-1">Submit</span></button>
                                 @else
                                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-spinner"></i><span class="pl-1">Update</span></button>
@@ -148,6 +148,7 @@
 
 <script>
     $("#bed_group").on('change',function(){
+        $("#price").val(0);
         var id = $(this).val();
         $.ajax({
             url         : '/app/admition/bedgroup/info/'+id,

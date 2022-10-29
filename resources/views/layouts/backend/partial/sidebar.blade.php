@@ -8,7 +8,7 @@
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
         <li class="nav-item menu-open">
-          <a href="{{Route('app.dashboard')}}" class="nav-link active">
+          <a href="{{Route('app.dashboard')}}" class="nav-link {{Request::is('app/dashboard*')?'active':''}}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -27,13 +27,13 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="#" class="nav-link">
                 <i class="fa-solid fa-person-circle-plus"></i>
                 <p>Role Add</p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="#" class="nav-link">
                 <i class="fa-sharp fa-solid fa-users"></i>
                 <p>Role List</p>
@@ -51,13 +51,13 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="#" class="nav-link">
                 <i class="fa-solid fa-user-plus"></i>
                 <p>User Add</p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="#" class="nav-link">
                 <i class="fa-solid fa-users"></i>
                 <p>User List</p>
@@ -69,7 +69,7 @@
         <li class="nav-header">Patient Management</li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link {{Request::is('app/doctor*')?'active':''}}">
             <i class="fa-solid fa-user-doctor"></i>
             <p>
               Doctor
@@ -77,13 +77,13 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.doctor.create')}}" class="nav-link">
                 <i class="fa-solid fa-circle-plus"></i>
                 <p>Doctor Add</p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.doctor.index')}}" class="nav-link">
                 <i class="fa-solid fa-list"></i>
                 <p>Doctor List</p>
@@ -93,7 +93,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link {{Request::is('app/assistant*')?'active':''}}">
             <i class="fa-solid fa-user-nurse"></i>
             <p>
               Assistant
@@ -101,13 +101,13 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.assistant.create')}}" class="nav-link">
                 <i class="fa-solid fa-circle-plus"></i>
                 <p>Assistant Add</p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.assistant.index')}}" class="nav-link">
                 <i class="fa-solid fa-list"></i>
                 <p>Assistant List</p>
@@ -117,7 +117,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link {{Request::is('app/patient*')?'active':''}}">
             <i class="fa-sharp fa-solid fa-wheelchair"></i>
             <p>
               Patient
@@ -125,49 +125,37 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.patient.create')}}" class="nav-link">
                 <i class="fa-solid fa-circle-plus"></i>
                 <p>Patient Add</p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.patient.index')}}" class="nav-link">
                 <i class="fa-solid fa-list"></i>
                 <p>Patient List</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{Route('app.admition.index')}}" class="nav-link">
-                <i class="fa-solid fa-list"></i>
-                <p>Admitted Patient List</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{Route('app.admition.create')}}" class="nav-link">
-                <i class="fa-solid fa-list"></i>
-                <p>Patient Admition</p>
               </a>
             </li>
           </ul>
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="fa-sharp fa-solid fa-wheelchair"></i>
+          <a href="#" class="nav-link {{Request::is('app/admition*')?'active':''}}">
+            <i class="fa-solid fa-bed-pulse"></i>
             <p>
               Patient Admission
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.admition.index')}}" class="nav-link">
                 <i class="fa-solid fa-list"></i>
                 <p>Patient List</p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.admition.create')}}" class="nav-link">
                 <i class="fa-solid fa-list"></i>
                 <p>New Admission</p>
@@ -180,7 +168,7 @@
         <li class="nav-header">Prescription Management</li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link {{Request::is('app/prescription*')?'active':''}}">
             <i class="fa-solid fa-file-prescription"></i>
             <p>
               Prescription
@@ -188,89 +176,89 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.prescription.dashboard')}}" class="nav-link">
                 <i class="fa-solid fa-circle-plus"></i>
                 <p>Dashboard</p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.prescription.create')}}" class="nav-link">
                 <i class="fa-solid fa-circle-plus"></i>
                 <p>Prescription Add</p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.prescription.index')}}" class="nav-link">
                 <i class="fa-solid fa-list"></i>
                 <p>Prescription List</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="fa-solid fa-list-check"></i>
-                <p>
-                  Manage
-                  <i class="right fas fa-angle-left"></i>
-                </p>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-list-check"></i>
+            <p>
+              Manage
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ml-2">
+              <a href="{{Route('app.medicinegroup.index')}}" class="nav-link">
+                <i class="fa-solid fa-bars"></i>
+                <p>Medicine Group</p>
               </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{Route('app.medicinegroup.index')}}" class="nav-link">
-                    <i class="fa-solid fa-bars"></i>
-                    <p>Medicine Group</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{Route('app.medicine.index')}}" class="nav-link">
-                    <i class="fa-solid fa-bars"></i>
-                    <p>Medicine</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{Route('app.frequency.index')}}" class="nav-link">
-                    <i class="fa-solid fa-bars"></i>
-                    <p>Frequency</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{Route('app.quantity.index')}}" class="nav-link">
-                    <i class="fa-solid fa-bars"></i>
-                    <p>Quantity</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{Route('app.quantity.type.index')}}" class="nav-link">
-                    <i class="fa-solid fa-bars"></i>
-                    <p>Qty Type</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{Route('app.eatingtime.index')}}" class="nav-link">
-                    <i class="fa-solid fa-bars"></i>
-                    <p>Eating Time</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{Route('app.advice.index')}}" class="nav-link">
-                    <i class="fa-solid fa-bars"></i>
-                    <p>Advice</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{Route('app.medical.test.index')}}" class="nav-link">
-                    <i class="fa-solid fa-bars"></i>
-                    <p>Medical Test</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{Route('app.complaint.index')}}" class="nav-link">
-                    <i class="fa-solid fa-bars"></i>
-                    <p>Complaint</p>
-                  </a>
-                </li>
-              </ul>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="{{Route('app.medicine.index')}}" class="nav-link">
+                <i class="fa-solid fa-bars"></i>
+                <p>Medicine</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="{{Route('app.frequency.index')}}" class="nav-link">
+                <i class="fa-solid fa-bars"></i>
+                <p>Frequency</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="{{Route('app.quantity.index')}}" class="nav-link">
+                <i class="fa-solid fa-bars"></i>
+                <p>Quantity</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="{{Route('app.quantity.type.index')}}" class="nav-link">
+                <i class="fa-solid fa-bars"></i>
+                <p>Qty Type</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="{{Route('app.eatingtime.index')}}" class="nav-link">
+                <i class="fa-solid fa-bars"></i>
+                <p>Eating Time</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="{{Route('app.advice.index')}}" class="nav-link">
+                <i class="fa-solid fa-bars"></i>
+                <p>Advice</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="{{Route('app.medical.test.index')}}" class="nav-link">
+                <i class="fa-solid fa-bars"></i>
+                <p>Medical Test</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="{{Route('app.complaint.index')}}" class="nav-link">
+                <i class="fa-solid fa-bars"></i>
+                <p>Complaint</p>
+              </a>
             </li>
           </ul>
         </li>
@@ -282,7 +270,7 @@
 
       
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link {{Request::is('app/bed*')?'active':''}}">
             <i class="fa-solid fa-bed"></i>
             <p>
               Bed
@@ -290,36 +278,18 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.beddashboard.index')}}" class="nav-link">
                 <i class="fa-solid fa-bed"></i>
                 <p>Dashboard</p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.bed.index')}}" class="nav-link">
                 <i class="fa-solid fa-bed"></i>
                 <p>Bed</p>
               </a>
           </li>
-          {{-- <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="fa-solid fa-bed-pulse"></i>
-                <p>Bed Type</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{Route('app.bedgroup.index')}}" class="nav-link">
-              <i class="fa-solid fa-sitemap"></i>
-                <p>Bed Group</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{Route('app.floor.index')}}" class="nav-link">
-              <i class="fa-solid fa-building"></i>
-                <p>Floor</p>
-            </a>
-          </li> --}}
           </ul>
         </li>
 
@@ -334,13 +304,13 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.disease.index')}}" class="nav-link">
                 <i class="fa-solid fa-bars"></i>
                 <p>Disease</p>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-2">
               <a href="{{Route('app.blood.index')}}" class="nav-link">
                 <i class="fa-solid fa-hand-holding-heart"></i>
                 <p>Blood Group</p>
@@ -350,17 +320,12 @@
         </li>
       </ul>
     </nav>
-    <div class="mt-3 space-y-1">
-      <!-- Authentication -->
-      <form method="POST" action="{{ route('logout') }}">
-          @csrf
+    
+      <form method="POST" id="logoutForm" action="{{ route('logout') }}" style="display: none">
+        @csrf
 
-          <x-responsive-nav-link :href="route('logout')"
-                  onclick="event.preventDefault();
-                              this.closest('form').submit();">
-              {{ __('Log Out') }}
-          </x-responsive-nav-link>
       </form>
-  </div>
+
+  <button type="submit" class="btn btn-danger" style="width: 100%" onclick="$('#logoutForm').submit();">Log Out</button>
     <!-- /.sidebar-menu -->
   </div>

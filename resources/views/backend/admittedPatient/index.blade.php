@@ -58,7 +58,7 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <a href="javascript:void(0)" onclick="assistantShow({{$admition->id}})" class="btn-sm btn-info dropdown-item">Show</a>
-                                        <a href="{{Route('app.patient.edit',[$admition->id])}}" class="btn-sm btn-primary dropdown-item">Edit</a>
+                                        <a href="{{Route('app.admition.edit',[$admition->id])}}" class="btn-sm btn-primary dropdown-item">Edit</a>
                                         <a href="javascript:void(0)" onclick="patientDelete({{$admition->id}})" class="btn-sm btn-danger dropdown-item">Delete</a>
                                     </div>
                                   </div>
@@ -191,7 +191,7 @@
                     'success'
                     )
                     $.ajax({
-                    url      : '/app/patient/delete/'+id,
+                    url      : '/app/admition/delete/'+id,
                     dataType : 'json',
                     Type     : 'Delete',
                     success  : function(response){
