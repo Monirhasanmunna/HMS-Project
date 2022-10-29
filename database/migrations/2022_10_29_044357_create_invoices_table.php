@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('doctor_id')->constrained('doctors')->onDelete('cascade');
             $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
+            $table->unsignedBigInteger('ref_id')->comment('join with beds.id or prescriptions.id subject to type');
             $table->enum('invoice_type',['bed', 'prescription'])->default('prescription');
             $table->date('invoice_date');
             $table->date('admission_date')->nullable();
