@@ -43,7 +43,7 @@
               <div class="col-4">
                 <div class="small-box bg-info">
                   <div class="inner">
-                    <h3>30</h3>
+                    <h3>{{$patients}}</h3>
   
                     <p>Total Current Patients</p>
                   </div>
@@ -56,7 +56,7 @@
               <div class="col-4">
                 <div class="small-box bg-success">
                   <div class="inner">
-                    <h3>5</h3>
+                    <h3>{{$todayAdmit}}</h3>
     
                     <p>Admitted Today</p>
                   </div>
@@ -99,30 +99,14 @@
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach ($totalAdmit as $p)
                       <tr>
-                        <td>TF-03</td>
-                        <td>Rafiq Ahmed</td>
-                        <td>10/13/25 08:05PM</td>
+                        <td>{{$p->bed->name}}</td>
+                        <td>{{$p->patients->name}}</td>
+                        <td>{{$p->created_at->format('d.m.Y')}}</td>
                         <td class="text-center"><a href="#"><i class="fa-sharp fa-solid fa-file-invoice btn-sm btn-primary "></i></a></td>
                       </tr>
-                      <tr>
-                        <td>TF-03</td>
-                        <td>Rafiq Ahmed</td>
-                        <td>10/13/25 08:05PM</td>
-                        <td class="text-center"><a href="#"><i class="fa-sharp fa-solid fa-file-invoice btn-sm btn-primary"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td>TF-03</td>
-                        <td>Rafiq Ahmed</td>
-                        <td>10/13/25 08:05PM</td>
-                        <td class="text-center"><a href="#"><i class="fa-sharp fa-solid fa-file-invoice btn-sm btn-primary"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td>TF-03</td>
-                        <td>Rafiq Ahmed</td>
-                        <td>10/13/25 08:05PM</td>
-                        <td class="text-center"><a href="#"><i class="fa-sharp fa-solid fa-file-invoice btn-sm btn-primary"></i></a></td>
-                      </tr>
+                      @endforeach
                     </tbody>
                   </table>
                 </div>
