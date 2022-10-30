@@ -302,10 +302,18 @@
                                             <div class="col-sm-12 col-md-12">
                                                 <b for="">Chief Complaints:</b>
                                                 <hr>
-                                                <textarea class="form-control col-md-12 col-sm-12  @error('cc') is-invalid @enderror" name="cc" placeholder="Chief Complaints">{{ $prescription->cc ?? old('cc') }}</textarea>
+                                                <!-- <textarea class="form-control col-md-12 col-sm-12  @error('cc') is-invalid @enderror" name="cc" placeholder="Chief Complaints">{{ $prescription->cc ?? old('cc') }}</textarea> -->
+                                                <select name="cc[]" multiple id="cc" class="js-example-placeholder-single js-states form-control @error('cc') is-invalid @enderror" style="width: 100%">
+                                                    <option></option>
+                                                    @foreach ($complaints as $complaint)
+                                                    <option value="{{$complaint->id}}" >{{$complaint->name}}</option>
+                                                    @endforeach
+                                                </select>
                                                 @error('cc')
                                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                                 @enderror
+
+                                                
                                             </div>
                                         </div>
 

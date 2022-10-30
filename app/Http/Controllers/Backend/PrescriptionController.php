@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Advice;
+use App\Models\Complaint;
 use App\Models\Doctor;
 use App\Models\Eatingtime;
 use App\Models\Frequency;
@@ -12,6 +13,7 @@ use App\Models\Medicine;
 use App\Models\Patient;
 use App\Models\Prescription;
 use App\Models\PrescriptionAdvice;
+use App\Models\PrescriptionComplaint;
 use App\Models\PrescriptionDetails;
 use App\Models\PrescriptionMedicine;
 use App\Models\PrescriptionTest;
@@ -76,7 +78,8 @@ class PrescriptionController extends Controller
         $medicalTest = MedicalTest::where('status', 1)->get();
         $advice = Advice::all();
         $doctors = Doctor::all();
-        return view('backend.prescription.create', compact('patients', 'medicines', 'medicalTest', 'advice', 'doctors'));
+        $complaints=Complaint::all();
+        return view('backend.prescription.create', compact('patients', 'medicines', 'medicalTest', 'advice', 'doctors','complaints'));
     }
 
     /**
@@ -124,7 +127,6 @@ class PrescriptionController extends Controller
             "salt" => $request->salt,
             "smoke" => $request->smoke,
             "smoking" => $request->smoking,
-            "cc" => $request->cc,
             "diagnosis" => $request->diagnosis,
             "sec_diagnosis" => $request->sec_diagnosis,
             "sec_dx2" => $request->sec_dx2,
@@ -150,20 +152,27 @@ class PrescriptionController extends Controller
         }
         
         if($request->advice){
-
             foreach($request->advice as $key=>$adv){
                 PrescriptionAdvice::create([
                    'advice_id' =>$adv,                
-                    'prescription_id'=>$prescription->id
+                   'prescription_id'=>$prescription->id
                 ]);
             }
         }
         
         if($request->suggest_test){
-
             foreach($request->suggest_test as $key=>$test){
                 PrescriptionTest::create([
                    'medical_test_id' =>$test,                
+                   'prescription_id'=>$prescription->id
+                ]);
+            }
+        }
+        
+        if($request->cc){
+            foreach($request->cc as $key=>$test){
+                PrescriptionComplaint::create([
+                    'complaint_id' =>$test,                
                     'prescription_id'=>$prescription->id
                 ]);
             }
@@ -200,8 +209,9 @@ class PrescriptionController extends Controller
         $medicalTest = MedicalTest::where('status', 1)->get();
         $advice = Advice::all();
         $doctors = Doctor::all();
+        $complaints=Complaint::all();
         $prescription=Prescription::findOrfail($id);
-        return view('backend.prescription.create', compact('patients', 'medicines', 'medicalTest', 'advice', 'doctors', 'prescription'));
+        return view('backend.prescription.create', compact('patients', 'medicines', 'medicalTest', 'advice', 'doctors','complaints', 'prescription'));
     }
 
     /**
