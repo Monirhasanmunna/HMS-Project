@@ -47,7 +47,7 @@
                                   @endif
                                 </td>
                                 <td>
-                                  <a href="" class="btn btn-sm btn-primary">Edit</a>
+                                  <a href="{{Route('app.role.edit',$role->id)}}" class="btn btn-sm btn-primary">Edit</a>
                                   <a href="javascript::void(0);" onclick="roledelete({{$role->id}})" class="btn btn-sm btn-danger">Delete</a>
                                 </td>
                               </tr>

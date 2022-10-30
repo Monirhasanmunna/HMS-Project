@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Assistant;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AssistantController extends Controller
 {
@@ -16,6 +17,7 @@ class AssistantController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.assistant.index');
         $assistants = Assistant::orderBy('id','DESC')->get();
         return view('backend.assistant.index',compact('assistants'));
     }
@@ -27,6 +29,7 @@ class AssistantController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.assistant.create');
         $doctors = Doctor::all();
         return view('backend.assistant.create',compact('doctors'));
     }
@@ -39,6 +42,7 @@ class AssistantController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('app.assistant.create');
         $request->validate([
             'doctor'    => 'required',
             'name'      => 'required|string',
@@ -79,6 +83,7 @@ class AssistantController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('app.assistant.edit');
         $doctors = Doctor::all();
         $assistant = Assistant::findOrfail($id);
         return view('backend.assistant.create',compact('doctors','assistant'));
@@ -93,6 +98,7 @@ class AssistantController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.assistant.edit');
         $request->validate([
             'doctor'    => 'required',
             'name'      => 'required|string',
@@ -121,6 +127,7 @@ class AssistantController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('app.assistant.destroy');
         $assistant = Assistant::findOrfail($id);
         $assistant->delete();
         return response()->json($assistant);

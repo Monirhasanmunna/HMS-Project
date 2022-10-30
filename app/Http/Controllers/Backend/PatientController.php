@@ -10,6 +10,7 @@ use App\Models\Disease;
 use App\Models\Doctor;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PatientController extends Controller
 {
@@ -20,6 +21,7 @@ class PatientController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.patient.index');
         $patients = Patient::orderBy('id','DESC')->get();
         return view('backend.patient.index',compact('patients'));
     }
@@ -31,6 +33,7 @@ class PatientController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.patient.create');
         $bedgroups = BedGroup::all();
         $doctors = Doctor::all();
         $disease = Disease::all();
@@ -46,7 +49,7 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-
+        Gate::authorize('app.patient.create');
         $request->validate([
             'doctor_id'         => 'required', 
             'name'              => 'required|string',
@@ -99,7 +102,9 @@ class PatientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   $doctors = Doctor::all();
+    {   
+        Gate::authorize('app.patient.edit');
+        $doctors = Doctor::all();
         $bloods  = Blood::all();
         $patient = Patient::findOrfail($id);
         return view('backend.patient.create',compact('patient','doctors','bloods'));
@@ -114,6 +119,7 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.patient.edit');
         $request->validate([
             'doctor_id'         => 'required',
             'name'              => 'required|string',
@@ -150,6 +156,7 @@ class PatientController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('app.patient.destroy');
         $patient = Patient::findOrfail($id);
         $patient->delete();
         return response()->json($patient);

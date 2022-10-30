@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class DoctorController extends Controller
 {
@@ -15,6 +16,7 @@ class DoctorController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.doctor.index');
         $doctors = Doctor::orderBy('id','DESC')->get();
         return view('backend.doctor.index',compact('doctors'));
     }
@@ -26,6 +28,7 @@ class DoctorController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.doctor.create');
         return view('backend.doctor.create');
     }
 
@@ -37,6 +40,7 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('app.doctor.create');
        $request->validate([
         'name'                  => 'required|string',
         'email'                 => 'required|email|unique:doctors',
@@ -83,6 +87,7 @@ class DoctorController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('app.doctor.edit');
         $doctor = Doctor::findOrfail($id);
         return view('backend.doctor.create',compact('doctor'));
         
@@ -97,6 +102,7 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.doctor.edit');
         $request->validate([
             'name'                  => 'required|string',
             'email'                 => 'required|email',
@@ -131,6 +137,7 @@ class DoctorController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('app.doctor.destroy');
         $doctor = Doctor::findOrfail($id);
         $doctor->delete();
         return response()->json($doctor);

@@ -8,6 +8,7 @@ use App\Models\Bed;
 use App\Models\BedGroup;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AdmittedPatientController extends Controller
 {
@@ -17,7 +18,8 @@ class AdmittedPatientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        Gate::authorize('app.admission.index');
         $admitions = AdmittedPatient::all();
         return view('backend.admittedPatient.index',compact('admitions'));
     }
@@ -29,6 +31,7 @@ class AdmittedPatientController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.admission.create');
         $patients  = Patient::all();
         $bedgroups = BedGroup::all();
         $beds      = Bed::all();
@@ -50,6 +53,7 @@ class AdmittedPatientController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('app.admission.create');
         $request->validate([
             'patient_id'    => 'required',
             'bedgroup_id'   => 'required',
@@ -94,6 +98,7 @@ class AdmittedPatientController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('app.admission.edit');
         $admission = AdmittedPatient::findOrfail($id);
         $patients  = Patient::all();
         $bedgroups = BedGroup::all();
@@ -110,6 +115,7 @@ class AdmittedPatientController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.admission.edit');
         $request->validate([
             'patient_id'    => 'required',
             'bedgroup_id'   => 'required',
@@ -150,6 +156,7 @@ class AdmittedPatientController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('app.admission.destroy');
         $admission = AdmittedPatient::findOrfail($id)->delete();
         return response()->json($admission);
 

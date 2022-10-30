@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Eatingtime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class EatingTimeController extends Controller
 {
@@ -15,6 +16,7 @@ class EatingTimeController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.eatingtime.index');
         $eatingtimes = Eatingtime::all();
         return view('backend.eatingtime.index',compact('eatingtimes'));
     }
@@ -26,6 +28,7 @@ class EatingTimeController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.eatingtime.create');
         return view('backend.eatingtime.create');
     }
 
@@ -37,6 +40,7 @@ class EatingTimeController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('app.eatingtime.create');
         $request->validate([
             'name'  => 'required|unique:eatingtimes'
         ]);
@@ -68,6 +72,7 @@ class EatingTimeController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('app.eatingtime.edit');
         $eatingtime = Eatingtime::findOrfail($id);
         return view('backend.eatingtime.create',compact('eatingtime'));
     }
@@ -81,6 +86,7 @@ class EatingTimeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.eatingtime.edit');
         $request->validate([
             'name'  => 'required'
         ]);
@@ -101,6 +107,7 @@ class EatingTimeController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('app.eatingtime.destroy');
         $eatingtime = Eatingtime::findOrfail($id);
         $eatingtime->delete();
         return response()->json($eatingtime);

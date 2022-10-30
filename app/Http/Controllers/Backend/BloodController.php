@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Blood;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class BloodController extends Controller
 {
@@ -15,6 +16,7 @@ class BloodController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.blood.index');
         $bloods = Blood::all();
         return view('backend.blood.index',compact('bloods'));
     }
@@ -26,6 +28,7 @@ class BloodController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.blood.create');
         return view('backend.blood.create');
     }
 
@@ -37,6 +40,7 @@ class BloodController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('app.blood.create');
         $request->validate([
             'name'  => 'required'
         ]);
@@ -68,6 +72,7 @@ class BloodController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('app.blood.edit');
         $blood = Blood::findOrfail($id);
         return view('backend.blood.create',compact('blood'));
     }
@@ -81,6 +86,7 @@ class BloodController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.blood.edit');
         $request->validate([
             'name'  => 'required'
         ]);
@@ -101,6 +107,7 @@ class BloodController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('app.blood.destroy');
         $blood = Blood::findOrfail($id);
         $blood->delete();
         return response()->json($blood);

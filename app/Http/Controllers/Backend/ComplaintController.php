@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Complaint;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ComplaintController extends Controller
 {
@@ -15,6 +16,7 @@ class ComplaintController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.complain.index');
         $complaints = Complaint::all();
         return view('backend.complaint.index',compact('complaints'));
     }
@@ -26,7 +28,7 @@ class ComplaintController extends Controller
      */
     public function create()
     {
-      
+        Gate::authorize('app.complain.create');
         return view('backend.complaint.create');
     }
 
@@ -38,6 +40,7 @@ class ComplaintController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('app.complain.create');
         $request->validate([            
             'name'            => 'required',          
         ]);
@@ -69,6 +72,7 @@ class ComplaintController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('app.complain.edit');
         $complaint = Complaint::findOrfail($id);                
         return view('backend.complaint.create',compact('complaint'));
     }
@@ -82,6 +86,7 @@ class ComplaintController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.complain.update');
         $request->validate([
             'name'            => 'required',
         ]);
@@ -102,6 +107,7 @@ class ComplaintController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('app.complain.destroy');
         $complaint = Complaint::findOrfail($id);
         $complaint->delete();
         return response()->json($complaint);

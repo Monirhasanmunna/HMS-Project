@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\MedicalTest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class MedicalTestController extends Controller
 {
@@ -15,6 +16,7 @@ class MedicalTestController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.test.index');
         $medicalTests = MedicalTest::all();
         return view('backend.medicalTest.index',compact('medicalTests'));
     }
@@ -26,7 +28,7 @@ class MedicalTestController extends Controller
      */
     public function create()
     {
-      
+        Gate::authorize('app.test.create');
         return view('backend.medicalTest.create');
     }
 
@@ -38,6 +40,7 @@ class MedicalTestController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('app.test.create');
         $request->validate([            
             'name'            => 'required',          
         ]);
@@ -69,6 +72,7 @@ class MedicalTestController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('app.test.edit');
         $medicalTest = MedicalTest::findOrfail($id);                
         return view('backend.medicalTest.create',compact('medicalTest'));
     }
@@ -82,6 +86,7 @@ class MedicalTestController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.test.edit');
         $request->validate([
             'name'            => 'required',
         ]);
@@ -102,6 +107,7 @@ class MedicalTestController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('app.test.destroy');
         $medicalTest = MedicalTest::findOrfail($id);
         $medicalTest->delete();
         return response()->json($medicalTest);

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Module;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class RoleController extends Controller
@@ -17,6 +18,7 @@ class RoleController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.roles.index');
         $roles = Role::all();
         return view('backend.role.index',compact('roles'));
     }
@@ -28,6 +30,7 @@ class RoleController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.roles.create');
         $modules = Module::all();
         return view('backend.role.create',compact('modules'));
     }
@@ -77,6 +80,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('app.roles.edit');
+        
+        $role = Role::findOrfail($id);
         $modules = Module::all();
         return view('backend.role.create',compact('modules','role'));
     }
@@ -90,6 +96,8 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.roles.edit');
+
         $request->validate([
 
             'name' => 'required',
@@ -118,6 +126,8 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('app.roles.destroy');
+
         $role = Role::findOrfail($id);
         if($role->deletable == true)
         {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Medicine;
 use App\Models\Medicinegroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class MedicineController extends Controller
 {
@@ -16,6 +17,7 @@ class MedicineController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.medicine.index');
         $medicines = Medicine::all();
         return view('backend.medicine.index',compact('medicines'));
     }
@@ -27,6 +29,7 @@ class MedicineController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.medicine.create');
         $medicinegroups = Medicinegroup::all();
         return view('backend.medicine.create',compact('medicinegroups'));
     }
@@ -39,6 +42,7 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('app.medicine.create');
         $request->validate([
             'medicinegroup_id'=> 'required',
             'name'            => 'required',
@@ -74,6 +78,7 @@ class MedicineController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('app.medicine.edit');
         $medicine = Medicine::findOrfail($id);
         $medicinegroups = Medicinegroup::all();
         return view('backend.medicine.create',compact('medicine','medicinegroups'));
@@ -88,6 +93,7 @@ class MedicineController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.medicine.edit');
         $request->validate([
             'medicinegroup_id'=> 'required',
             'name'            => 'required',
@@ -112,6 +118,7 @@ class MedicineController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('app.medicine.destroy');
         $medicine = Medicine::findOrfail($id);
         $medicine->delete();
         return response()->json($medicine);

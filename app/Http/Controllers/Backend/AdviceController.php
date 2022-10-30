@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Advice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AdviceController extends Controller
 {
@@ -15,6 +16,7 @@ class AdviceController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.advice.index');
         $advices = Advice::all();
         return view('backend.advice.index',compact('advices'));
     }
@@ -26,6 +28,7 @@ class AdviceController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.advice.create');
         return view('backend.advice.create');
     }
 
@@ -37,6 +40,8 @@ class AdviceController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('app.advice.create');
+
         $request->validate([
             'name'  => 'required|unique:advice'
         ]);
@@ -68,6 +73,7 @@ class AdviceController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('app.advice.edit');
         $advice = Advice::findOrfail($id);
         return view('backend.advice.create',compact('advice'));
     }
@@ -81,6 +87,7 @@ class AdviceController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.advice.edit');
         $request->validate([
             'name'  => 'required'
         ]);
@@ -101,6 +108,7 @@ class AdviceController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('app.advice.destroy');
         $advice = Advice::findOrfail($id);
         $advice->delete();
         return response()->json($advice);

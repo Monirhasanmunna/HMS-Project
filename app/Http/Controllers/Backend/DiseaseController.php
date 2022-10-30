@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Disease;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class DiseaseController extends Controller
 {
@@ -15,6 +16,7 @@ class DiseaseController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.disease.index');
         $diseases = Disease::orderBy('id','DESC')->get();
         return view('backend.disease.index',compact('diseases'));
     }
@@ -26,6 +28,7 @@ class DiseaseController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.disease.create');
         $diseaseCode = Disease::orderBy('id','DESC')->first()->code;
         return view('backend.disease.create',compact('diseaseCode'));
     }
@@ -38,6 +41,7 @@ class DiseaseController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('app.disease.create');
         $request->validate([
             'name'  => 'required|unique:diseases',
             'code'  => 'required|unique:diseases'
@@ -71,6 +75,7 @@ class DiseaseController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('app.disease.edit');
         $disease = Disease::findOrfail($id);
         return view('backend.disease.create',compact('disease'));
     }
@@ -84,6 +89,7 @@ class DiseaseController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('app.disease.edit');
         $request->validate([
             'name'  => 'required',
             'code'  => 'required'
@@ -106,6 +112,7 @@ class DiseaseController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('app.disease.destroy');
         $disease = Disease::findOrfail($id);
         $disease->delete();
         return response()->json($disease);

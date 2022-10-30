@@ -18,12 +18,14 @@ use App\Models\PrescriptionTest;
 use App\Models\Quantity;
 use App\Models\QuantityType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PrescriptionController extends Controller
 {
 
     public function dashboard()
     {
+        Gate::authorize('app.prescriptiondashboard.dashboard');
         return view('backend.prescription.dashboard');
     }
 
@@ -34,6 +36,7 @@ class PrescriptionController extends Controller
      */
     public function index()
     {
+        Gate::authorize('app.prescription.index');
         $prescriptions=Prescription::all();
         return view('backend.prescription.index', compact('prescriptions'));
     }
@@ -67,6 +70,7 @@ class PrescriptionController extends Controller
      */
     public function create()
     {
+        Gate::authorize('app.prescription.create');
         $patients = Patient::all();
         $medicines = Medicine::all();
         $medicalTest = MedicalTest::where('status', 1)->get();
@@ -83,8 +87,7 @@ class PrescriptionController extends Controller
      */
     public function store(Request $request)
     {
-
-        
+        Gate::authorize('app.prescription.create');
         // dd($request->all());
         $request->validate([
             'patient_id'    => 'required',
@@ -191,6 +194,7 @@ class PrescriptionController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('app.prescription.edit');
         $patients = Patient::all();
         $medicines = Medicine::all();
         $medicalTest = MedicalTest::where('status', 1)->get();
@@ -220,6 +224,7 @@ class PrescriptionController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('app.prescription.destroy');
         $prescription = Prescription::findOrfail($id);
         $prescriptionMedicine=PrescriptionMedicine::where('prescription_id', $id)->get();
         $prescriptionMedicine->each->delete();
