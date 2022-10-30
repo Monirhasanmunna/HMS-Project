@@ -19,7 +19,7 @@
         <li class="nav-header">User Management</li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link {{Request::is('app/role*')?'active':''}}">
             <i class="fa-sharp fa-solid fa-person"></i>
             <p>
               Role
@@ -28,13 +28,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item ml-2">
-              <a href="#" class="nav-link">
+              <a href="{{Route('app.role.create')}}" class="nav-link">
                 <i class="fa-solid fa-person-circle-plus"></i>
                 <p>Role Add</p>
               </a>
             </li>
             <li class="nav-item ml-2">
-              <a href="#" class="nav-link">
+              <a href="{{Route('app.role.index')}}" class="nav-link">
                 <i class="fa-sharp fa-solid fa-users"></i>
                 <p>Role List</p>
               </a>

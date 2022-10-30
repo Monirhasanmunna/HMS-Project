@@ -23,6 +23,7 @@ use App\Http\Controllers\Backend\PatientController;
 use App\Http\Controllers\Backend\PrescriptionController;
 use App\Http\Controllers\Backend\QuantityController;
 use App\Http\Controllers\Backend\QuantityTypeController;
+use App\Http\Controllers\Backend\User\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,17 @@ Route::get('/', [AuthenticatedSessionController::class, 'create'])->middleware('
 Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>['auth','verified']],function(){
 
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+
+    Route::group(['as'=>'role.','prefix'=>'role','namespace'=>'User'],function(){
+
+        Route::get('/index',[RoleController::class,'index'])->name('index');
+        Route::get('/create',[RoleController::class,'create'])->name('create');
+        Route::post('/store',[RoleController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[RoleController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[RoleController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[RoleController::class,'destroy'])->name('delete');
+    });
+
 
     Route::group(['as'=>'doctor.','prefix'=>'doctor'],function(){
 
