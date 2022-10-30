@@ -22,7 +22,6 @@ return new class extends Migration
             $table->unsignedBigInteger("qtyType_id"); 
             $table->unsignedBigInteger("eatingType_id"); 
             $table->string("eatDuration" );        
-            $table->enum('status', ['new','draft','fillup', 'pending','paid'])->default('new');    
             $table->foreign('prescription_id')->references('id')->on('prescriptions');
             $table->foreign('medicine_id')->references('id')->on('medicines');
             $table->foreign('frequency_id')->references('id')->on('frequencies');

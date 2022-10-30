@@ -27,8 +27,13 @@ class PrescriptionController extends Controller
 
     public function dashboard()
     {
+        $totalPatient=Patient::count();
+        $newPatient=Patient::orderBy('id', 'desc')->take(5)->get();
+        $newPrescription=Prescription::orderBy('id', 'desc')->take(5)->get();
+        $totalPrescription=Prescription::count();
+        // dd($newPatient);
         Gate::authorize('app.prescriptiondashboard.dashboard');
-        return view('backend.prescription.dashboard');
+        return view('backend.prescription.dashboard', compact('totalPatient','newPatient','newPrescription','totalPrescription'));
     }
 
     /**
