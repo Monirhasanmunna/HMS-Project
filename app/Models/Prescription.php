@@ -19,7 +19,7 @@ class Prescription extends Model
         ->join('quantities', 'quantities.id', '=', 'prescription_medicines.qty_id')
         ->join('quantity_types', 'quantity_types.id', '=', 'prescription_medicines.qtyType_id')
         ->join('eatingtimes', 'eatingtimes.id', '=', 'prescription_medicines.eatingType_id')
-        ->selectRaw('prescription_medicines.*,frequencies.name as frequencies, quantities.name as quantities,  quantity_types.name as quantity_types, eatingtimes.name as eatingtimes, medicines.name as medicines');
+        ->selectRaw('prescription_medicines.*,frequencies.name as frequencies, quantities.name as quantities,  quantity_types.name as quantity_types, eatingtimes.name as eatingtimes, medicines.name as medicines, medicines.mg');
     }
 
     
@@ -32,7 +32,7 @@ class Prescription extends Model
         return $this->hasMany(PrescriptionTest::class, 'prescription_id', 'id')
         ->join('medical_tests', 'medical_tests.id', '=', 'prescription_tests.medical_test_id');        
     }
-
+    
 
     public function doctor(){
         return $this->belongsTo(Doctor::class, 'doctor_id', 'id');
@@ -43,6 +43,6 @@ class Prescription extends Model
     }
 
     public function complaint(){
-        return $this->belongsTo(Complaint::class, 'complaint_id', 'id');
+        return $this->hasMany(PrescriptionComplaint::class, 'prescription_id', 'id');
     }
 }
