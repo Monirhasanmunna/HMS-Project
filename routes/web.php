@@ -242,7 +242,7 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/create',[PrescriptionController::class,'create'])->name('create');
         Route::post('/store',[PrescriptionController::class,'store'])->name('store');
         Route::get('/edit/{id}',[PrescriptionController::class,'edit'])->name('edit');
-        Route::put('/update/{id}',[PrescriptionController::class,'update'])->name('update');
+        Route::put('/update/{prescription}',[PrescriptionController::class,'update'])->name('update');
         Route::get('/delete/{id}',[PrescriptionController::class,'destroy'])->name('delete');
         
         Route::get('/view/{prescription}',[PrescriptionController::class,'view'])->name('view');

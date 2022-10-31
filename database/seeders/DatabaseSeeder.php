@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
-        
         $this->call(DoctorSeeder::class);
         $this->call(AssistantSeeder::class);
         $this->call(DiseaseSeeder::class);
@@ -34,5 +33,8 @@ class DatabaseSeeder extends Seeder
         $this->call(BedGroupSeeder::class);
         $this->call(BedTypeSeeder::class);
         $this->call(BedSeeder::class);
+        $this->call(ComplaintSeeder::class);
+        $this->call(MedicalTestSeeder::class);
+        $this->call(PatientSeeder::class);        
     }
 }

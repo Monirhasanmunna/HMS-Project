@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Advice;
+use App\Models\Complaint;
 use App\Models\Doctor;
 use App\Models\Eatingtime;
 use App\Models\Frequency;
@@ -12,6 +13,7 @@ use App\Models\Medicine;
 use App\Models\Patient;
 use App\Models\Prescription;
 use App\Models\PrescriptionAdvice;
+use App\Models\PrescriptionComplaint;
 use App\Models\PrescriptionDetails;
 use App\Models\PrescriptionMedicine;
 use App\Models\PrescriptionTest;
@@ -25,8 +27,13 @@ class PrescriptionController extends Controller
 
     public function dashboard()
     {
+        $totalPatient=Patient::count();
+        $newPatient=Patient::orderBy('id', 'desc')->take(5)->get();
+        $newPrescription=Prescription::orderBy('id', 'desc')->take(5)->get();
+        $totalPrescription=Prescription::count();
+        // dd($newPatient);
         Gate::authorize('app.prescriptiondashboard.dashboard');
-        return view('backend.prescription.dashboard');
+        return view('backend.prescription.dashboard', compact('totalPatient','newPatient','newPrescription','totalPrescription'));
     }
 
     /**
@@ -76,7 +83,14 @@ class PrescriptionController extends Controller
         $medicalTest = MedicalTest::where('status', 1)->get();
         $advice = Advice::all();
         $doctors = Doctor::all();
-        return view('backend.prescription.create', compact('patients', 'medicines', 'medicalTest', 'advice', 'doctors'));
+        $complaints=Complaint::all();
+
+        $quantities = Quantity::all();
+        $qtytypies  = QuantityType::all();
+        $eatingTimes = Eatingtime::all();
+        $frequencies = Frequency::all();
+        return view('backend.prescription.create', compact('patients', 'medicines', 'medicalTest', 'advice', 'doctors',
+        'complaints', 'quantities', 'qtytypies','eatingTimes', 'frequencies'));
     }
 
     /**
@@ -91,7 +105,7 @@ class PrescriptionController extends Controller
         // dd($request->all());
         $request->validate([
             'patient_id'    => 'required',
-            'medicine_id'   => 'required',
+            'medicine'   => 'required',
             'doctor_id'     => 'required',  
             'cc'            => 'required'          
         ]);
@@ -124,7 +138,6 @@ class PrescriptionController extends Controller
             "salt" => $request->salt,
             "smoke" => $request->smoke,
             "smoking" => $request->smoking,
-            "cc" => $request->cc,
             "diagnosis" => $request->diagnosis,
             "sec_diagnosis" => $request->sec_diagnosis,
             "sec_dx2" => $request->sec_dx2,
@@ -136,7 +149,7 @@ class PrescriptionController extends Controller
 
 
         // dd($prescription->id);
-        $medId=explode(',', $request->medicine_id);
+        // $medId=explode(',', $request->medicine_id);
         foreach($request->frequency as $key=>$freq){
             PrescriptionMedicine::create([
                'frequency_id' =>$freq,
@@ -144,26 +157,33 @@ class PrescriptionController extends Controller
                 'qtyType_id'=>$request->qtyType[$key],
                 'eatingType_id'=>$request->eatingType[$key],
                 'eatDuration'=>$request->eatDuration[$key],
-                'medicine_id'=>$medId[$key],
+                'medicine_id'=>$request->medicine[$key],
                 'prescription_id'=>$prescription->id
             ]);
         }
         
         if($request->advice){
-
             foreach($request->advice as $key=>$adv){
                 PrescriptionAdvice::create([
                    'advice_id' =>$adv,                
-                    'prescription_id'=>$prescription->id
+                   'prescription_id'=>$prescription->id
                 ]);
             }
         }
         
         if($request->suggest_test){
-
             foreach($request->suggest_test as $key=>$test){
                 PrescriptionTest::create([
                    'medical_test_id' =>$test,                
+                   'prescription_id'=>$prescription->id
+                ]);
+            }
+        }
+        
+        if($request->cc){
+            foreach($request->cc as $key=>$test){
+                PrescriptionComplaint::create([
+                    'complaint_id' =>$test,                
                     'prescription_id'=>$prescription->id
                 ]);
             }
@@ -200,8 +220,15 @@ class PrescriptionController extends Controller
         $medicalTest = MedicalTest::where('status', 1)->get();
         $advice = Advice::all();
         $doctors = Doctor::all();
+        $complaints=Complaint::all();
         $prescription=Prescription::findOrfail($id);
-        return view('backend.prescription.create', compact('patients', 'medicines', 'medicalTest', 'advice', 'doctors', 'prescription'));
+
+        $quantities = Quantity::all();
+        $qtytypies  = QuantityType::all();
+        $eatingTimes = Eatingtime::all();
+        $frequencies = Frequency::all();
+        return view('backend.prescription.create', compact('patients', 'medicines', 'medicalTest', 'advice', 'doctors','complaints', 
+        'prescription', 'quantities', 'qtytypies','eatingTimes', 'frequencies'));
     }
 
     /**
@@ -211,10 +238,96 @@ class PrescriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Prescription $prescription)
     {
-        //
-    }
+        
+        $prescription->mem_type = $request->mem_type;
+        $prescription->education = $request->education;
+        $prescription->sbp = $request->sbp;
+        $prescription->dbp = $request->dbp;
+        $prescription->oxygen = $request->oxygen;
+        $prescription->pulse = $request->pulse;
+        $prescription->temp = $request->temp;
+        $prescription->edima = $request->edima;
+        $prescription->anemia = $request->anemia;
+        $prescription->jaundice = $request->jaundice;
+        $prescription->weight = $request->weight;
+        $prescription->height = $request->height;
+        $prescription->bmi = $request->bmi;
+        $prescription->blgr = $request->blgr;
+        $prescription->heart = $request->heart;
+        $prescription->lungs = $request->lungs;
+        $prescription->diabeties = $request->diabeties;
+        $prescription->hp = $request->hp;
+        $prescription->ihd = $request->ihd;
+        $prescription->strk = $request->strk;
+        $prescription->copd = $request->copd;
+        $prescription->cancer = $request->cancer;
+        $prescription->ckd = $request->ckd;
+        $prescription->salt = $request->salt;
+        $prescription->smoke = $request->smoke;
+        $prescription->smoking = $request->smoking;
+        $prescription->diagnosis = $request->diagnosis;
+        $prescription->sec_diagnosis = $request->sec_diagnosis;
+        $prescription->sec_dx2 = $request->sec_dx2;
+        $prescription->next_meet = $request->next_meet;
+        $prescription->meet_day = $request->meet_day;
+        $prescription->patient_id = $request->patient_id;
+        $prescription->doctor_id = $request->doctor_id;   
+        
+        $prescription->save();
+
+
+
+        PrescriptionMedicine::where('prescription_id', $prescription->id)->delete();
+        foreach($request->frequency as $key=>$freq){
+            PrescriptionMedicine::create([
+               'frequency_id' =>$freq,
+                'qty_id'=>$request->qty[$key],
+                'qtyType_id'=>$request->qtyType[$key],
+                'eatingType_id'=>$request->eatingType[$key],
+                'eatDuration'=>$request->eatDuration[$key],
+                'medicine_id'=>$request->medicine[$key],
+                'prescription_id'=>$prescription->id
+            ]);
+        }
+        
+        if($request->advice){
+            PrescriptionAdvice::where('prescription_id', $prescription->id)->delete();
+            foreach($request->advice as $key=>$adv){
+                PrescriptionAdvice::create([
+                   'advice_id' =>$adv,                
+                   'prescription_id'=>$prescription->id
+                ]);
+            }
+        }
+        
+        if($request->suggest_test){
+
+            PrescriptionTest::where('prescription_id', $prescription->id)->delete();
+
+            foreach($request->suggest_test as $key=>$test){
+                PrescriptionTest::create([
+                   'medical_test_id' =>$test,                
+                   'prescription_id'=>$prescription->id
+                ]);
+            }
+        }
+        
+        if($request->cc){
+            PrescriptionComplaint::where('prescription_id', $prescription->id)->delete();
+            foreach($request->cc as $key=>$test){
+                PrescriptionComplaint::create([
+                    'complaint_id' =>$test,                
+                    'prescription_id'=>$prescription->id
+                ]);
+            }
+        }
+
+        notify()->success('Prescription Updated');
+        return redirect()->route('app.prescription.index');
+        
+        }
 
     /**
      * Remove the specified resource from storage.
