@@ -13,8 +13,9 @@
         border-radius: 4px;
         padding-top: 2px;
     }
-    .select2-container--default .select2-selection--multiple .select2-selection__choice{
-        background-color:#777 !important;
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #777 !important;
     }
 </style>
 @endpush
@@ -27,15 +28,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            
                             @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
                             @endif
                             <h3 class="card-title text-primary ">
                                 @if(!isset($prescription))
@@ -54,14 +54,13 @@
                             </h3>
                         </div>
                         <div class="card-body">
-
                             <div class="form-row">
                                 <div class="form-group col-12">
                                     <label>Doctor</label>
-                                    <select  id="doctor" class=" form-control @error('doctor_id') is-invalid @enderror">
+                                    <select id="doctor" class=" form-control @error('doctor_id') is-invalid @enderror">
                                         <option></option>
                                         @foreach ($doctors as $doctor)
-                                        <option value="{{$doctor->id}}" {{($prescription->doctor_id ?? old('doctor_id') == $doctor->id) ? 'selected': ''}} >{{$doctor->name}}</option>
+                                        <option value="{{$doctor->id}}" {{($prescription->doctor_id ?? old('doctor_id') == $doctor->id) ? 'selected': ''}}>{{$doctor->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('doctor_id')
@@ -70,7 +69,7 @@
                                 </div>
                                 <div class="form-group col-12">
                                     <label>Patient</label>
-                                    <select  id="patient" class="js-example-placeholder-single js-states form-control @error('patient_id') is-invalid @enderror" style="width: 100%">
+                                    <select id="patient" class="js-example-placeholder-single js-states form-control @error('patient_id') is-invalid @enderror" style="width: 100%">
                                         <option></option>
                                         @foreach ($patients as $patient)
                                         <option value="{{$patient->id}}" {{($prescription->patient_id ?? old('patient_id') == $patient->id) ? 'selected': ''}}>{{$patient->name}}</option>
@@ -81,55 +80,43 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="form-row">
-
                                 <div class="form-group col-3">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control form-control-sm @error('name') is-invalid @enderror" id="name" placeholder="Enter Name" readonly>
-                                    
-                                </div>
 
+                                </div>
                                 <div class="form-group col-3">
                                     <label for="age">Age</label>
                                     <input type="number" class="form-control form-control-sm @error('age') is-invalid @enderror" id="age" placeholder="Enter Age" readonly>
-                                    
-                                </div>
 
+                                </div>
                                 <div class="form-group col-3">
                                     <label for="address">Address</label>
                                     <input type="text" class="form-control form-control-sm @error('address') is-invalid @enderror" id="address" placeholder="Enter Address" readonly>
-                                    
-                                </div>
 
+                                </div>
                                 <div class="form-group col-3">
                                     <label for="mobile">Mobile</label>
                                     <input type="number" class="form-control form-control-sm @error('mobile') is-invalid @enderror" id="mobile" placeholder="Enter Mobile" readonly>
-                                    
+
                                 </div>
                             </div>
-
-
 
                             <form action="{{isset($prescription)? Route('app.prescription.update',[$prescription->id]): Route('app.prescription.store')}}" method="POST">
                                 @if(isset($prescription))
                                 @method('PUT')
                                 @endif
                                 @csrf
-
-
-
                                 <hr>
                                 <div class="row">
                                     <div class=" col-md-4">
-
                                         <table>
                                             <tbody>
                                                 <tr>
                                                     <td width="40%">Pt. Type</td>
                                                     <td>
-
-                                                        <select class="form-control" name="mem_type" >
+                                                        <select class="form-control" name="mem_type">
                                                             <option selected="false" disabled="">Select One</option>
                                                             <option value="OPD" {{(($prescription->mem_type ?? old('mem_type')) == 'OPD') ? 'selected': ''}}>OPD</option>
                                                             <option value="HCU" {{(($prescription->mem_type ?? old('mem_type')) == 'HCU') ? 'selected': ''}}>HCU</option>
@@ -142,27 +129,27 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Edu. Year</td>
-                                                    <td> <input type="text" name="education" class="form-control"  value="{{ $prescription->education ?? old('education') }}"></td>
+                                                    <td> <input type="text" name="education" class="form-control" value="{{ $prescription->education ?? old('education') }}"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>SBP (mm of Hg)</td>
-                                                    <td> <input type="text" name="sbp" class="form-control"  value="{{ $prescription->sbp ?? old('sbp') }}"> </td>
+                                                    <td> <input type="text" name="sbp" class="form-control" value="{{ $prescription->sbp ?? old('sbp') }}"> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>DBP (mm of Hg)</td>
-                                                    <td> <input type="text" name="dbp" class="form-control"  value="{{ $prescription->dbp ?? old('dbp') }}"> </td>
+                                                    <td> <input type="text" name="dbp" class="form-control" value="{{ $prescription->dbp ?? old('dbp') }}"> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>O<sub>2</sub> Satu. (%)</td>
-                                                    <td> <input type="text" name="oxygen" class="form-control"  value="{{ $prescription->oxygen ?? old('oxygen') }}"> </td>
+                                                    <td> <input type="text" name="oxygen" class="form-control" value="{{ $prescription->oxygen ?? old('oxygen') }}"> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Pulse (/min)</td>
-                                                    <td> <input type="text" name="pulse" class="form-control"  value="{{ $prescription->pulse ?? old('pulse') }}"> </td>
+                                                    <td> <input type="text" name="pulse" class="form-control" value="{{ $prescription->pulse ?? old('pulse') }}"> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Temp. (°F)</td>
-                                                    <td> <input type="text" name="temp" class="form-control"  value="{{ $prescription->temp ?? old('temp') }}"> </td>
+                                                    <td> <input type="text" name="temp" class="form-control" value="{{ $prescription->temp ?? old('temp') }}"> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Edema</td>
@@ -174,8 +161,8 @@
                                                 <tr>
                                                     <td>Anemia</td>
                                                     <td>
-                                                        <input type="radio" name="anemia" value="Y"  {{(($prescription->anemia ?? old('anemia')) == 'Y') ? 'checked': ''}}> Y
-                                                        <input type="radio" name="anemia" value="N"  {{(($prescription->anemia ?? old('anemia')) == 'N') ? 'checked': ''}}> N
+                                                        <input type="radio" name="anemia" value="Y" {{(($prescription->anemia ?? old('anemia')) == 'Y') ? 'checked': ''}}> Y
+                                                        <input type="radio" name="anemia" value="N" {{(($prescription->anemia ?? old('anemia')) == 'N') ? 'checked': ''}}> N
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -187,33 +174,33 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Weight (Kg)</td>
-                                                    <td> <input type="text" name="weight" id="weight" class="form-control"  value="{{ $prescription->weight ?? old('weight') }}"> </td>
+                                                    <td> <input type="text" name="weight" id="weight" class="form-control" value="{{ $prescription->weight ?? old('weight') }}"> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Height (cm)</td>
-                                                    <td> <input type="text" name="height" id="height" class="form-control"  value="{{ $prescription->height ?? old('height') }}"> </td>
+                                                    <td> <input type="text" name="height" id="height" class="form-control" value="{{ $prescription->height ?? old('height') }}"> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>BMI </td>
                                                     <td>
                                                         <span id="bmi"></span>
-                                                        <input type="text" name="bmi" class="form-control"  value="{{ $prescription->bmi ?? old('bmi') }}">
+                                                        <input type="text" name="bmi" class="form-control" value="{{ $prescription->bmi ?? old('bmi') }}">
 
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Bl. Gr. </td>
                                                     <td>
-                                                        <input type="text" name="blgr" class="form-control"  value="{{ $prescription->blgr ?? old('blgr') }}">
+                                                        <input type="text" name="blgr" class="form-control" value="{{ $prescription->blgr ?? old('blgr') }}">
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Heart </td>
-                                                    <td> <input type="text" name="heart" class="form-control "  value="{{ $prescription->heart ?? old('heart') }}"></td>
+                                                    <td> <input type="text" name="heart" class="form-control " value="{{ $prescription->heart ?? old('heart') }}"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Lungs </td>
-                                                    <td> <input type="text" name="lungs" class="form-control "  value="{{ $prescription->lungs ?? old('lungs') }}"></td>
+                                                    <td> <input type="text" name="lungs" class="form-control " value="{{ $prescription->lungs ?? old('lungs') }}"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -281,21 +268,21 @@
                                                     <td>Salt </td>
                                                     <td>
                                                         <input type="radio" name="salt" value="Y" {{(($prescription->salt ?? old('salt')) == 'Y') ? 'checked': ''}}> Y
-                                                        <input type="radio" name="salt" value="N"{{(($prescription->salt ?? old('salt')) == 'N') ? 'checked': ''}}> N
+                                                        <input type="radio" name="salt" value="N" {{(($prescription->salt ?? old('salt')) == 'N') ? 'checked': ''}}> N
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td> SLT </td>
                                                     <td>
-                                                        <input type="radio" name="smoke" value="Y"{{(($prescription->smoke ?? old('smoke')) == 'Y') ? 'checked': ''}}> Y
-                                                        <input type="radio" name="smoke" value="N"{{(($prescription->smoke ?? old('smoke')) == 'N') ? 'checked': ''}}> No
+                                                        <input type="radio" name="smoke" value="Y" {{(($prescription->smoke ?? old('smoke')) == 'Y') ? 'checked': ''}}> Y
+                                                        <input type="radio" name="smoke" value="N" {{(($prescription->smoke ?? old('smoke')) == 'N') ? 'checked': ''}}> No
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Smoking </td>
                                                     <td>
-                                                        <input type="radio" name="smoking" value="Y"{{(($prescription->smoking ?? old('smoking')) == 'Y') ? 'checked': ''}}> Y
-                                                        <input type="radio" name="smoking" value="N"{{(($prescription->smoking ?? old('smoking')) == 'N') ? 'checked': ''}}> N
+                                                        <input type="radio" name="smoking" value="Y" {{(($prescription->smoking ?? old('smoking')) == 'Y') ? 'checked': ''}}> Y
+                                                        <input type="radio" name="smoking" value="N" {{(($prescription->smoking ?? old('smoking')) == 'N') ? 'checked': ''}}> N
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -307,16 +294,15 @@
                                                 <hr>
                                                 <?php
 
-                                                    use App\Helper\Helper;
-                                                    // $complainIds=[];
-                                                    if($prescription->complaint ?? Null){
-                                                        
-                                                       $complainIds= Helper::arrayCovert($prescription->complaint, 'complaint_id');
-                                                        
-                                                    }else{
-                                                        $complainIds=[];
-                                                    }
-                                                    ?>
+                                                use App\Helper\Helper;
+                                                // $complainIds=[];
+                                                if ($prescription->complaint ?? Null) {
+
+                                                    $complainIds = Helper::arrayCovert($prescription->complaint, 'complaint_id');
+                                                } else {
+                                                    $complainIds = [];
+                                                }
+                                                ?>
                                                 <!-- <textarea class="form-control col-md-12 col-sm-12  @error('cc') is-invalid @enderror" name="cc" placeholder="Chief Complaints">{{ $prescription->cc ?? old('cc') }}</textarea> -->
                                                 <select name="cc[]" multiple id="cc" class="js-example-placeholder-single js-states form-control @error('cc') is-invalid @enderror" style="width: 100%">
                                                     <option></option>
@@ -328,7 +314,7 @@
                                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                                 @enderror
 
-                                                
+
                                             </div>
                                         </div>
 
@@ -366,15 +352,15 @@
                                         <div class="form-row">
                                             <div class="form-group col-12">
                                                 <label>Medicine</label>
-                                                <select  id="medicine_id" class="js-example-placeholder-single js-states form-control " style="width: 100%">
+                                                <select id="medicine_id" class="js-example-placeholder-single js-states form-control " style="width: 100%">
                                                     <option></option>
                                                     @foreach ($medicines as $medicine)
-                                                    <option value="{{$medicine->id}}" >{{$medicine->name}}</option>
+                                                    <option value="{{$medicine->id}}">{{$medicine->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
-                                        <input hidden type="number[]" id="medicines_id" multiple="multiple" name="medicine_id" value="{{$prescription->name ?? old('name') }}"/>
+                                        <input hidden type="number[]" id="medicines_id" multiple="multiple" name="medicine_id" value="{{$prescription->name ?? old('name') }}" />
                                         <hr>
 
                                         <table class="table">
@@ -391,100 +377,92 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="t_body">
-                                            @if($prescription->medicines?? null)
+                                                @if($prescription->medicines?? null)
                                                 @foreach($prescription->medicines as $med)
                                                 <tr>
                                                     <td>{{$med->medicines}}
-                                                        <input type="hidden" name="medicine[]" value="{{$med->medicine_id}}"/>
+                                                        <input type="hidden" name="medicine[]" value="{{$med->medicine_id}}" />
                                                     </td>
                                                     <td>{{$med->mg}}</td>
-                                                <td>
-                                                    <select class="form-control"  name="frequency[]">
-                                                        @foreach($frequencies as $freq)
-                                                        <option value="{{$freq->id}}" @selected($freq->id ==$med->frequency_id )>{{$freq->name}}</option>
+                                                    <td>
+                                                        <select class="form-control" name="frequency[]">
+                                                            @foreach($frequencies as $freq)
+                                                            <option value="{{$freq->id}}" @selected($freq->id ==$med->frequency_id )>{{$freq->name}}</option>
 
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select class="form-control"  name="qty[]">
-                                                    @foreach($quantities as $qty)
-                                                        <option value="{{$qty->id}}" @selected($qty->id ==$med->qty_id )>{{$qty->name}}</option>
-
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select class="form-control"  name="qtyType[]">
-                                                    @foreach($qtytypies as $qtype)
-                                                        <option value="{{$qtype->id}}" @selected($qtype->id ==$med->qtyType_id )>{{$qtype->name}}</option>
-
-                                                        @endforeach
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select class="form-control"  name="eatingType[]">
-                                                    @foreach($eatingTimes as $qtype)
-                                                        <option value="{{$qtype->id}}" @selected($qtype->id ==$med->eatingType_id )>{{$qtype->name}}</option>
-
-                                                        @endforeach
-                                                    </select>
+                                                            @endforeach
+                                                        </select>
                                                     </td>
                                                     <td>
-                                                    <select name="eatDuration[]" class="form-control " >
-                                                                <option selected="false" disabled="">Select</option>
-                                                                    <option value="0" @selected($med->eatDuration==0)>0</option>
-                                                                    <option value="1" @selected($med->eatDuration==1)>১</option>
-                                                                    <option value="2" @selected($med->eatDuration==2)>২</option>
-                                                                    <option value="3" @selected($med->eatDuration==3)>৩</option>
-                                                                    <option value="4" @selected($med->eatDuration==4)>৪</option>
-                                                                    <option value="5" @selected($med->eatDuration==5)>৫</option>
-                                                                    <option value="6" @selected($med->eatDuration==6)>৬</option>
-                                                                    <option value="7" @selected($med->eatDuration==7)>৭</option>
-                                                                    <option value="8" @selected($med->eatDuration==8)>৮</option>
-                                                                    <option value="9" @selected($med->eatDuration==9)>৯</option>
-                                                                    <option value="10" @selected($med->eatDuration==10)>১০</option>
-                                                                    <option value="11" @selected($med->eatDuration==11)>১১</option>
-                                                                    <option value="12" @selected($med->eatDuration==12)>১২</option>
-                                                                    <option value="13" @selected($med->eatDuration==13)>১৩</option>
-                                                                    <option value="14" @selected($med->eatDuration==14)>১৪</option>
-                                                                    <option value="15" @selected($med->eatDuration==15)>১৫</option>
-                                                                    <option value="16" @selected($med->eatDuration==16)>১৬</option>
-                                                                    <option value="17" @selected($med->eatDuration==17)>১৭</option>
-                                                                    <option value="18" @selected($med->eatDuration==18)>১৮</option>
-                                                                    <option value="19" @selected($med->eatDuration==19)>১৯</option>
-                                                                    <option value="20" @selected($med->eatDuration==20)>২০</option>
-                                                                    <option value="21" @selected($med->eatDuration==21)>২১</option>
-                                                                </select>
-                                                </td>
+                                                        <select class="form-control" name="qty[]">
+                                                            @foreach($quantities as $qty)
+                                                            <option value="{{$qty->id}}" @selected($qty->id ==$med->qty_id )>{{$qty->name}}</option>
 
-                                                <td>
-                                                    <a href="" class=" btn-danger btn-sm delete-tr"><i class="fa fa-trash"></i></a>
-                                                </td>
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control" name="qtyType[]">
+                                                            @foreach($qtytypies as $qtype)
+                                                            <option value="{{$qtype->id}}" @selected($qtype->id ==$med->qtyType_id )>{{$qtype->name}}</option>
+
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control" name="eatingType[]">
+                                                            @foreach($eatingTimes as $qtype)
+                                                            <option value="{{$qtype->id}}" @selected($qtype->id ==$med->eatingType_id )>{{$qtype->name}}</option>
+
+                                                            @endforeach
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select name="eatDuration[]" class="form-control ">
+                                                            <option selected="false" disabled="">Select</option>
+                                                            <option value="0" @selected($med->eatDuration==0)>0</option>
+                                                            <option value="1" @selected($med->eatDuration==1)>১</option>
+                                                            <option value="2" @selected($med->eatDuration==2)>২</option>
+                                                            <option value="3" @selected($med->eatDuration==3)>৩</option>
+                                                            <option value="4" @selected($med->eatDuration==4)>৪</option>
+                                                            <option value="5" @selected($med->eatDuration==5)>৫</option>
+                                                            <option value="6" @selected($med->eatDuration==6)>৬</option>
+                                                            <option value="7" @selected($med->eatDuration==7)>৭</option>
+                                                            <option value="8" @selected($med->eatDuration==8)>৮</option>
+                                                            <option value="9" @selected($med->eatDuration==9)>৯</option>
+                                                            <option value="10" @selected($med->eatDuration==10)>১০</option>
+                                                            <option value="11" @selected($med->eatDuration==11)>১১</option>
+                                                            <option value="12" @selected($med->eatDuration==12)>১২</option>
+                                                            <option value="13" @selected($med->eatDuration==13)>১৩</option>
+                                                            <option value="14" @selected($med->eatDuration==14)>১৪</option>
+                                                            <option value="15" @selected($med->eatDuration==15)>১৫</option>
+                                                            <option value="16" @selected($med->eatDuration==16)>১৬</option>
+                                                            <option value="17" @selected($med->eatDuration==17)>১৭</option>
+                                                            <option value="18" @selected($med->eatDuration==18)>১৮</option>
+                                                            <option value="19" @selected($med->eatDuration==19)>১৯</option>
+                                                            <option value="20" @selected($med->eatDuration==20)>২০</option>
+                                                            <option value="21" @selected($med->eatDuration==21)>২১</option>
+                                                        </select>
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="" class=" btn-danger btn-sm delete-tr"><i class="fa fa-trash"></i></a>
+                                                    </td>
 
                                                 </tr>
                                                 @endforeach
                                                 @endif
                                             </tbody>
                                         </table>
-
-
-
-
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <h6 class="font-weight-bold">উপদেশঃ</h6>
                                                 <hr>
-                                                    
                                                 <div style="overflow-y: scroll;	max-height: 300px;">
-                                                <?php
-
-                                                    if($prescription->advice ?? Null){
-                                                        
-                                                       $advIds= Helper::arrayCovert($prescription->advice, 'advice_id');
-                                                        
-                                                    }else{
-                                                        $advIds=[];
+                                                    <?php
+                                                    if ($prescription->advice ?? Null) {
+                                                        $advIds = Helper::arrayCovert($prescription->advice, 'advice_id');
+                                                    } else {
+                                                        $advIds = [];
                                                     }
                                                     ?>
                                                     @foreach($advice as $key => $ad)
@@ -494,59 +472,52 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-
                                     <div class="col-sm-12 col-md-12" data-select2-id="86">
                                         <b for="">Follow-up Investigation(s):</b>
                                         <hr>
                                         <?php
-                                        if($prescription->test ?? old('suggest_test')){
-                                            $testIds= Helper::arrayCovert($prescription->test, 'medical_test_id');
-                                        }else{
-                                            $testIds=[];
+                                        if ($prescription->test ?? old('suggest_test')) {
+                                            $testIds = Helper::arrayCovert($prescription->test, 'medical_test_id');
+                                        } else {
+                                            $testIds = [];
                                         }
-                                       
                                         ?>
                                         <select id="testFollowup" class="form-control  form-control-sm " name="suggest_test[]" multiple="" style="width: 100%;" data-select2-id="5" tabindex="-1" aria-hidden="true">
-
                                             @foreach($medicalTest as $test)
                                             <option value="{{$test->id}}" @selected(in_array($test->id, $testIds))>{{$test->name}}</option>
                                             @endforeach
-
                                         </select>
                                     </div>
-
-
                                     <div class="row text-center" style="border-top:1px solid #2b6749; padding:5px; text-align: center !important;">
                                         <div class="col-sm-12 col-print text-center">
                                             <select name="next_meet">
-                                                <option selected="false"  disabled="">Select</option>
-                                                <option value="0"  @selected(($prescription->next_meet ?? old('next_meet')) =='0') >0</option>
-                                                <option value="1"  @selected(($prescription->next_meet ?? old('next_meet')) =='1') >১</option>
-                                                <option value="2"  @selected(($prescription->next_meet ?? old('next_meet')) =='2') >২</option>
-                                                <option value="3"  @selected(($prescription->next_meet ?? old('next_meet')) =='3') >৩</option>
-                                                <option value="4"  @selected(($prescription->next_meet ?? old('next_meet')) =='4') >৪</option>
-                                                <option value="5"  @selected(($prescription->next_meet ?? old('next_meet')) =='5') >৫</option>
-                                                <option value="6"  @selected(($prescription->next_meet ?? old('next_meet')) =='6') >৬</option>
-                                                <option value="7"  @selected(($prescription->next_meet ?? old('next_meet')) =='7') >৭</option>
-                                                <option value="8"  @selected(($prescription->next_meet ?? old('next_meet')) =='8') >৮</option>
-                                                <option value="9"  @selected(($prescription->next_meet ?? old('next_meet')) =='9') >৯</option>
-                                                <option value="10"  @selected(($prescription->next_meet ?? old('next_meet')) =='10') >১০</option>
-                                                <option value="11"  @selected(($prescription->next_meet ?? old('next_meet')) =='11') >১১</option>
-                                                <option value="12"  @selected(($prescription->next_meet ?? old('next_meet')) =='12') >১২</option>
-                                                <option value="13"  @selected(($prescription->next_meet ?? old('next_meet')) =='13') >১৩</option>
-                                                <option value="14"  @selected(($prescription->next_meet ?? old('next_meet')) =='14') >১৪</option>
-                                                <option value="15"  @selected(($prescription->next_meet ?? old('next_meet')) =='15') >১৫</option>
-                                                <option value="16"  @selected(($prescription->next_meet ?? old('next_meet')) =='16') >১৬</option>
-                                                <option value="17"  @selected(($prescription->next_meet ?? old('next_meet')) =='17') >১৭</option>
-                                                <option value="18"  @selected(($prescription->next_meet ?? old('next_meet')) =='18') >১৮</option>
-                                                <option value="19"  @selected(($prescription->next_meet ?? old('next_meet')) =='19') >১৯</option>
-                                                <option value="20"  @selected(($prescription->next_meet ?? old('next_meet')) =='20') >২০</option>
-                                                <option value="21"  @selected(($prescription->next_meet ?? old('next_meet')) =='21') >২১</option>
+                                                <option selected="false" disabled="">Select</option>
+                                                <option value="0" @selected(($prescription->next_meet ?? old('next_meet')) =='0') >0</option>
+                                                <option value="1" @selected(($prescription->next_meet ?? old('next_meet')) =='1') >১</option>
+                                                <option value="2" @selected(($prescription->next_meet ?? old('next_meet')) =='2') >২</option>
+                                                <option value="3" @selected(($prescription->next_meet ?? old('next_meet')) =='3') >৩</option>
+                                                <option value="4" @selected(($prescription->next_meet ?? old('next_meet')) =='4') >৪</option>
+                                                <option value="5" @selected(($prescription->next_meet ?? old('next_meet')) =='5') >৫</option>
+                                                <option value="6" @selected(($prescription->next_meet ?? old('next_meet')) =='6') >৬</option>
+                                                <option value="7" @selected(($prescription->next_meet ?? old('next_meet')) =='7') >৭</option>
+                                                <option value="8" @selected(($prescription->next_meet ?? old('next_meet')) =='8') >৮</option>
+                                                <option value="9" @selected(($prescription->next_meet ?? old('next_meet')) =='9') >৯</option>
+                                                <option value="10" @selected(($prescription->next_meet ?? old('next_meet')) =='10') >১০</option>
+                                                <option value="11" @selected(($prescription->next_meet ?? old('next_meet')) =='11') >১১</option>
+                                                <option value="12" @selected(($prescription->next_meet ?? old('next_meet')) =='12') >১২</option>
+                                                <option value="13" @selected(($prescription->next_meet ?? old('next_meet')) =='13') >১৩</option>
+                                                <option value="14" @selected(($prescription->next_meet ?? old('next_meet')) =='14') >১৪</option>
+                                                <option value="15" @selected(($prescription->next_meet ?? old('next_meet')) =='15') >১৫</option>
+                                                <option value="16" @selected(($prescription->next_meet ?? old('next_meet')) =='16') >১৬</option>
+                                                <option value="17" @selected(($prescription->next_meet ?? old('next_meet')) =='17') >১৭</option>
+                                                <option value="18" @selected(($prescription->next_meet ?? old('next_meet')) =='18') >১৮</option>
+                                                <option value="19" @selected(($prescription->next_meet ?? old('next_meet')) =='19') >১৯</option>
+                                                <option value="20" @selected(($prescription->next_meet ?? old('next_meet')) =='20') >২০</option>
+                                                <option value="21" @selected(($prescription->next_meet ?? old('next_meet')) =='21') >২১</option>
                                             </select>
-                                            <input type="radio" id="day" name="meet_day" value="day"  {{(($prescription->meet_day ?? old('meet_day')) =='day') ? 'checked':'' }}> <label for="day">দিন</label>
-                                            <input type="radio" id="week" name="meet_day" value="week"  {{($prescription->meet_day ?? old('meet_day') =='week') ? 'checked':'' }}> <label for="week">সপ্তাহ</label>
+                                            <input type="radio" id="day" name="meet_day" value="day" {{(($prescription->meet_day ?? old('meet_day')) =='day') ? 'checked':'' }}> <label for="day">দিন</label>
+                                            <input type="radio" id="week" name="meet_day" value="week" {{($prescription->meet_day ?? old('meet_day') =='week') ? 'checked':'' }}> <label for="week">সপ্তাহ</label>
                                             <input type="radio" id="month" name="meet_day" value="month" {{($prescription->meet_day ?? old('meet_day') =='month') ? 'checked':'' }}> <label for="month">মাস</label>
                                             পর আসবেন। পরবর্তী ভিজিটের সময় অবশ্যই ব্যবস্থাপত্র সাথে আনবেন। ধন্যবাদ।
                                         </div>
@@ -569,10 +540,6 @@
         <section>
 </div>
 
-
-
-
-
 @endsection
 
 @push('js')
@@ -587,11 +554,10 @@
 </script>
 
 <script>
-
-$("#doctor").on('change', function() {
+    $("#doctor").on('change', function() {
         var doctor_id = $(this).val();
         $("#doctor_id").val(doctor_id);
-});
+    });
 
     $("#patient").on('change', function() {
         var patient_id = $(this).val();
@@ -600,7 +566,7 @@ $("#doctor").on('change', function() {
         loadPtient(patient_id)
     });
 
-    function loadPtient(patient_id){
+    function loadPtient(patient_id) {
         $.ajax({
             url: '/app/prescription/patient/info/' + patient_id,
             type: 'GET',
@@ -611,7 +577,7 @@ $("#doctor").on('change', function() {
                 $("#age").val(response.age);
                 $("#address").val(response.address);
                 $("#mobile").val(response.mobile);
-                
+
             }
         });
     }
@@ -731,9 +697,13 @@ $("#doctor").on('change', function() {
     //   });
 
 
-    $(document).ready(function(){
-        @if($prescription->patient_id ?? old('patient_id'))
-        let patient_id={{$prescription->patient_id ?? old('patient_id')}}
+    $(document).ready(function() {
+        @if($prescription - > patient_id ?? old('patient_id'))
+        let patient_id = {
+            {
+                $prescription - > patient_id ?? old('patient_id')
+            }
+        }
         loadPtient(patient_id)
         @endif
     })
