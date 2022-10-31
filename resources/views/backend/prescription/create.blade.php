@@ -313,6 +313,8 @@
                                                         
                                                        $complainIds= Helper::arrayCovert($prescription->complaint, 'complaint_id');
                                                         
+                                                    }else{
+                                                        $complainIds=[];
                                                     }
                                                     ?>
                                                 <!-- <textarea class="form-control col-md-12 col-sm-12  @error('cc') is-invalid @enderror" name="cc" placeholder="Chief Complaints">{{ $prescription->cc ?? old('cc') }}</textarea> -->
@@ -481,6 +483,8 @@
                                                         
                                                        $advIds= Helper::arrayCovert($prescription->advice, 'advice_id');
                                                         
+                                                    }else{
+                                                        $advIds=[];
                                                     }
                                                     ?>
                                                     @foreach($advice as $key => $ad)
@@ -499,6 +503,8 @@
                                         <?php
                                         if($prescription->test ?? old('suggest_test')){
                                             $testIds= Helper::arrayCovert($prescription->test, 'medical_test_id');
+                                        }else{
+                                            $testIds=[];
                                         }
                                        
                                         ?>
