@@ -18,14 +18,20 @@ class RoleSeeder extends Seeder
     {
         $permissions = Permission::all();
         Role::updateOrCreate([
-            'name'      => 'Admin',
-            'slug'      => 'admin',
+            'name'      => 'Super Admin',
+            'slug'      => 'super-admin',
             'deletable' => false
         ])->permissions()->sync($permissions->pluck('id'));
 
         Role::updateOrCreate([
-            'name'      => 'User',
-            'slug'      => 'user',
+            'name'      => 'Doctor',
+            'slug'      => 'doctor',
+            'deletable' => true
+        ]);
+
+        Role::updateOrCreate([
+            'name'      => 'Assistant',
+            'slug'      => 'assistant',
             'deletable' => true
         ]);
     }

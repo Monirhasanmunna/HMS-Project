@@ -127,8 +127,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
+        <form method="POST" id="logoutForm" action="{{ route('logout') }}" style="display: none">
+          @csrf
+  
+        </form>
+        <a class="nav-link btn btn-primary text-white" data-widget="control-sidebar" onclick="$('#logoutForm').submit();" data-controlsidebar-slide="true" href="javascript::void(0)" role="button">
+          {{-- <i class="fas fa-th-large"></i> --}}
+          {{Auth::user()->name}}
         </a>
       </li>
     </ul>

@@ -97,7 +97,6 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         Gate::authorize('app.roles.edit');
-
         $request->validate([
 
             'name' => 'required',
@@ -105,17 +104,21 @@ class RoleController extends Controller
         ]);
 
         $role = Role::findOrfail($id);
+        if($role->slug != 'super-admin'){
+            $role->update([
 
-        $role->update([
-
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-
-        ]);
-        $role->permissions()->sync($request->input('permission'));
-
-        notify()->info("Role Updated");
-        return redirect()->route('app.role.index');
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+    
+            ]);
+            $role->permissions()->sync($request->input('permission'));
+    
+            notify()->info("Role Updated");
+            return redirect()->route('app.role.index');
+        }else{
+            notify()->warning("Can Not Update Super Admin User Info");
+            return redirect()->route('app.role.index');
+        }
     }
 
     /**
