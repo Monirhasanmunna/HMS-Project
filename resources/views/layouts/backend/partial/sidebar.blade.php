@@ -52,13 +52,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item ml-2">
-              <a href="#" class="nav-link">
+              <a href="{{Route('app.user.create')}}" class="nav-link">
                 <i class="fa-solid fa-user-plus"></i>
                 <p>User Add</p>
               </a>
             </li>
             <li class="nav-item ml-2">
-              <a href="#" class="nav-link">
+              <a href="{{Route('app.user.index')}}" class="nav-link">
                 <i class="fa-solid fa-users"></i>
                 <p>User List</p>
               </a>

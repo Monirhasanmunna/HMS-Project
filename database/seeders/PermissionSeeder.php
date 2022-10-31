@@ -16,6 +16,37 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
+
+
+         //User Permission
+         $userModule = Module::updateOrCreate(['name'  => 'User Management',]);
+
+         Permission::updateOrCreate([
+             'module_id' => $userModule->id,
+             'name'      => 'Access User',
+             'slug'      => 'app.user.index'
+         ]);
+ 
+         Permission::updateOrCreate([
+             'module_id' => $userModule->id,
+             'name'      => 'Create User',
+             'slug'      => 'app.user.create'
+         ]);
+ 
+         Permission::updateOrCreate([
+             'module_id' => $userModule->id,
+             'name'      => 'Edit User',
+             'slug'      => 'app.user.edit'
+         ]);
+ 
+         Permission::updateOrCreate([
+             'module_id' => $userModule->id,
+             'name'      => 'Delete User',
+             'slug'      => 'app.user.destroy'
+         ]);
+
+
+
         $dashboardModule = Module::updateOrCreate(['name'  => 'Admin Dashboard',]);
 
         Permission::updateOrCreate([

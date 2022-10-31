@@ -33,7 +33,7 @@
 
   @stack('css')
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" style="color: rgb(49, 49, 49);">
 <div class="wrapper">
 
   {{-- <!-- Preloader -->

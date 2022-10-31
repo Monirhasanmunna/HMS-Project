@@ -17,7 +17,7 @@
                 <div class="col-lg-12">
                     <div class="card mb-4">
                       <div class="card-header">
-                        <h3 class="card-title text-primary"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Role's</span></h3>
+                        <h3 class="card-title text-primary"><i class="fa-solid fa-user-group"></i><span class="pl-1">Role's</span></h3>
                         <div class="text-right">
                           <a href="{{Route('app.role.create')}}" id="roleAddBtn" class="btn btn-sm btn-primary pull-right">Add New</a>
                         </div>

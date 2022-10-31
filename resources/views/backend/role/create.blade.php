@@ -33,7 +33,15 @@
                 <div class="col-md-12">
                     <div class="main-card mb-3 card">
                         <div class="card-header">
-                            <h3 class="card-title text-primary"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Role Add</span></h3>
+                            <h3 class="card-title text-primary">
+                                @if(isset($role))
+                                <i class="fa-solid fa-square-pen"></i>
+                                <span class="pl-1">Update Role</span>
+                                @else
+                                <i class="fa-solid fa-circle-plus"></i>
+                                <span class="pl-1">Add Role</span>
+                                @endif
+                            </h3>
                             <div class="text-right">
                               <a href="{{Route('app.role.index')}}" id="roleAddBtn" class="btn btn-sm btn-primary pull-right">Back</a>
                             </div>

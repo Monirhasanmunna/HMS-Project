@@ -26,7 +26,10 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title text-primary"><i class="fa-solid fa-user-doctor"></i><span class="pl-1">Patient's</span></h3>
+                      <h3 class="card-title text-primary"><i class="fa-solid fa-users"></i><span class="pl-1">User's</span></h3>
+                      <div class="text-right">
+                        <a href="{{Route('app.user.create')}}" id="roleAddBtn" class="btn btn-sm btn-primary pull-right">Add New</a>
+                      </div>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -34,56 +37,46 @@
                           <thead>
                           <tr>
                             <th>#</th>
+                            <th>Image</th>
                             <th>Name</th>
-                            <th>Age</th>
-                            <th>Sex</th>
-                            <th>Doctor</th>
-                            <th>Mobile</th>
-                            <th>B/G</th>
-                            <th>Weight</th>                            
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Join At</th>                           
                             <th class="text-center">Action</th>
                           </tr>
                           </thead>
                           <tbody>
-                        @foreach ($patients as $key=>$patient)
+                        @foreach ($users as $key=>$user)
                           <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$patient->name}}</td>
-                            <td>{{$patient->age}}</td>
-                            <td>{{$patient->sex}}</td>
-                            <td>{{$patient->doctor->name}}</td>
-                            <td>{{$patient->mobile}}</td>
-                            <td>{{$patient->blood_group}}</td>
-                            <td>{{$patient->weight}}</td>
-                            
+                            <td><img style="width:50px;height:50px;border-radius:50%" src="{{asset('storage/users/'.$user->avatar)}}" alt=""></td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>
+                                @if($user->status == 1)
+                                <span class="badge badge-primary">Active</span>
+                                @else
+                                <span class="badge badge-warning">Inactive</span>
+                                @endif
+                            </td>
+                            <td>{{$user->created_at->diffForHumans()}}</td>
                             <td class="text-center">
-                                <div class="dropdown show dropleft ">
-                                    <a class="btn btn-sm btn-primary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a href="javascript:void(0)" onclick="assistantShow({{$patient->id}})" class="btn-sm btn-info dropdown-item">Show</a>
-                                        <a href="{{Route('app.patient.edit',[$patient->id])}}" class="btn-sm btn-primary dropdown-item">Edit</a>
-                                        <a href="javascript:void(0)" onclick="patientDelete({{$patient->id}})" class="btn-sm btn-danger dropdown-item">Delete</a>
-                                    </div>
-                                  </div>
+                                <a class="btn btn-sm btn-primary" href="{{Route('app.user.edit',[$user->id])}}" class="btn-sm btn-primary dropdown-item">Edit</a>
+                                <a class="btn btn-sm btn-danger" href="javascript:void(0)" onclick="userdelete({{$user->id}})" class="btn-sm btn-danger dropdown-item">Delete</a>
                             </td>
                           </tr>
                         @endforeach
                           </tbody>
                           <tfoot>
                             <tr>
-                              <th>#</th>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>Sex</th>
-                            <th>Doctor</th>
-                            <th>Mobile</th>
-                            <th>B/G</th>
-                            <th>Weight</th>
-                            
-                            <th class="text-center">Action</th>
-                              </tr>
+                                <th>#</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Join At</th>                           
+                                <th class="text-center">Action</th>
+                            </tr>
                           </tfoot>
                         </table>
                       </div>
@@ -132,7 +125,7 @@
       </script>
 
       <script>
-        function patientDelete(id){
+        function userdelete(id){
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -150,13 +143,16 @@
                     'success'
                     )
                     $.ajax({
-                    url      : '/app/patient/delete/'+id,
+                    url      : '/app/user/delete/'+id,
                     dataType : 'json',
                     Type     : 'Delete',
                     success  : function(response){
+                      console.log(response)
+                      if(response.true){
                         setTimeout(function(){
                         window.location.reload();
                         },1000);
+                      }  
                     },
                     });
                 }

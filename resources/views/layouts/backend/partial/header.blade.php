@@ -131,7 +131,7 @@
           @csrf
   
         </form>
-        <a class="nav-link btn btn-primary text-white" data-widget="control-sidebar" onclick="$('#logoutForm').submit();" data-controlsidebar-slide="true" href="javascript::void(0)" role="button">
+        <a class="nav-link btn btn-sm btn-primary text-white" data-widget="control-sidebar" onclick="$('#logoutForm').submit();" data-controlsidebar-slide="true" href="javascript::void(0)" role="button">
           {{-- <i class="fas fa-th-large"></i> --}}
           {{Auth::user()->name}}
         </a>

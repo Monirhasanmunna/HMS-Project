@@ -101,7 +101,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-4">
                                         <label for="price">Price</label>
-                                        <input type="number" name="price" id="price" class="form-control form-control-sm" id="price" value="{{ $admission->bedgroup->price}}" readonly>
+                                        <input type="number" name="price" id="price" class="form-control form-control-sm" id="price" value="{{ $admission->bedgroup->price ?? old('price') }}" readonly>
                                     </div>
 
                                     <div class="form-group col-4">
@@ -114,7 +114,7 @@
 
                                     <div class="form-group col-4">
                                         <label for="due">Due</label>
-                                        <input type="number" name="due" class="form-control form-control-sm" id="due" value="{{ $admission->due}}" readonly>
+                                        <input type="number" name="due" class="form-control form-control-sm" id="due" value="{{ $admission->due ?? old('due')}}" readonly>
                                     </div>
                                 </div>
                     
