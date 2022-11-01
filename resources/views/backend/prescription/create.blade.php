@@ -473,8 +473,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-12" data-select2-id="86">
-                                        <b for="">Follow-up Investigation(s):</b>
+                                    <div class="col-sm-12 col-md-12 mb-3">
+                                        <b for="">Follow-up Investigation(s) :</b>
                                         <hr>
                                         <?php
                                         if ($prescription->test ?? old('suggest_test')) {
@@ -483,7 +483,7 @@
                                             $testIds = [];
                                         }
                                         ?>
-                                        <select id="testFollowup" class="form-control  form-control-sm " name="suggest_test[]" multiple="" style="width: 100%;" data-select2-id="5" tabindex="-1" aria-hidden="true">
+                                        <select id="testFollowup" class="js-example-placeholder-single js-states form-control @error('suggest_test') is-invalid @enderror" name="suggest_test[]" multiple >
                                             @foreach($medicalTest as $test)
                                             <option value="{{$test->id}}" @selected(in_array($test->id, $testIds))>{{$test->name}}</option>
                                             @endforeach
@@ -698,10 +698,10 @@
 
 
     $(document).ready(function() {
-        @if($prescription - > patient_id ?? old('patient_id'))
+        @if($prescription->patient_id ?? old('patient_id'))
         let patient_id = {
             {
-                $prescription - > patient_id ?? old('patient_id')
+                $prescription->patient_id ?? old('patient_id')
             }
         }
         loadPtient(patient_id)

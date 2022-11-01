@@ -53,10 +53,10 @@
                             <td>{{$pres->created_at->format('d-m-Y')}} + {{$pres->next_meet}} {{$pres->meet_day}} </td>
 
                             <td class="text-center">
-                              <a href="{{Route('app.prescription.edit',[$pres->id])}}" class="btn btn-sm btn-primary">Invoice</a>
+                              <a href="#" class="btn btn-sm btn-primary" disabled>Invoice</a>
                               <a href="{{Route('app.prescription.edit',[$pres->id])}}" class="btn btn-sm btn-dark">Edit</a>
                               <a href="{{Route('app.prescription.view',[$pres->id])}}" class="btn btn-sm btn-info">View</a>
-                              <a href="{{Route('app.prescription.edit',[$pres->id])}}" class="btn btn-sm btn-success">Paid</a>
+                              <a href="#" class="btn btn-sm btn-success" disabled>Paid</a>
                               <!-- <a href="{{Route('app.prescription.edit',[$pres->id])}}" class="btn btn-sm btn-primary">Print</a> -->
                               <a href="javascript:void(0)" onclick="presDelete({{$pres->id}})" class="btn btn-sm btn-danger">Delete</a>
                             </td>
