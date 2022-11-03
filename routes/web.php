@@ -24,6 +24,7 @@ use App\Http\Controllers\Backend\PatientController;
 use App\Http\Controllers\Backend\PrescriptionController;
 use App\Http\Controllers\Backend\QuantityController;
 use App\Http\Controllers\Backend\QuantityTypeController;
+use App\Http\Controllers\Backend\SetupController;
 use App\Http\Controllers\Backend\User\RoleController;
 use App\Http\Controllers\Backend\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -304,6 +305,13 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/edit/{id}',[BedController::class,'edit'])->name('edit');
         Route::post('/update/{id}',[BedController::class,'update'])->name('update');
         Route::get('/delete/{id}',[BedController::class,'destroy'])->name('delete');
+    });
+
+
+    Route::group(['as'=>'setup.','prefix'=>'setup'],function(){
+
+        Route::get('/index',[SetupController::class,'index'])->name('index');
+        Route::put('/update/{id}',[SetupController::class,'update'])->name('update');
     });
     
 });

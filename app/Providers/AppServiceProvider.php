@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Setup;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $setup = Setup::where('id',1)->first();
+        View::share('setup',$setup);
     }
 }

@@ -549,5 +549,17 @@ class PermissionSeeder extends Seeder
                    'name'      => 'Delete Quantity Type',
                    'slug'      => 'app.quantitytype.destroy'
                ]);
+
+
+
+
+               //General Setup Permission
+               $setupModule = Module::updateOrCreate(['name'  => 'General Setup',]);
+
+               Permission::updateOrCreate([
+                   'module_id' => $setupModule->id,
+                   'name'      => 'Access General Setup',
+                   'slug'      => 'app.generalsetup.index'
+               ]);
     }
 }
