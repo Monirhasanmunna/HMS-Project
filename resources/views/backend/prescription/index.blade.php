@@ -53,12 +53,16 @@
                             <td>{{$pres->created_at->format('d-m-Y')}} + {{$pres->next_meet}} {{$pres->meet_day}} </td>
 
                             <td class="text-center">
-                              <a href="#" class="btn btn-sm btn-primary" disabled>Invoice</a>
-                              <a href="{{Route('app.prescription.edit',[$pres->id])}}" class="btn btn-sm btn-dark">Edit</a>
                               <a href="{{Route('app.prescription.view',[$pres->id])}}" class="btn btn-sm btn-info">View</a>
-                              <a href="#" class="btn btn-sm btn-success" disabled>Paid</a>
-                              <!-- <a href="{{Route('app.prescription.edit',[$pres->id])}}" class="btn btn-sm btn-primary">Print</a> -->
+                              
+                              @if(($pres->status=='new') || ($pres->status=='fillup'))
+                              <a href="{{Route('app.prescription.edit',[$pres->id])}}" class="btn btn-sm btn-dark">Edit</a>
+                              <a href="{{route('app.invoice.generate',['1',$pres->id])}}" class="btn btn-sm btn-success" >Generate Invoice</a>
                               <a href="javascript:void(0)" onclick="presDelete({{$pres->id}})" class="btn btn-sm btn-danger">Delete</a>
+                              @elseif(($pres->status=='complete') || ($pres->status=='paid') || ($pres->status=='pending'))
+                              <a href="{{route('app.invoice.show', 2)}}" class="btn btn-sm btn-success" >Invoice</a>
+                              @endif
+                              
                             </td>
                           </tr>
                         @endforeach

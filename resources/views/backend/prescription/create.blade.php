@@ -67,7 +67,10 @@
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                     @enderror
                                 </div>
-                                <div class="form-group col-12">
+                                
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-8">
                                     <label>Patient</label>
                                     <select id="patient" class="js-example-placeholder-single js-states form-control @error('patient_id') is-invalid @enderror" style="width: 100%">
                                         <option></option>
@@ -79,28 +82,14 @@
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-3">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control form-control-sm @error('name') is-invalid @enderror" id="name" placeholder="Enter Name" readonly>
+                                <div class="form-group col-4">
+                                    <label for="name">Name: <span id="name"></span></label><br/>
+                                    <label for="age">Age: <span id="age"></span></label><br/>
+                                    <label for="address">Address: <span id="address"></span></label><br/>
+                                    <label for="mobile">Mobile: <span id="mobile"></span></label><br/>
 
                                 </div>
-                                <div class="form-group col-3">
-                                    <label for="age">Age</label>
-                                    <input type="number" class="form-control form-control-sm @error('age') is-invalid @enderror" id="age" placeholder="Enter Age" readonly>
-
-                                </div>
-                                <div class="form-group col-3">
-                                    <label for="address">Address</label>
-                                    <input type="text" class="form-control form-control-sm @error('address') is-invalid @enderror" id="address" placeholder="Enter Address" readonly>
-
-                                </div>
-                                <div class="form-group col-3">
-                                    <label for="mobile">Mobile</label>
-                                    <input type="number" class="form-control form-control-sm @error('mobile') is-invalid @enderror" id="mobile" placeholder="Enter Mobile" readonly>
-
-                                </div>
+                
                             </div>
 
                             <form action="{{isset($prescription)? Route('app.prescription.update',[$prescription->id]): Route('app.prescription.store')}}" method="POST">
@@ -108,9 +97,45 @@
                                 @method('PUT')
                                 @endif
                                 @csrf
-                                <hr>
                                 <div class="row">
                                     <div class=" col-md-4">
+                                        <div class="form-group">
+                                            <label for="visit_type">Visit Type</label>
+                                            <select name="visit_type" id="visit_type" class="form-control">
+                                                <option @selected(($prescription->visit_type ?? @old('visit_type'))=='first') value="first">First Visit</option>
+                                                <option @selected(($prescription->visit_type ?? @old('visit_type'))=='repeat') value="repeat">Repeat Visit</option>
+                                                <option @selected(($prescription->visit_type ?? @old('visit_type'))=='reportonly') value="reportonly">Report Only</option>
+                                            </select>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-sm-12 col-md-12">
+                                                <p ><strong>Chief Complaints:</strong></p>
+                                                <?php
+
+                                                use App\Helper\Helper;
+                                                // $complainIds=[];
+                                                if ($prescription->complaint ?? Null) {
+
+                                                    $complainIds = Helper::arrayCovert($prescription->complaint, 'complaint_id');
+                                                } else {
+                                                    $complainIds = [];
+                                                }
+                                                ?>
+                                                <!-- <textarea class="form-control col-md-12 col-sm-12  @error('cc') is-invalid @enderror" name="cc" placeholder="Chief Complaints">{{ $prescription->cc ?? old('cc') }}</textarea> -->
+                                                <select name="cc[]" multiple id="cc" class="js-example-placeholder-single js-states form-control @error('cc') is-invalid @enderror" style="width: 100%">
+                                                    <option></option>
+                                                    @foreach ($complaints as $complaint)
+                                                    <option value="{{$complaint->id}}" @selected(in_array($complaint->id, $complainIds))>{{$complaint->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('cc')
+                                                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                                @enderror
+
+
+                                            </div>
+                                        </div>
+                                        <p class="mt-3"><strong>Diagnosis:</strong></p>
                                         <table>
                                             <tbody>
                                                 <tr>
@@ -205,7 +230,6 @@
                                             </tbody>
                                         </table>
                                         <b>Disease History:</b>
-                                        <hr>
                                         <table class="table">
                                             <tbody>
                                                 <tr>
@@ -261,7 +285,6 @@
                                         </table>
 
                                         <b>Behavioural History:</b>
-                                        <hr>
                                         <table class="table">
                                             <tbody>
                                                 <tr>
@@ -288,40 +311,11 @@
                                             </tbody>
                                         </table>
 
-                                        <div class="row mb-2">
-                                            <div class="col-sm-12 col-md-12">
-                                                <b for="">Chief Complaints:</b>
-                                                <hr>
-                                                <?php
-
-                                                use App\Helper\Helper;
-                                                // $complainIds=[];
-                                                if ($prescription->complaint ?? Null) {
-
-                                                    $complainIds = Helper::arrayCovert($prescription->complaint, 'complaint_id');
-                                                } else {
-                                                    $complainIds = [];
-                                                }
-                                                ?>
-                                                <!-- <textarea class="form-control col-md-12 col-sm-12  @error('cc') is-invalid @enderror" name="cc" placeholder="Chief Complaints">{{ $prescription->cc ?? old('cc') }}</textarea> -->
-                                                <select name="cc[]" multiple id="cc" class="js-example-placeholder-single js-states form-control @error('cc') is-invalid @enderror" style="width: 100%">
-                                                    <option></option>
-                                                    @foreach ($complaints as $complaint)
-                                                    <option value="{{$complaint->id}}" @selected(in_array($complaint->id, $complainIds))>{{$complaint->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('cc')
-                                                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                                @enderror
-
-
-                                            </div>
-                                        </div>
+                                        
 
                                         <div class="row mb-2">
                                             <div class="col-sm-12 col-md-12">
                                                 <label for="" class="font-weight-bold">Inv. Finding(s):</label>
-                                                <hr>
 
 
                                             </div>
@@ -361,7 +355,6 @@
                                             </div>
                                         </div>
                                         <input hidden type="number[]" id="medicines_id" multiple="multiple" name="medicine_id" value="{{$prescription->name ?? old('name') }}" />
-                                        <hr>
 
                                         <table class="table">
                                             <thead class="thead-dark">
@@ -456,7 +449,6 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <h6 class="font-weight-bold">উপদেশঃ</h6>
-                                                <hr>
                                                 <div style="overflow-y: scroll;	max-height: 300px;">
                                                     <?php
                                                     if ($prescription->advice ?? Null) {
@@ -472,10 +464,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-12 mb-3">
-                                        <b for="">Follow-up Investigation(s) :</b>
-                                        <hr>
+
+                                        <div class="col-sm-12 col-md-12 mb-3 mt-5 pt-5">
+                                        <p class=""><strong>Follow-up Investigation(s) :</strong></p>
+                                        
                                         <?php
                                         if ($prescription->test ?? old('suggest_test')) {
                                             $testIds = Helper::arrayCovert($prescription->test, 'medical_test_id');
@@ -489,7 +481,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="row text-center" style="border-top:1px solid #2b6749; padding:5px; text-align: center !important;">
+                                    <div class="row text-center" style=" text-align: center !important;">
                                         <div class="col-sm-12 col-print text-center">
                                             <select name="next_meet">
                                                 <option selected="false" disabled="">Select</option>
@@ -516,12 +508,14 @@
                                                 <option value="20" @selected(($prescription->next_meet ?? old('next_meet')) =='20') >২০</option>
                                                 <option value="21" @selected(($prescription->next_meet ?? old('next_meet')) =='21') >২১</option>
                                             </select>
-                                            <input type="radio" id="day" name="meet_day" value="day" {{(($prescription->meet_day ?? old('meet_day')) =='day') ? 'checked':'' }}> <label for="day">দিন</label>
-                                            <input type="radio" id="week" name="meet_day" value="week" {{($prescription->meet_day ?? old('meet_day') =='week') ? 'checked':'' }}> <label for="week">সপ্তাহ</label>
-                                            <input type="radio" id="month" name="meet_day" value="month" {{($prescription->meet_day ?? old('meet_day') =='month') ? 'checked':'' }}> <label for="month">মাস</label>
+                                            <input type="radio" id="day" name="meet_day" value="day" @checked(($prescription->meet_day ?? old('meet_day')) =='day')> <label for="day">দিন</label>
+                                            <input type="radio" id="week" name="meet_day" value="week" @checked(($prescription->meet_day ?? old('meet_day')) =='week')> <label for="week">সপ্তাহ</label>
+                                            <input type="radio" id="month" name="meet_day" value="month" @checked(($prescription->meet_day ?? old('meet_day')) =='month')> <label for="month">মাস</label>
                                             পর আসবেন। পরবর্তী ভিজিটের সময় অবশ্যই ব্যবস্থাপত্র সাথে আনবেন। ধন্যবাদ।
                                         </div>
                                     </div>
+                                    </div>
+                                    
                                 </div>
                                 <input type="hidden" name="doctor_id" id="doctor_id" value="{{ $prescription->doctor_id ?? old('doctor_id') }}">
                                 <input type="hidden" name="patient_id" id="patient_id" value="{{ $prescription->patient_id ?? old('patient_id') }}">
@@ -573,10 +567,10 @@
             dataType: 'json',
             success: function(response) {
                 console.log(response);
-                $("#name").val(response.name);
-                $("#age").val(response.age);
-                $("#address").val(response.address);
-                $("#mobile").val(response.mobile);
+                $("#name").text(response.name);
+                $("#age").text(response.age);
+                $("#address").text(response.address);
+                $("#mobile").text(response.mobile);
 
             }
         });
@@ -699,11 +693,8 @@
 
     $(document).ready(function() {
         @if($prescription->patient_id ?? old('patient_id'))
-        let patient_id = {
-            {
-                $prescription->patient_id ?? old('patient_id')
-            }
-        }
+        let patient_id = {{$prescription->patient_id ?? old('patient_id')}}
+            
         loadPtient(patient_id)
         @endif
     })

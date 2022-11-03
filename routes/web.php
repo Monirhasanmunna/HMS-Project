@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\DiseaseController;
 use App\Http\Controllers\Backend\DoctorController;
 use App\Http\Controllers\Backend\EatingTimeController;
 use App\Http\Controllers\Backend\FrequencyController;
+use App\Http\Controllers\Backend\InvoiceController;
 use App\Http\Controllers\Backend\MedicalTestController;
 use App\Http\Controllers\Backend\MedicineController;
 use App\Http\Controllers\Backend\MedicineGroupController;
@@ -249,6 +250,14 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         // ajax route
         Route::get('patient/info/{id}',[PrescriptionController::class,'patient_info']);
         Route::get('medicine/info/{id}',[PrescriptionController::class,'medicine_info']);
+    });
+
+
+    Route::group(['as'=>'invoice.','prefix'=>'invoice'],function(){     
+        Route::get('/{invoice}/view',[InvoiceController::class,'show'])->name('show');
+        Route::get('/generate/{type}/{prescription_id}',[InvoiceController::class,'generateInvoice'])->name('generate');
+        Route::post('/store',[InvoiceController::class,'store'])->name('store');
+     
     });
 
 

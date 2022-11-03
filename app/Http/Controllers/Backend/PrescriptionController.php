@@ -144,7 +144,9 @@ class PrescriptionController extends Controller
             "next_meet" => $request->next_meet,
             "meet_day" => $request->meet_day,
             "patient_id" => $request->patient_id,
-            "doctor_id" => $request->doctor_id
+            "doctor_id" => $request->doctor_id,
+            "visit_type"=>$request->visit_type
+
         ]);
 
 
@@ -274,7 +276,7 @@ class PrescriptionController extends Controller
         $prescription->meet_day = $request->meet_day;
         $prescription->patient_id = $request->patient_id;
         $prescription->doctor_id = $request->doctor_id;   
-        
+        $prescription->visit_type = $request->visit_type;           
         $prescription->save();
 
 

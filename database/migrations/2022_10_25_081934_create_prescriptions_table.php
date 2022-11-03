@@ -51,8 +51,8 @@ return new class extends Migration
             $table->unsignedBigInteger("patient_id" );
             $table->unsignedBigInteger("doctor_id" );
 
-            $table->enum('status', ['new','draft','fillup', 'pending','paid'])->default('new');    
-
+            $table->enum('visit_type', ['first','repeat','reportonly'])->default('first');    
+            $table->enum('status', ['new','draft','fillup','complete', 'pending','paid'])->default('new'); 
             $table->foreign('patient_id')->references('id')->on('patients');
             $table->foreign('doctor_id')->references('id')->on('doctors');
 

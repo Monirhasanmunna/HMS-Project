@@ -45,4 +45,5 @@ class Prescription extends Model
     public function complaint(){
         return $this->hasMany(PrescriptionComplaint::class, 'prescription_id', 'id');
     }
+
 }

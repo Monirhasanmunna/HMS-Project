@@ -26,6 +26,7 @@ return new class extends Migration
             $table->double('amount', 8,2);
             $table->double('discount', 8,2);
             $table->double('net_amount', 8,2);
+            $table->enum('status', ['new','draft','complete', 'pending','due','paid'])->default('new');    
             $table->timestamps();
         });
     }
