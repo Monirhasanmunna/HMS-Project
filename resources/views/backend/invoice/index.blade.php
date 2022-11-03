@@ -68,9 +68,9 @@
                             <td>{{$inv->patient->name}}</td>
                             <td>{{$inv->invice_type}}</td>
                             <td>{{$inv->status}}</td>
-                            <td>{{$inv->amount}}</td>
-                            <td>{{$inv->discount}}</td>
-                            <td>{{$inv->net_amount}}</td>
+                            <td>{{number_format($inv->amount,2)}}</td>
+                            <td>{{number_format($inv->discount,2)}}</td>
+                            <td>{{number_format($inv->net_amount,2)}}</td>
                             
                             <td class="text-center">
                               <a href="{{Route('app.invoice.show',[$inv->id])}}" target="_new" class="btn btn-sm btn-info">View</a>
@@ -90,9 +90,9 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th>{{$amount}}</th>
-                                <th>{{$discount}}</th>
-                                <th>{{$net_amount}}</th>
+                                <th>{{number_format($amount,2)}}</th>
+                                <th>{{number_format($discount,2)}}</th>
+                                <th>{{number_format($net_amount,2)}}</th>
                                 <th></th>
                             </tr>
                           </tfoot>

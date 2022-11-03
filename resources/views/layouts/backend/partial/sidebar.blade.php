@@ -194,6 +194,12 @@
                 <p>Prescription List</p>
               </a>
             </li>
+            <li class="nav-item ml-2">
+              <a href="{{Route('app.invoice.index')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Invoice List</p>
+              </a>
+            </li>
           </ul>
         </li>
 
