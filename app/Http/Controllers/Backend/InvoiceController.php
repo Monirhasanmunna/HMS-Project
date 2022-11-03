@@ -18,7 +18,8 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        $invoices=Invoice::all();
+        return view('backend.invoice.index', compact('invoices'));
     }
 
     /**
@@ -93,7 +94,15 @@ class InvoiceController extends Controller
     public function show(Invoice $invoice)
     {
         // dd($invoice);
-        return view('backend.invoice.view', compact('invoice'));
+        if($invoice->invoice_type=='prescription'){
+            $prescription=Prescription::find($invoice->ref_id);
+        }else{
+            $prescription=array();
+        }
+        
+        // dd($prescription);
+
+        return view('backend.invoice.view', compact('invoice', 'prescription'));
     }
 
     /**
