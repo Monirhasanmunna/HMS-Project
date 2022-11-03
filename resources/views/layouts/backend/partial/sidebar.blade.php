@@ -422,9 +422,9 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item ml-2">
-              <a href="#" class="nav-link">
-                <i class="fa-solid fa-bars"></i>
-                <p>User Settings</p>
+              <a href="{{Route('app.setup.index')}}" class="nav-link">
+                <i class="fa-solid fa-gears"></i>
+                <p>Setup</p>
               </a>
             </li>
             
