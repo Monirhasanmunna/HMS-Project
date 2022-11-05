@@ -276,11 +276,93 @@
         </li>
 
 
-        
+        <li class="nav-header">Human Resources</li>
 
+        {{-- {{Request::is('app/bed*')?'active':''}} --}}
+        <li class="nav-item">
+          <a href="#" class="nav-link"> 
+            <i class="fa-solid fa-users"></i>
+            <p>
+              Human Resources
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-user"></i>
+                <p>Nurse</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-user"></i>
+                <p>Pharmacist</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-user"></i>
+                <p>Laboratorist</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-user"></i>
+                <p>Accountant</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-user"></i>
+                <p>Receptionist</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
+        <li class="nav-header">Financial Activities</li>
+        {{-- {{Request::is('app/bed*')?'active':''}} --}}
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa fa-money-check"></i>
+            <p>
+              Financial Activities
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa fa-money-check"></i>
+                <p>Expense Category</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa fa-money-check"></i>
+                <p>Expense</p>
+              </a>
+          </li>
+          <li class="nav-item ml-2">
+            <a href="#" class="nav-link">
+              <i class="fa fa-money-check"></i>
+              <p>Income</p>
+            </a>
+          </li>
+          <li class="nav-item ml-2">
+            <a href="#" class="nav-link">
+              <i class="fa fa-money-check"></i>
+              <p>Net</p>
+            </a>
+          </li>
+          </ul>
+        </li>
+
+        
       <li class="nav-header">Bed Management</li>
 
-      
         <li class="nav-item">
           <a href="#" class="nav-link {{Request::is('app/bed*')?'active':''}}">
             <i class="fa-solid fa-bed"></i>
@@ -301,6 +383,39 @@
                 <i class="fa-solid fa-bed"></i>
                 <p>Bed</p>
               </a>
+          </li>
+          </ul>
+        </li>
+
+
+        <li class="nav-header">Donor</li>
+        {{-- {{Request::is('app/bed*')?'active':''}} --}}
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa fa-hand-holding-water"></i>
+            <p>
+              Donor
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-user"></i>
+                <p>Donor List</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-circle-plus"></i>
+                <p>Add Donor</p>
+              </a>
+          </li>
+          <li class="nav-item ml-2">
+            <a href="#" class="nav-link">
+              <i class="fa-solid fa-droplet"></i>
+              <p>Blood Bank</p>
+            </a>
           </li>
           </ul>
         </li>
@@ -411,24 +526,41 @@
           </ul>
         </li>
 
-        <li class="nav-header">Settings</li>
+        <li class="nav-header">Logs</li>
+        
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="fa-solid fa-gear"></i>
+            <i class="fa fa-history"></i>
             <p>
-              Settings
+              Logs
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item ml-2">
-              <a href="{{Route('app.setup.index')}}" class="nav-link">
-                <i class="fa-solid fa-gears"></i>
-                <p>Setup</p>
+              <a href="#" class="nav-link">
+                 <i class="fa fa-history"></i>
+                <p>Transaction Logs</p>
               </a>
             </li>
-            
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                 <i class="fa fa-history"></i>
+                <p>User Login logs</p>
+              </a>
+            </li>
           </ul>
+        </li>
+
+        <li class="nav-header">Settings</li>
+
+        <li class="nav-item ">
+          <a href="{{Route('app.setup.index')}}" class="nav-link">
+            <i class="fa-solid fa-gears"></i>
+            <p>
+              Setup
+            </p>
+          </a>
         </li>
 
       </ul>

@@ -20,7 +20,8 @@ class UserSeeder extends Seeder
             'role_id' => Role::where('slug','super-admin')->first()->id,
             'name'    => 'Super Admin',
             'email'   => 'superadmin@gmail.com',
-            'password'=> bcrypt(11111111)
+            'password'=> bcrypt(11111111),
+            'status'  => 1
         ]);
 
         User::updateOrCreate([
