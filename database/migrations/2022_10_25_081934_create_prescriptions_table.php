@@ -54,12 +54,7 @@ return new class extends Migration
             $table->enum('visit_type', ['first','repeat','reportonly'])->default('first');    
             $table->enum('status', ['new','draft','fillup','complete', 'pending','paid'])->default('new'); 
             $table->foreign('patient_id')->references('id')->on('patients');
-            $table->foreign('doctor_id')->references('id')->on('doctors');
-
-
-
-
-
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
             $table->timestamps();
         });
     }

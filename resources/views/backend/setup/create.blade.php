@@ -108,7 +108,7 @@
                                               <span class="text-danger">{{ $message }}</span>
                                               @enderror
                                             </div>
-                                            <img class="mt-2" id="logo" src="{{asset('storage/logo/'.$setup->logo)}}" alt="logo" width="100" height="100" style="border-radius: 50%"/>
+                                            <img class="mt-2" id="logo" src="{{isset($setup)?asset('storage/logo/'.$setup->logo): ''}}" alt="logo" width="100" height="100" style="border-radius: 50%"/>
                                           </div>
 
                                     </div>

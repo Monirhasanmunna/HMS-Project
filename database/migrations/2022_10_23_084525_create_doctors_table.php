@@ -14,7 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('doctors', function (Blueprint $table) {
+
             $table->id();
+            $table->bigInteger('room_id')->nullable();
+            $table->bigInteger('followup_id')->nullable();
+            $table->bigInteger('holiday_id')->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('mobile');
@@ -26,6 +30,11 @@ return new class extends Migration
             $table->double('nextVisit', 8, 2)->nullable();
             $table->double('reportOnly', 8, 2)->nullable();
             $table->timestamps();
+            $table->string('b_name');
+            $table->string('b_degrees');
+            $table->string('b_specialist');
+            $table->string('b_designation');
+            $table->string('b_consultant_of_college');
         });
     }
 

@@ -25,7 +25,17 @@ class DoctorSeeder extends Seeder
             'mobile'                => '01754874782',
             'firstVisit'            => 1000,
             'nextVisit'             => 800,
-            'reportOnly'            => 600
+            'reportOnly'            => 600,
+
+            'b_name'                    => 'ডাঃ শারমিন আক্তার',
+            'b_degrees'                 => 'এমবিবিএস,এমপিসিএস,ডিজিও,এফসিপিএস',
+            'b_specialist'              => 'গাইনি এন্ড অবস',
+            'b_designation'             => 'কন্সাল্টেন্ট',
+            'b_consultant_of_college'   => 'ইউটিএস মেডিকেল কলেজ এন্ড হাসপাতাল',
+            'room_id'                   => 1,
+            'followup_id'               => 1,
+            'holiday_id'                => 1
+
         ]);
 
         Doctor::updateOrCreate([
@@ -38,7 +48,16 @@ class DoctorSeeder extends Seeder
             'mobile'                => '01754874782',
             'firstVisit'            => 800,
             'nextVisit'             => 600,
-            'reportOnly'            => 400
+            'reportOnly'            => 400,
+
+            'b_name'                    => 'ডাঃ শিরিন আক্তার',
+            'b_degrees'                 => 'এমবিবিএস,এমপিসিএস,ডিজিও,এফসিপিএস',
+            'b_specialist'              => 'গাইনি এন্ড অবস',
+            'b_designation'             => 'কন্সাল্টেন্ট',
+            'b_consultant_of_college'   => 'ইউটিএস মেডিকেল কলেজ এন্ড হাসপাতাল',
+            'room_id'                   => 2,
+            'followup_id'               => 2,
+            'holiday_id'                => 2
         ]);
     }
 }

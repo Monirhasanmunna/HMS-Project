@@ -20,4 +20,19 @@ class Doctor extends Model
     {
         return $this->hasMany(Patient::class);
     }
+
+    public function followup()
+    {
+        return $this->belongsTo(FollowUp::class,'followup_id');
+    }
+
+    public function holiday()
+    {
+        return $this->belongsTo(Holiday::class,'holiday_id');
+    }
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class,'room_id');
+    }
 }

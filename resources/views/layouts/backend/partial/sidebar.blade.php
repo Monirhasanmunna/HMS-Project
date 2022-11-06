@@ -559,16 +559,31 @@
         </li>
 
         <li class="nav-header">Settings</li>
-
-        <li class="nav-item ">
-          <a href="{{Route('app.setup.index')}}" class="nav-link">
-            <i class="fa-solid fa-gears"></i>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-gear"></i>
             <p>
-              Setup
+              General Setting
+              <i class="right fas fa-angle-left"></i>
             </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ml-2">
+              <a href="#" class="nav-link">
+                <i class="fa-solid fa-person-shelter"></i>
+                <p>Room List</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
+              <a href="{{Route('app.setup.index')}}" class="nav-link">
+                <i class="fa-solid fa-gears"></i>
+                <p>
+                  Setup
+                </p>
+              </a>
+            </li>
+          </ul>
         </li>
-
       </ul>
     </nav>
     

@@ -180,7 +180,6 @@
 
       <script>
         function doctorDelete(id){
-
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You will lost this data!",
@@ -201,6 +200,7 @@
                     dataType : 'json',
                     Type     : 'Delete',
                     success  : function(response){
+                      console.log(response);
                         setTimeout(function(){
                         window.location.reload();
                         },1000);

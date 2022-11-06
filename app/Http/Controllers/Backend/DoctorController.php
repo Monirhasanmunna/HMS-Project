@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
+use App\Models\FollowUp;
+use App\Models\Holiday;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -29,7 +32,10 @@ class DoctorController extends Controller
     public function create()
     {
         Gate::authorize('app.doctor.create');
-        return view('backend.doctor.create');
+        $rooms = Room::all();
+        $holidays = Holiday::all();
+        $followups = FollowUp::all();
+        return view('backend.doctor.create',compact('rooms','holidays','followups'));
     }
 
     /**
@@ -40,27 +46,45 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('app.doctor.create');
+       Gate::authorize('app.doctor.create');
        $request->validate([
-        'name'                  => 'required|string',
-        'email'                 => 'required|email|unique:doctors',
-        'degrees'               => 'required|string',
-        'specialist'            => 'required',
-        'consultant_of_college' => 'sometimes',
-        'mobile'                => 'required|min:11',
+        'name'                      => 'required|string',
+        'email'                     => 'required|email|unique:doctors',
+        'degrees'                   => 'required|string',
+        'specialist'                => 'required',
+        'designation'               => 'required',
+        'consultant_of_college'     => 'sometimes',
+        'mobile'                    => 'required|min:11',
+        'b_name'                    => 'required|string',
+        'b_degrees'                 => 'required|string',
+        'b_designation'             => 'required',
+        'b_specialist'              => 'required',
+        'b_consultant_of_college'   => 'sometimes',
+        'room_no'                   => 'required',
+        'follow_up'                 => 'required',
+        'holiday'                   => 'required'
        ]);
 
+
        Doctor::create([
-        'name'                  => $request->name,
-        'email'                 => $request->email,
-        'mobile'                => $request->mobile,
-        'degrees'               => $request->degrees,
-        'specialist'            => $request->specialist,
-        'designation'            => $request->designation,
-        'consultant_of_college' => $request->consultant_of_college,
-        'firstVisit'            => $request->firstVisit,
-        'nextVisit'            => $request->nextVisit,
-        'reportOnly'            => $request->reportOnly
+        'name'                      => $request->name,
+        'email'                     => $request->email,
+        'mobile'                    => $request->mobile,
+        'degrees'                   => $request->degrees,
+        'specialist'                => $request->specialist,
+        'designation'               => $request->designation,
+        'consultant_of_college'     => $request->consultant_of_college,
+        'firstVisit'                => $request->firstVisit,
+        'nextVisit'                 => $request->nextVisit,
+        'reportOnly'                => $request->reportOnly,
+        'b_name'                    => $request->b_name,
+        'b_degrees'                 => $request->b_degrees,
+        'b_designation'             => $request->b_designation,
+        'b_specialist'              => $request->b_specialist,
+        'b_consultant_of_college'   => $request->b_consultant_of_college,
+        'room_id'                   => $request->room_no,
+        'followup_id'               => $request->follow_up,
+        'holiday_id'                => $request->holiday
        ]);
 
        notify()->success('Doctor Create Successfully');
@@ -88,8 +112,11 @@ class DoctorController extends Controller
     public function edit($id)
     {
         Gate::authorize('app.doctor.edit');
+        $rooms = Room::all();
+        $holidays = Holiday::all();
+        $followups = FollowUp::all();
         $doctor = Doctor::findOrfail($id);
-        return view('backend.doctor.create',compact('doctor'));
+        return view('backend.doctor.create',compact('doctor','rooms','holidays','followups'));
         
     }
 
@@ -104,25 +131,39 @@ class DoctorController extends Controller
     {
         Gate::authorize('app.doctor.edit');
         $request->validate([
-            'name'                  => 'required|string',
-            'email'                 => 'required|email',
-            'degrees'               => 'required|string',
-            'specialist'            => 'required',
-            'consultant_of_college' => 'sometimes',
-            'mobile'                => 'required|min:11',
+            'name'                      => 'required|string',
+            'email'                     => 'required|email',
+            'degrees'                   => 'required|string',
+            'specialist'                => 'required',
+            'designation'               => 'required',
+            'consultant_of_college'     => 'sometimes',
+            'mobile'                    => 'required|min:11',
+            'b_name'                    => 'required|string',
+            'b_degrees'                 => 'required|string',
+            'b_designation'             => 'required',
+            'b_specialist'              => 'required',
+            'b_consultant_of_college'   => 'sometimes',
            ]);
     
            Doctor::findOrfail($id)->update([
-            'name'                  => $request->name,
-            'email'                 => $request->email,
-            'degrees'               => $request->degrees,
-            'specialist'            => $request->specialist,
-            'designation'            => $request->designation,
-            'consultant_of_college' => $request->consultant_of_college,
-            'mobile'                => $request->mobile,
-            'firstVisit'            => $request->firstVisit,
-            'nextVisit'            => $request->nextVisit,
-            'reportOnly'            => $request->reportOnly
+            'name'                      => $request->name,
+            'email'                     => $request->email,
+            'degrees'                   => $request->degrees,
+            'specialist'                => $request->specialist,
+            'designation'               => $request->designation,
+            'consultant_of_college'     => $request->consultant_of_college,
+            'mobile'                    => $request->mobile,
+            'firstVisit'                => $request->firstVisit,
+            'nextVisit'                 => $request->nextVisit,
+            'reportOnly'                => $request->reportOnly,
+            'b_name'                    => $request->b_name,
+            'b_degrees'                 => $request->b_degrees,
+            'b_designation'             => $request->b_designation,
+            'b_specialist'              => $request->b_specialist,
+            'b_consultant_of_college'   => $request->b_consultant_of_college,
+            'room_id'                   => $request->room_no,
+            'followup_id'               => $request->follow_up,
+            'holiday_id'                => $request->holiday
            ]);
     
            notify()->success('Doctor Update Successfully');

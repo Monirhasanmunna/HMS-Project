@@ -49,8 +49,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{Route('app.dashboard')}}" class="brand-link pl-4">
-      <img src="{{asset('storage/logo/'.$setup->logo)}}" alt="" class="brand-image img-circle elevation-3">
-      <span class="brand-text text-white">{{$setup->company_name}}</span>
+      <img src="{{isset($setup)?asset('storage/logo/'.$setup->logo):''}}" alt="" class="brand-image img-circle elevation-3">
+      <span class="brand-text text-white">{{isset($setup)?$setup->company_name:''}}</span>
      
     </a>
 
