@@ -581,6 +581,12 @@
               </a>
             </li>
             <li class="nav-item ml-2">
+              <a href="{{Route('app.followup.index')}}" class="nav-link">
+                <i class="fa-solid fa-person-shelter"></i>
+                <p>Follow Up</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
               <a href="{{Route('app.setup.index')}}" class="nav-link">
                 <i class="fa-solid fa-gears"></i>
                 <p>

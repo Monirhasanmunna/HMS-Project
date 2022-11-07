@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\DiseaseController;
 use App\Http\Controllers\Backend\DoctorController;
 use App\Http\Controllers\Backend\EatingTimeController;
+use App\Http\Controllers\Backend\FollowUpController;
 use App\Http\Controllers\Backend\FrequencyController;
 use App\Http\Controllers\Backend\HolidayController;
 use App\Http\Controllers\Backend\InvoiceController;
@@ -324,6 +325,16 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/edit/{id}',[HolidayController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[HolidayController::class,'update'])->name('update');
         Route::get('/delete/{id}',[HolidayController::class,'destroy'])->name('delete');
+    });
+
+    Route::group(['as'=>'followup.','prefix'=>'setting/followup'],function(){
+
+        Route::get('/index',[FollowUpController::class,'index'])->name('index');
+        Route::get('/create',[FollowUpController::class,'create'])->name('create');
+        Route::post('/store',[FollowUpController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[FollowUpController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[FollowUpController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[FollowUpController::class,'destroy'])->name('delete');
     });
     
 });
