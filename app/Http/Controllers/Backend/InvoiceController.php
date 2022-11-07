@@ -91,7 +91,7 @@ class InvoiceController extends Controller
             'remark'=>$request->remark,
             'amount'=>$request->amount,
             'discount'=>$request->discount,
-            'net_amount'=>($request->amount - $request->amount),
+            'net_amount'=>($request->amount - $request->discount),
         ]);
 
         if($invoice){
