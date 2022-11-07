@@ -9,12 +9,12 @@
     <link rel="stylesheet" type="text/css" href="{{asset('backend/login/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('backend/login/css/fontawesome-all.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('backend/login/css/iofrm-style.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('backend/login/css/iofrm-theme4.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('backend/login/css/iofrm-theme8.css')}}">
 </head>
 <body>
     <div class="form-body">
         <div class="website-logo">
-            <a href="index.html">
+            <a href="#">
                 <div class="logo">
                     <img class="logo-size" src="{{asset('backend/login/images/logo-light.svg')}}" alt="">
                 </div>
@@ -24,14 +24,21 @@
             <div class="img-holder">
                 <div class="bg"></div>
                 <div class="info-holder">
-                    <img src="{{asset('backend/login/images/graphic1.svg')}}" alt="">
+                    <h3>Get more things done with Loggin platform.</h3>
+                    <p>Access to the most powerfull tool in the entire design and web industry.</p>
+                    <img src="{{asset('backend/login/images/graphic4.svg')}}" alt="">
                 </div>
             </div>
             <div class="form-holder">
                 <div class="form-content">
-                    <div class="form-items" style="border: 1px solid #0093FF; padding:8px;">
-                        <h3>Welcome to <strong style="color: #0093FF">HMS</strong>.</h3>
-                        <p>A hospital is a good place to set various dilemmas.</p>
+                    <div class="form-items">
+                        <div class="website-logo-inside">
+                            <a href="#">
+                                <div class="logo">
+                                    <img class="logo-size" src="{{asset('backend/login/images/logo-light.svg')}}" alt="">
+                                </div>
+                            </a>
+                        </div>
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <input class="form-control" type="email" name="email" placeholder="E-mail Address" required>

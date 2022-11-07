@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\DiseaseController;
 use App\Http\Controllers\Backend\DoctorController;
 use App\Http\Controllers\Backend\EatingTimeController;
 use App\Http\Controllers\Backend\FrequencyController;
+use App\Http\Controllers\Backend\HolidayController;
 use App\Http\Controllers\Backend\InvoiceController;
 use App\Http\Controllers\Backend\MedicalTestController;
 use App\Http\Controllers\Backend\MedicineController;
@@ -312,6 +313,17 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
 
         Route::get('/index',[SetupController::class,'index'])->name('index');
         Route::put('/update/{id}',[SetupController::class,'update'])->name('update');
+    });
+
+
+    Route::group(['as'=>'holiday.','prefix'=>'setting/holiday'],function(){
+
+        Route::get('/index',[HolidayController::class,'index'])->name('index');
+        Route::get('/create',[HolidayController::class,'create'])->name('create');
+        Route::post('/store',[HolidayController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[HolidayController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[HolidayController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[HolidayController::class,'destroy'])->name('delete');
     });
     
 });

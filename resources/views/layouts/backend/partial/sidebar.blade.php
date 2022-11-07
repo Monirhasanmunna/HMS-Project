@@ -575,6 +575,12 @@
               </a>
             </li>
             <li class="nav-item ml-2">
+              <a href="{{Route('app.holiday.index')}}" class="nav-link">
+                <i class="fa-solid fa-person-shelter"></i>
+                <p>Holidays</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
               <a href="{{Route('app.setup.index')}}" class="nav-link">
                 <i class="fa-solid fa-gears"></i>
                 <p>

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.backend.main')
 
 @push('css')
 <!-- DataTables -->
@@ -32,12 +32,13 @@
 
     .page * {
       visibility: visible;
+      padding-top: 0%;
+      margin-top: 0%;
     }
 
     #printBtn {
       visibility: hidden !important;
     }
-
   }
 </style>
 @endpush
@@ -46,9 +47,8 @@
 
 <div class="content-wrapper">
 
-
-  <div class="page d-flex flex-column justify-content-between" style="min-height: 100vh;">
-    {{-- <button id="printBtn" onclick="window.print()" class="btn btn-primary float-right m-4">Print</button> --}}
+  <div class="page d-flex flex-column justify-content-between" style="min-height: 50vh;">
+    <button id="printBtn" onclick="window.print()" class="btn btn-primary float-right m-4">Print</button>
     <div>
       
       <div class="row p-5 pb-0">
@@ -260,7 +260,7 @@
       </div>
     </div>
 
-    <div class="px-5 pt-3 pb-3" style="background-color:rgb(225, 225, 225) ">
+    <div class="footer px-5 pt-3 pb-3" style="background-color:rgb(225, 225, 225) ">
             <!-- chamber details  -->
             <div class="row align-iteml-center">
               <div class="col-5">
@@ -305,7 +305,7 @@
 <script src="{{asset('backend/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 
 
-<script>
+{{-- <script>
   window.print();
-</script>
+</script> --}}
 @endpush
