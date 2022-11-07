@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Doctor;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
 use App\Models\Prescription;
@@ -16,10 +16,35 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $invoices=Invoice::all();
-        return view('backend.invoice.index', compact('invoices'));
+
+        $doctor_id = null;
+        $invoice_type = null;
+        $fromDate = date('Y-m-d');
+        $toDate  = date('Y-m-d');
+
+        $inv=Invoice::query();
+        
+        
+        if($request->filled('doctor_id')){
+            $inv->where('doctor_id',$request->get('doctor_id'));
+            $doctor_id=$request->get('doctor_id');
+        }
+        if($request->filled('invoice_type')){            
+            $inv->where('invoice_type',$request->get('invoice_type'));
+            $invoice_type=$request->get('invoice_type');
+        }
+        if($request->filled('fromDate') && $request->filled('toDate')){
+            $fromDate=date('Y-m-d',strtotime($request->get('fromDate')));
+            $toDate=date('Y-m-d',strtotime($request->get('toDate')));
+            $inv->whereBetween('invoice_date',[date('Y-m-d',strtotime($request->get('fromDate'))), date('Y-m-d',strtotime($request->get('toDate')))]);
+        }
+        
+        $inv->orderBy('id', 'desc');
+        $invoices=$inv->get();
+        $doctors=Doctor::all();
+        return view('backend.invoice.index', compact('invoices', 'doctors', 'invoice_type', 'doctor_id', 'fromDate', 'toDate'));
     }
 
     /**

@@ -258,7 +258,7 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
 
 
     Route::group(['as'=>'invoice.','prefix'=>'invoice'],function(){     
-        Route::get('/index',[InvoiceController::class,'index'])->name('index');
+        Route::any('/index',[InvoiceController::class,'index'])->name('index');
         Route::get('/{invoice}/view',[InvoiceController::class,'show'])->name('show');
         Route::get('/generate/{type}/{prescription_id}',[InvoiceController::class,'generateInvoice'])->name('generate');
         Route::post('/store',[InvoiceController::class,'store'])->name('store');

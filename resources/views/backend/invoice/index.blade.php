@@ -33,6 +33,43 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+
+
+                      <form action="{{route('app.invoice.index')}}" method="POST">
+                        @csrf
+                    <div class="row pb-3 rb-3">
+                      <div class="col-sm-2 offset-1">
+                        <!-- <label for="doctor">Doctor</label>   -->
+                        <select name="doctor_id" id="doctor" class="form-control">
+                          @foreach($doctors as $doc)
+                          <option value="{{$doc->id}}" @selected($doc->id==$doctor_id)>{{$doc->name}}</option>
+                          @endforeach
+                        </select>
+
+                      </div>
+                      <div class="col-sm-2">
+                        <!-- <label for="type">Type</label> -->
+                        <select name="invoice_type" id="doctor" class="form-control">
+                          <option value="prescription"  @selected('prescription'==$invoice_type)> Prescription</option>
+                          <option value="bed"   @selected('bed'==$invoice_type)>Bed</option>
+
+                        </select>
+                      </div>
+                      <div class="col-sm-2">
+                          <!-- <label for="fromDate">From</label> -->
+                          <input type="text" class="form-control" value="{{$fromDate}}" placeholder="from date" name="fromDate" id="fromDate">
+                      </div>
+                      <div class="col-sm-2">
+                          <!-- <label for="toDate">to</label> -->
+                          <input type="text" class="form-control"  value="{{$toDate}}" placeholder="to date" name="toDate" id="toDate">
+                      </div>
+                      <div class="col-sm-2">
+                          <button class="btn btn-sm btn-success">Search</button>
+                      </div>
+                    </div>
+                  </form>
+
+
                         <table id="example2" class="table table-bordered table-hover ">
                           <thead>
                           <tr>
@@ -66,7 +103,7 @@
                             <td>{{$inv->invoice_date}} </td>
                             <td>{{$inv->doctor->name}}</td>
                             <td>{{$inv->patient->name}}</td>
-                            <td>{{$inv->invice_type}}</td>
+                            <td>{{$inv->invoice_type}}</td>
                             <td>{{$inv->status}}</td>
                             <td>{{number_format($inv->amount,2)}}</td>
                             <td>{{number_format($inv->discount,2)}}</td>
@@ -127,6 +164,8 @@
     <script src="{{asset('backend/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
     <script>
         $(function () {
+          $('#fromDate').datepicker();
+          $('#toDate').datepicker();
           $("#example1").DataTable({
             "responsive": true, "lengthChange": false, "autoWidth": false,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
@@ -144,6 +183,7 @@
       </script>
 
       <script>
+
         function presDelete(id){
 
             Swal.fire({
