@@ -569,7 +569,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item ml-2">
-              <a href="#" class="nav-link">
+              <a href="{{Route('app.room.index')}}" class="nav-link">
                 <i class="fa-solid fa-person-shelter"></i>
                 <p>Room List</p>
               </a>
@@ -583,7 +583,7 @@
             <li class="nav-item ml-2">
               <a href="{{Route('app.followup.index')}}" class="nav-link">
                 <i class="fa-solid fa-person-shelter"></i>
-                <p>Follow Up</p>
+                <p>Follow Up Days</p>
               </a>
             </li>
             <li class="nav-item ml-2">

@@ -26,6 +26,7 @@ use App\Http\Controllers\Backend\PatientController;
 use App\Http\Controllers\Backend\PrescriptionController;
 use App\Http\Controllers\Backend\QuantityController;
 use App\Http\Controllers\Backend\QuantityTypeController;
+use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\SetupController;
 use App\Http\Controllers\Backend\User\RoleController;
 use App\Http\Controllers\Backend\User\UserController;
@@ -335,6 +336,17 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/edit/{id}',[FollowUpController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[FollowUpController::class,'update'])->name('update');
         Route::get('/delete/{id}',[FollowUpController::class,'destroy'])->name('delete');
+    });
+
+
+    Route::group(['as'=>'room.','prefix'=>'setting/room'],function(){
+
+        Route::get('/index',[RoomController::class,'index'])->name('index');
+        Route::get('/create',[RoomController::class,'create'])->name('create');
+        Route::post('/store',[RoomController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[RoomController::class,'edit'])->name('edit');
+        Route::put('/update/{id}',[RoomController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[RoomController::class,'destroy'])->name('delete');
     });
     
 });
