@@ -87,6 +87,11 @@ class DoctorController extends Controller
         'holiday_id'                => $request->holiday
        ]);
 
+
+       $room = Room::findOrfail($request->room_no);
+       $room->status = true;
+       $room->save();
+
        notify()->success('Doctor Create Successfully');
        return redirect()->route('app.doctor.index');
     }
@@ -144,27 +149,37 @@ class DoctorController extends Controller
             'b_specialist'              => 'required',
             'b_consultant_of_college'   => 'sometimes',
            ]);
+
+           $doctor = Doctor::findOrfail($id);
+           $room = Room::findOrfail($doctor->room_id);
+           $room->status = false;
+           $room->save();
     
-           Doctor::findOrfail($id)->update([
-            'name'                      => $request->name,
-            'email'                     => $request->email,
-            'degrees'                   => $request->degrees,
-            'specialist'                => $request->specialist,
-            'designation'               => $request->designation,
-            'consultant_of_college'     => $request->consultant_of_college,
-            'mobile'                    => $request->mobile,
-            'firstVisit'                => $request->firstVisit,
-            'nextVisit'                 => $request->nextVisit,
-            'reportOnly'                => $request->reportOnly,
-            'b_name'                    => $request->b_name,
-            'b_degrees'                 => $request->b_degrees,
-            'b_designation'             => $request->b_designation,
-            'b_specialist'              => $request->b_specialist,
-            'b_consultant_of_college'   => $request->b_consultant_of_college,
-            'room_id'                   => $request->room_no,
-            'followup_id'               => $request->follow_up,
-            'holiday_id'                => $request->holiday
-           ]);
+           
+           $doctor->name                    = $request->name;
+           $doctor->email                   = $request->email;
+           $doctor->degrees                 = $request->degrees;
+           $doctor->specialist              = $request->specialist;
+           $doctor->designation             = $request->designation;
+           $doctor->consultant_of_college   = $request->consultant_of_college;
+           $doctor->mobile                  = $request->mobile;
+           $doctor->firstVisit              = $request->firstVisit;
+           $doctor->nextVisit               = $request->nextVisit;
+           $doctor->reportOnly              = $request->reportOnly;
+           $doctor->b_name                  = $request->b_name;
+           $doctor->b_degrees               = $request->b_degrees;
+           $doctor->b_designation           = $request->b_designation;
+           $doctor->b_specialist            = $request->b_specialist;
+           $doctor->b_consultant_of_college = $request->b_consultant_of_college;
+           $doctor->room_id                 = $request->room_no;
+           $doctor->followup_id             = $request->follow_up;
+           $doctor->holiday_id              = $request->holiday;
+           
+           
+           $room = Room::findOrfail($request->room_no);
+           $room->status = true;
+           $room->save();
+           $doctor->save();
     
            notify()->success('Doctor Update Successfully');
            return redirect()->route('app.doctor.index');
@@ -181,6 +196,11 @@ class DoctorController extends Controller
         Gate::authorize('app.doctor.destroy');
         $doctor = Doctor::findOrfail($id);
         $doctor->delete();
+
+        $room = Room::findOrfail($doctor->room_id);
+        $room->status = false;
+        $room->save();
+
         return response()->json($doctor);
     }
 }

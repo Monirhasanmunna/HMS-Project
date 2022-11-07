@@ -38,6 +38,7 @@
                           <tr>
                             <th style="width: 60px">#</th>
                             <th class="text-center">Room No.</th>
+                            <th class="text-center">Status</th>
                             <th class="text-center" style="width: 170px">Action</th>
                           </tr>
                           </thead>
@@ -46,6 +47,13 @@
                           <tr>
                             <td>{{$key+1}}</td>
                             <td class="text-center">{{$room->name}}</td>
+                            <td class="text-center">
+                              @if($room->status == true)
+                              <span class="badge badge-danger">Not Available</span>
+                              @else
+                              <span class="badge badge-primary">Available</span>
+                              @endif
+                            </td>
                             <td class="text-center">
                               <a href="{{Route('app.room.edit',[$room->id])}}" class="btn btn-sm btn-primary">Edit</a>
                               <a href="javascript:void(0)" onclick="roomDelete({{$room->id}})" class="btn btn-sm btn-danger">Delete</a>
@@ -57,6 +65,7 @@
                             <tr>
                               <th style="width: 60px">#</th>
                               <th class="text-center">Room No.</th>
+                              <th class="text-center">Status</th>
                               <th class="text-center" style="width: 170px">Action</th>
                             </tr>
                           </tfoot>

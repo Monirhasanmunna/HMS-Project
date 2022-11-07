@@ -48,16 +48,16 @@ class BedController extends Controller
        ]);
 
     
-    $bed = New Bed;
-    $bed->bedgroup_id   = $request->bedgroup;
-    $bed->bedtype_id    = $request->bedtype;
-    $bed->name          = $request->name;
-    if($request->status == 1){
-        $bed->status = true;
-    }else{
-        $bed->status = false;
-    }
-    $bed->save();
+        $bed = New Bed;
+        $bed->bedgroup_id   = $request->bedgroup;
+        $bed->bedtype_id    = $request->bedtype;
+        $bed->name          = $request->name;
+        if($request->status == 1){
+            $bed->status = true;
+        }else{
+            $bed->status = false;
+        }
+        $bed->save();
 
        notify()->success('Bed Created Successfully');
        return redirect()->back();
