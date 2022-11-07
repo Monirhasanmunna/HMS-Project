@@ -7,8 +7,8 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
-        <li class="nav-item menu-open">
-          <a href="{{Route('app.dashboard')}}" class="nav-link {{Request::is('app/dashboard*')?'active':''}}">
+        <li class="nav-item">
+          <a href="{{Route('app.dashboard')}}" class="nav-link {{Request::is('app/dashboard*')?'activate':''}}">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -16,10 +16,10 @@
           </a>
         </li>
 
-        <li class="nav-header">User Management</li>
+        <li class="nav-header"><span class="badge badge-primary">User Management</span></li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link {{Request::is('app/role*')?'active':''}}">
+          <a href="#" class="nav-link {{Request::is('app/role*')?'activate':''}}">
             <i class="fa-sharp fa-solid fa-person"></i>
             <p>
               Role
@@ -43,7 +43,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link {{Request::is('app/user*')?'activate':''}}">
             <i class="fa-solid fa-user"></i>
             <p>
               User
@@ -66,10 +66,10 @@
           </ul>
         </li>
         
-        <li class="nav-header">Patient Management</li>
+        <li class="nav-header"><span class="badge badge-primary">Patient Management</span></li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link {{Request::is('app/doctor*')?'active':''}}">
+          <a href="#" class="nav-link {{Request::is('app/doctor*')?'activate':''}}">
             <i class="fa-solid fa-user-doctor"></i>
             <p>
               Doctor
@@ -93,7 +93,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link {{Request::is('app/assistant*')?'active':''}}">
+          <a href="#" class="nav-link {{Request::is('app/assistant*')?'activate':''}}">
             <i class="fa-solid fa-user-nurse"></i>
             <p>
               Assistant
@@ -117,7 +117,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link {{Request::is('app/patient*')?'active':''}}">
+          <a href="#" class="nav-link {{Request::is('app/patient*')?'activate':''}}">
             <i class="fa-sharp fa-solid fa-wheelchair"></i>
             <p>
               Patient
@@ -141,7 +141,7 @@
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link {{Request::is('app/admition*')?'active':''}}">
+          <a href="#" class="nav-link {{Request::is('app/admition*')?'activate':''}}">
             <i class="fa-solid fa-bed-pulse"></i>
             <p>
               Patient Admission
@@ -165,10 +165,10 @@
         </li>
 
 
-        <li class="nav-header">Prescription Management</li>
+        <li class="nav-header"><span class="badge badge-primary">Prescription Management</span></li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link {{Request::is('app/prescription*')?'active':''}}">
+          <a href="#" class="nav-link {{Request::is('app/prescription*')?'activate':''}}">
             <i class="fa-solid fa-file-prescription"></i>
             <p>
               Prescription
@@ -282,9 +282,9 @@
         </li>
 
 
-        <li class="nav-header">Human Resources</li>
+        <li class="nav-header"><span class="badge badge-primary">Human Resources</span></li>
 
-        {{-- {{Request::is('app/bed*')?'active':''}} --}}
+        {{-- {{Request::is('app/bed*')?'activate':''}} --}}
         <li class="nav-item">
           <a href="#" class="nav-link"> 
             <i class="fa-solid fa-users"></i>
@@ -328,8 +328,8 @@
         </li>
 
 
-        <li class="nav-header">Financial Activities</li>
-        {{-- {{Request::is('app/bed*')?'active':''}} --}}
+        <li class="nav-header"><span class="badge badge-primary">Financial Activities</span></li>
+        {{-- {{Request::is('app/bed*')?'activate':''}} --}}
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="fa fa-money-check"></i>
@@ -367,10 +367,10 @@
         </li>
 
         
-      <li class="nav-header">Bed Management</li>
+      <li class="nav-header"><span class="badge badge-primary">Bed Management</span></li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link {{Request::is('app/bed*')?'active':''}}">
+          <a href="#" class="nav-link {{Request::is('app/bed*')?'activate':''}}">
             <i class="fa-solid fa-bed"></i>
             <p>
               Bed
@@ -394,8 +394,8 @@
         </li>
 
 
-        <li class="nav-header">Donor</li>
-        {{-- {{Request::is('app/bed*')?'active':''}} --}}
+        <li class="nav-header"><span class="badge badge-primary">Donor</span></li>
+        {{-- {{Request::is('app/bed*')?'activate':''}} --}}
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="fa fa-hand-holding-water"></i>
@@ -452,7 +452,7 @@
           </ul>
         </li> --}}
 
-        <li class="nav-header">Pathology</li>
+        <li class="nav-header"><span class="badge badge-primary">Pathology</span></li>
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="fa-solid fa-flask"></i>
@@ -477,7 +477,7 @@
           </ul>
         </li>
 
-        <li class="nav-header">Report</li>
+        <li class="nav-header"><span class="badge badge-primary">Report</span></li>
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="fa-solid fa-receipt"></i>
@@ -532,7 +532,7 @@
           </ul>
         </li>
 
-        <li class="nav-header">Logs</li>
+        <li class="nav-header"><span class="badge badge-primary">Logs</span></li>
         
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -558,9 +558,9 @@
           </ul>
         </li>
 
-        <li class="nav-header">Settings</li>
+        <li class="nav-header"><span class="badge badge-primary">Settings</span></li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link {{Request::is('app/setting*')?'activate':''}}">
             <i class="fa-solid fa-gear"></i>
             <p>
               General Setting

@@ -3,44 +3,28 @@
 
 @section('content')
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-4 col-4">
-            <h1 class="m-0">Dashboard</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-4 col-4">
-            <h1 class="m-0">𝒲𝑒𝓁𝒸𝑜𝓂𝑒 𝒯𝑜 𝒬𝐵 𝐻𝑀𝒮</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-4 col-4">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item text-primary">Dashboard v1</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
+        <div class="row px-2 pt-2">
+          <div class="col-12 bg-primary pt-1" style="border-radius: 3px">
+            <div class="dashboard_header text-center">
+              <h6>Welcome To QB It Solution HMS</h6>
+            </div>
+          </div>
+      </div>
+        <div class="row mt-2">
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>15</h3>
 
-                <p>New Orders</p>
+                <p>Invoice</p>
               </div>
               <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="fa-solid fa-file-invoice"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -50,12 +34,11 @@
               <div class="inner">
                 <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                <p>Bounce Rate</p>
+                <p>Discount</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fa-solid fa-percent"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -65,12 +48,11 @@
               <div class="inner">
                 <h3>44</h3>
 
-                <p>User Registrations</p>
+                <p>Due</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="fa-solid fa-money-bill"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -79,16 +61,178 @@
             <div class="small-box bg-danger">
               <div class="inner">
                 <h3>65</h3>
-
-                <p>Unique Visitors</p>
+                <p>Cash In</p>
               </div>
               <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <i class="fa-solid fa-money-bill-transfer"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
+        </div>
+
+        <div class="row">
+          <div class="col-7">
+            <div class="row mt-2">
+              <div class="col-lg-4">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                  <div class="inner">
+                    <h3>15</h3>
+    
+                    <p>New Patient's</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-wheelchair"></i>
+                  </div>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-4">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                  <div class="inner">
+                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+    
+                    <p>Today's Patients</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-wheelchair"></i>
+                  </div>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-4">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3>44</h3>
+    
+                    <p>IPD Patient's</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-bed"></i>
+                  </div>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-4">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                  <div class="inner">
+                    <h3>65</h3>
+                    <p>Refund</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-backward"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                  <div class="inner">
+                    <h3>65</h3>
+                    <p>Cash Out</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-circle-minus"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <!-- small box -->
+                <div class="small-box bg-primary">
+                  <div class="inner">
+                    <h3>65</h3>
+                    <p>Pc/Referral</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-money-bill-1-wave"></i>
+                  </div>
+                </div>
+              </div>
+              <!-- ./col -->
+            </div>
+          </div>
+          <div class="col-5">
+            <div class="card card1-border mt-2">
+              <div class="card-header card1-header-border">
+                <h5 class="card-title" style="color:green">Today's Completed Follow UP</h5>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <table class="table tborder">
+                  <thead>
+                    <tr>
+                      <th>Patient</th>
+                      <th>Follow Up By</th>
+                      <th class="text-right">Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Rafiq Ahmed</td>
+                      <td>Jarin Hayat</td>
+                      <td class="text-right"><a href="#"><i class="fa-solid fa-bars btn-sm btn-info"></i></a></td>
+                    </tr>
+                    <tr>
+                      <td>Rafiq Ahmed</td>
+                      <td>Jarin Hayat</td>
+                      <td class="text-right"><a href="#"><i class="fa-solid fa-bars btn-sm btn-info"></i></a></td>
+                    </tr>
+                    <tr>
+                      <td>Rafiq Ahmed</td>
+                      <td>Jarin Hayat</td>
+                      <td class="text-right"><a href="#"><i class="fa-solid fa-bars btn-sm btn-info"></i></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-7">
+            <div class="card card1-border mt-2">
+              <div class="card-header card1-header-border">
+                <h5 class="card-title" style="color:green">User Activity</h5>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <table class="table tborder">
+                  <thead>
+                    <tr>
+                      <th style="width: 500px;">User Name</th>
+                      <th>Last Access Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Rafiq Ahmed</td>
+                      <td>28-09-2022 9:38</td>
+                    </tr>
+                    <tr>
+                      <td>Rafiq Ahmed</td>
+                      <td>28-09-2022 9:38</td>
+                    </tr>
+                    <tr>
+                      <td>Rafiq Ahmed</td>
+                      <td>28-09-2022 9:38</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+          <div class="col-5">
+
+          </div>
         </div>
         <!-- /.row -->
         <!-- Main row -->

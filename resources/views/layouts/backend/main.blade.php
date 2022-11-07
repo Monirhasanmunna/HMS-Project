@@ -29,7 +29,12 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="{{ asset('css/iziToast.css') }}" rel="stylesheet">
   <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-
+<style>
+.activate {
+    background-color: #2A9440 !important;
+    color: white;
+}
+</style>
 
   @stack('css')
 </head>
