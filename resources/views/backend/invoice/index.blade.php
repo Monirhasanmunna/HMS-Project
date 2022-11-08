@@ -111,6 +111,7 @@
                             
                             <td class="text-center">
                               <a href="{{Route('app.invoice.show',[$inv->id])}}" target="_new" class="btn btn-sm btn-info">View</a>
+                              <a href="{{Route('app.invoice.print',[$inv->id])}}" target="_new" class="btn btn-sm btn-info">print</a>
                               
                               
                               

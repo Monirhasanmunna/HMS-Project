@@ -260,6 +260,7 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
     Route::group(['as'=>'invoice.','prefix'=>'invoice'],function(){     
         Route::any('/index',[InvoiceController::class,'index'])->name('index');
         Route::get('/{invoice}/view',[InvoiceController::class,'show'])->name('show');
+        Route::get('/{invoice}/print',[InvoiceController::class,'showPrint'])->name('print');
         Route::get('/generate/{type}/{prescription_id}',[InvoiceController::class,'generateInvoice'])->name('generate');
         Route::post('/store',[InvoiceController::class,'store'])->name('store');
      

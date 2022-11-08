@@ -196,6 +196,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
         Riskihajar\Terbilang\TerbilangServiceProvider::class,
     ],
 
@@ -213,6 +214,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'Image' => 'Intervention\Image\Facades\Image',
         'Terbilang' => Riskihajar\Terbilang\Facades\Terbilang::class,
+        'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
 
     ])->toArray(),
 

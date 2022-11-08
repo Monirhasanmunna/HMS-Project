@@ -8,6 +8,7 @@ use App\Models\Invoice;
 use App\Models\InvoiceDetail;
 use App\Models\Prescription;
 use Illuminate\Http\Request;
+use PDF;
 
 class InvoiceController extends Controller
 {
@@ -125,10 +126,27 @@ class InvoiceController extends Controller
             $prescription=array();
         }
         
-        // dd($prescription);
 
         return view('backend.invoice.view', compact('invoice', 'prescription'));
     }
+
+    public function showPrint(Invoice $invoice)
+    {
+        // dd($invoice);
+        if($invoice->invoice_type=='prescription'){
+            $prescription=Prescription::find($invoice->ref_id);
+        }else{
+            $prescription=array();
+        }
+        
+        // dd($prescription);
+
+       $pdf = PDF::loadView('backend.invoice.pdf', compact('invoice', 'prescription'));
+        return $pdf->stream('document.pdf');
+        // return view('backend.invoice.view', compact('invoice', 'prescription'));
+    }
+
+  
 
     /**
      * Show the form for editing the specified resource.
