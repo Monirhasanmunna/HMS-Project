@@ -32,7 +32,7 @@ class DoctorController extends Controller
     public function create()
     {
         Gate::authorize('app.doctor.create');
-        $rooms = Room::all();
+        $rooms = Room::where('status',false)->get();
         $holidays = Holiday::all();
         $followups = FollowUp::all();
         return view('backend.doctor.create',compact('rooms','holidays','followups'));

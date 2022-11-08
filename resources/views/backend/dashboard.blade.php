@@ -18,7 +18,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>15</h3>
+                <h3>{{Count($invoices)}}</h3>
 
                 <p>Invoice</p>
               </div>
@@ -29,10 +29,19 @@
           </div>
           <!-- ./col -->
           <div class="col-lg-3 col-6">
-            <!-- small box -->
+            <?php 
+              $discount_amount = 0;
+              $total_amount = 0;
+            ?>
+            <?php 
+            foreach ($invoices as $key => $inv) {
+              $discount_amount = $discount_amount + $inv['discount'];
+              $total_amount = $total_amount + $inv['net_amount'];
+            }
+            ?>
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>Tk. {{$discount_amount}}</h3>
 
                 <p>Discount</p>
               </div>
@@ -43,10 +52,16 @@
           </div>
           <!-- ./col -->
           <div class="col-lg-3 col-6">
-            <!-- small box -->
+            <?php $due_amount = 0; ?>
+            <?php 
+            foreach ($admittedPatient as $key => $addpatient) {
+              $due_amount = $due_amount + $addpatient['due'];
+              $total_amount = $total_amount + $addpatient['paid'];
+            }
+            ?>
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3>Tk. {{$due_amount}}</h3>
 
                 <p>Due</p>
               </div>
@@ -60,7 +75,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3>{{$total_amount}}</h3>
                 <p>Cash In</p>
               </div>
               <div class="icon">
@@ -78,9 +93,9 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                   <div class="inner">
-                    <h3>15</h3>
+                    <h3>{{Count($patients)}}</h3>
     
-                    <p>New Patient's</p>
+                    <p>Patient's</p>
                   </div>
                   <div class="icon">
                     <i class="fa-solid fa-wheelchair"></i>
@@ -92,7 +107,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                   <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+                    <h3>{{Count($todayspatient)}}</h3>
     
                     <p>Today's Patients</p>
                   </div>
@@ -106,7 +121,7 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                   <div class="inner">
-                    <h3>44</h3>
+                    <h3>{{Count($admittedPatient)}}</h3>
     
                     <p>IPD Patient's</p>
                   </div>

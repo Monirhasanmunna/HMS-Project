@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Setup;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $setup = Setup::where('id',1)->first();
         if(isset($setup)){
-          View::share('setup',$setup);  
-        }
+          View::share('setup',$setup);   
+        }   
     }
 }

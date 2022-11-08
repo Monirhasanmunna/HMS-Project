@@ -20,7 +20,8 @@ class SetupController extends Controller
     public function index()
     {
         Gate::authorize('app.generalsetup.index');
-        return view('backend.setup.create');
+        $setup = Setup::where('id',1)->first();
+        return view('backend.setup.create',compact('setup'));
     }
 
     /**
