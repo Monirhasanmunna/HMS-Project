@@ -47,7 +47,7 @@ class SetupController extends Controller
 
         $setup = Setup::findOrfail($id);
         $image = $request->file('logo');
-        $slug = Str::slug($request->name);
+        $slug = Str::slug($request->company_name);
         $imageName = '';
         if(isset($image)){
 
@@ -55,9 +55,9 @@ class SetupController extends Controller
             $imageName = $slug.'-'.uniqid().'.'.$image->getClientOriginalExtension();
 
             //storage create
-            if(!Storage::disk('public')->exists('users')){
+            if(!Storage::disk('public')->exists('logo')){
 
-                Storage::disk('public')->makeDirectory('users');
+                Storage::disk('public')->makeDirectory('logo');
             }
 
             //delete old pic

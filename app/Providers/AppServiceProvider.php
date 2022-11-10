@@ -27,9 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $setup = Setup::where('id',1)->first();
-        // if(isset($setup)){
-        //   View::share('setup',$setup);   
-        // }   
+        $setup = Setup::where('id',1)->first();
+        if(isset($setup)){
+          View::share('setup',$setup);   
+        }   
     }
 }

@@ -67,7 +67,7 @@ body * {
                   </div>
                   <div class="row px-4 mt-2">
                     <div class="col-6">
-                      <p class="mb-0"><b>{{$prescription->patient->name}}</b></p>
+                      <p class="mb-0"><b>{{isset($prescription) ? $prescription->patient->name : $admission->patients->name}}</b></p>
                     </div>
                     <div class="col-6">
                       <p class="mb-0 text-right"><b>Cabin NO : 101</b></p>
@@ -79,7 +79,7 @@ body * {
                         <small>UHID</small>: <b class="bg-light">001</b>
                       </p>
                       <small>
-                        <p class="m-0 p-0 text-gray">Age/Sex: <b>{{$prescription->patient->age}}Y/{{$prescription->patient->sex}}</b></p>
+                        <p class="m-0 p-0 text-gray">Age/Sex: <b>{{isset($prescription) ? $prescription->patient->age : $admission->patients->age}}Y/{{isset($prescription) ? $prescription->patient->sex : $admission->patients->sex}}</b></p>
                         <p class="m-0 p-0 text-gray">Contact: <b>Husband</b></p>
                         <p class="m-0 p-0 text-gray">
                           Contact No: <b>+880 1798691956</b>
@@ -92,7 +92,7 @@ body * {
                     <div class="col-7 text-right">
                       <small>
                         <p class="m-0 p-0 text-gray">
-                          Supervise BT: <b>{{$prescription->doctor->name}}({{$prescription->patient->degrees}})</b>
+                          Supervise BT: <b>{{isset($prescription) ? $prescription->doctor->name : $admission->patients->doctor->name}}({{isset($prescription) ? $prescription->doctor->degrees : $admission->patients->doctor->degrees}})</b>
                         </p>
                         <p class="m-0 p-0 text-gray">Invoice Date: <b>{{$invoice->invoice_date}} </b></p>
                         <p class="m-0 p-0 text-gray">
@@ -162,7 +162,7 @@ body * {
                         </p>
                         <p class="d-flex m-0 justify-content-between">
                           <span class="text-right col-7">Due : </span>
-                          <span class="">{{number_format($invoice->net_amount,2)}}</span>
+                          <span class="">{{number_format($invoice->due,2)}}</span>
                         </p>
                         <p class="mb-5 mt-4 text-right">
                           <span class="text-right d-block"><b><u>Recevied By:</u></b>

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('admission_date')->nullable();
             $table->string('remark');
             $table->double('amount', 8,2);
+            $table->double('due', 8,2)->nullable();
             $table->double('discount', 8,2);
             $table->double('net_amount', 8,2);
             $table->enum('status', ['new','draft','complete', 'pending','due','paid'])->default('new');    

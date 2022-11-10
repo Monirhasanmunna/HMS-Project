@@ -66,7 +66,7 @@
           </ul>
         </li>
         
-        <li class="nav-header"><span class="badge badge-primary">Patient Management</span></li>
+        <li class="nav-header"><span class="badge badge-primary">Doctor Management</span></li>
 
         <li class="nav-item">
           <a href="#" class="nav-link {{Request::is('app/doctor*')?'activate':''}}">
@@ -115,6 +115,8 @@
             </li>
           </ul>
         </li>
+
+        <li class="nav-header"><span class="badge badge-primary">Patient Management</span></li>
 
         <li class="nav-item">
           <a href="#" class="nav-link {{Request::is('app/patient*')?'activate':''}}">
@@ -192,12 +194,6 @@
               <a href="{{Route('app.prescription.index')}}" class="nav-link">
                 <i class="fa-solid fa-list"></i>
                 <p>Prescription List</p>
-              </a>
-            </li>
-            <li class="nav-item ml-2">
-              <a href="{{Route('app.invoice.index')}}" class="nav-link">
-                <i class="fa-solid fa-list"></i>
-                <p>Invoice List</p>
               </a>
             </li>
           </ul>
@@ -488,6 +484,12 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item ml-2">
+              <a href="{{Route('app.invoice.index')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Invoice List</p>
+              </a>
+            </li>
+            <li class="nav-item ml-2">
               <a href="#" class="nav-link">
                 <i class="fa-solid fa-bars"></i>
                 <p>Financial Report</p>
@@ -583,7 +585,7 @@
             <li class="nav-item ml-2">
               <a href="{{Route('app.followup.index')}}" class="nav-link">
                 <i class="fa-solid fa-person-shelter"></i>
-                <p>Follow Up Days</p>
+                <p>Follow Up</p>
               </a>
             </li>
             <li class="nav-item ml-2">

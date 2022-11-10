@@ -469,7 +469,7 @@
                                         <p class=""><strong>Follow-up Investigation(s) :</strong></p>
                                         
                                         <?php
-                                        if ($prescription->test ?? old('suggest_test')) {
+                                        if (isset($prescription) ? $prescription->test : old('suggest_test')) {
                                             $testIds = Helper::arrayCovert($prescription->test, 'medical_test_id');
                                         } else {
                                             $testIds = [];

@@ -52,16 +52,9 @@
                             <td>{{$admition->paid}}</td>
                             <td>{{$admition->due}}</td>
                             <td class="text-center">
-                                <div class="dropdown show dropleft ">
-                                    <a class="btn btn-sm btn-primary" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a href="javascript:void(0)" onclick="assistantShow({{$admition->id}})" class="btn-sm btn-info dropdown-item">Show</a>
-                                        <a href="{{Route('app.admition.edit',[$admition->id])}}" class="btn-sm btn-primary dropdown-item">Edit</a>
-                                        <a href="javascript:void(0)" onclick="patientDelete({{$admition->id}})" class="btn-sm btn-danger dropdown-item">Delete</a>
-                                    </div>
-                                  </div>
+                              <a href="{{route('app.invoice.generate',['2',$admition->id])}}" class="btn-sm btn-info">Generate Pdf</a>
+                              <a href="{{Route('app.admition.edit',[$admition->id])}}" class="btn-sm btn-primary">Edit</a>
+                              <a href="javascript:void(0)" onclick="patientDelete({{$admition->id}})" class="btn-sm btn-danger">Delete</a>
                             </td>
                           </tr>
                         @endforeach

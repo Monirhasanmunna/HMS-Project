@@ -51,7 +51,7 @@
                         <!-- <label for="type">Type</label> -->
                         <select name="invoice_type" id="doctor" class="form-control">
                           <option value="prescription"  @selected('prescription'==$invoice_type)> Prescription</option>
-                          <option value="bed"   @selected('bed'==$invoice_type)>Bed</option>
+                          <option value="bed"  @selected('bed'==$invoice_type)>Bed</option>
 
                         </select>
                       </div>

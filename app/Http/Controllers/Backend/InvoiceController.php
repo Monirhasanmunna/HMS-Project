@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdmittedPatient;
 use App\Models\Doctor;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
@@ -41,6 +42,7 @@ class InvoiceController extends Controller
             $toDate=date('Y-m-d',strtotime($request->get('toDate')));
             $inv->whereBetween('invoice_date',[date('Y-m-d',strtotime($request->get('fromDate'))), date('Y-m-d',strtotime($request->get('toDate')))]);
         }
+
         
         $inv->orderBy('id', 'desc');
         $invoices=$inv->get();
@@ -60,14 +62,21 @@ class InvoiceController extends Controller
     
     public function generateInvoice($type,  $ref_id)
     {
+        
         if($type==1){
             $pres=Prescription::where('id', $ref_id)->first();
             $doctor_id=$pres->doctor_id; 
             $patient_id=$pres->paitent_id;
+
+            return view('backend.invoice.create', compact('doctor_id', 'patient_id','ref_id','pres', 'type'));
+        }
+
+        if($type==2){
+
+            $admission = AdmittedPatient::where('id',$ref_id)->first();
+            return view('backend.invoice.create', compact('type','ref_id','admission'));
         }
         
-        
-        return view('backend.invoice.create', compact('doctor_id', 'patient_id','ref_id','pres', 'type'));
     }
 
     /**
@@ -78,37 +87,55 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'amount'=> 'required'
-        // ]);
+       // return $request->all();
 
         $invoice=Invoice::create([
-            'doctor_id'=>$request->doctor_id,
-            'patient_id'=>$request->patient_id,
-            'ref_id'=>$request->ref_id,
-            'doctor_id'=>$request->doctor_id,
-            'doctor_id'=>$request->doctor_id,
-            'invoice_date'=>date('Y-m-d'),
-            'remark'=>$request->remark,
-            'amount'=>$request->amount,
-            'discount'=>$request->discount,
-            'net_amount'=>($request->amount - $request->discount),
+            'invoice_type'  =>$request->invoice_type,
+            'doctor_id'     =>$request->doctor_id,
+            'patient_id'    =>$request->patient_id,
+            'ref_id'        =>$request->ref_id,
+            'doctor_id'     =>$request->doctor_id,
+            'doctor_id'     =>$request->doctor_id,
+            'invoice_date'  =>date('Y-m-d'),
+            'remark'        =>$request->remark,
+            'amount'        =>$request->amount,
+            'discount'      =>$request->discount,
+            'net_amount'    =>($request->amount - $request->discount),
+            'admission_date'=>$request->addmission_date
         ]);
 
-        if($invoice){
+        if($request->invoice_type == 'prescription') {
+                if($invoice){
+                InvoiceDetail::create([
+                    'invoice_id'=>$invoice->id,
+                    'detail' => 'prescription',
+                    'unit_amount'=>$request->amount
+                ]);
+
+                $pres=Prescription::where('id', $request->ref_id)->first();
+                $pres->status='complete';
+                $pres->save();
+            }
+            
+            notify()->success('Invoice Generated');
+            return redirect()->route('app.prescription.index');
+        }
+
+
+        if($request->invoice_type == 'bed') {
+            if($invoice){
             InvoiceDetail::create([
                 'invoice_id'=>$invoice->id,
-                'detail' => 'prescription',
+                'detail' => 'bed',
                 'unit_amount'=>$request->amount
             ]);
 
-            $pres=Prescription::where('id', $request->ref_id)->first();
-            $pres->status='complete';
-            $pres->save();
+            // $pres=AdmittedPatient::where('id', $request->ref_id)->first();
+            // $pres->status='complete';
+            // $pres->save();
         }
-
-        notify()->success('Invoice Generated');
-        return redirect()->route('app.prescription.index');
+    }
+        
     }
 
     /**
@@ -119,31 +146,35 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        // dd($invoice);
+
         if($invoice->invoice_type=='prescription'){
             $prescription=Prescription::find($invoice->ref_id);
+            return view('backend.invoice.view', compact('invoice', 'prescription'));
         }else{
-            $prescription=array();
+          
+            $admission=AdmittedPatient::find($invoice->ref_id);
+            return view('backend.invoice.view', compact('invoice', 'admission'));
         }
-        
-
-        return view('backend.invoice.view', compact('invoice', 'prescription'));
+       
     }
 
     public function showPrint(Invoice $invoice)
     {
-        // dd($invoice);
         if($invoice->invoice_type=='prescription'){
+
             $prescription=Prescription::find($invoice->ref_id);
+
+            $pdf = PDF::loadView('backend.invoice.pdf', compact('invoice', 'prescription'));
+            return $pdf->stream('document.pdf');
+
         }else{
-            $prescription=array();
+
+            $admission=AdmittedPatient::find($invoice->ref_id);
+
+            $pdf = PDF::loadView('backend.invoice.pdf', compact('invoice', 'admission'));
+            return $pdf->stream('document.pdf');
         }
         
-        // dd($prescription);
-
-       $pdf = PDF::loadView('backend.invoice.pdf', compact('invoice', 'prescription'));
-        return $pdf->stream('document.pdf');
-        // return view('backend.invoice.view', compact('invoice', 'prescription'));
     }
 
   

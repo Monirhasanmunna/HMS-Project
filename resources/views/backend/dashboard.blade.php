@@ -75,7 +75,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>{{$total_amount}}</h3>
+                <h3>Tk. {{$total_amount}}</h3>
                 <p>Cash In</p>
               </div>
               <div class="icon">

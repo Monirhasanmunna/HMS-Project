@@ -38,40 +38,90 @@
                                 
                                 @csrf
                                 <input type="hidden" name="type" value="{{$type}}">
-                                <input type="hidden" name="doctor_id" value="{{$pres->doctor_id}}">
-                                <input type="hidden" name="patient_id" value="{{$pres->patient_id}}">
+                                <input type="hidden" name="doctor_id" value="{{isset($pres) ? $pres->doctor_id : $admission->patients->doctor->id}}">
+                                <input type="hidden" name="patient_id" value="{{isset($pres) ? $pres->patient_id : $admission->patient_id}}">
                                 <input type="hidden" name="ref_id" value="{{$ref_id}}">
+                                <input type="hidden" name="addmission_date" value="{{isset($admission) ? $admission->created_at : ''}}">
                                 
+                                @if($type==1) 
+                                    <div class="form-group">
+                                        <label>
+                                                Presciption
+                                        </label>
+                                        <?php 
+                                        $amount=0;
+                                        if($pres->visit_type=='first'){
+                                            $amount=$pres->doctor->firstVisit;
+                                        }elseif($pres->visit_type=='repeat'){
+                                            $amount=$pres->doctor->nextVisit;
+                                        }elseif($pres->visit_type=='reportonly'){
+                                            $amount=$pres->doctor->reportOnly;
+                                        }
+                                        ?>
+                                        <input name="amount" type="number" class="form-control" value="{{$amount}}">
+                                        <input type="hidden" name="invoice_type" value="prescription">
+                                        
+                                        @error('amount')
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name">Discount</label>
+                                        <input type="number" name="discount" value="0" class="form-control @error('name') is-invalid @enderror" id="name">
+                                        @error('discount')
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name">remark</label>
+                                        
+                                        <textarea name="remark" id="" cols="30" rows="3" class="form-control">{{@old('remark')}}</textarea>
+                                        @error('remark')
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+                                @endif
+
+                                @if($type == 2) 
                                 <div class="form-group">
-                                    @if($type==1) 
+                                   
                                     <label>
-                                            Presciption
+                                            Admission
                                     </label>
-                                    <?php 
-                                    $amount=0;
-                                    if($pres->visit_type=='first'){
-                                        $amount=$pres->doctor->firstVisit;
-                                    }elseif($pres->visit_type=='repeat'){
-                                        $amount=$pres->doctor->nextVisit;
-                                    }elseif($pres->visit_type=='reportonly'){
-                                        $amount=$pres->doctor->reportOnly;
-                                    }
-                                    ?>
-                                    <input name="amount" type="number" class="form-control" value="{{$amount}}">
-                                    <input type="hidden" name="invoice_type" value="prescription">
-                                    @endif
+                                    <input name="amount" type="number" class="form-control" value="{{isset($admission) ? $admission->bedgroup->price : ''}}" readonly>
+                                    <input type="hidden" name="invoice_type" value="bed">
                                     @error('amount')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="name">Paid</label>
+                                    <input type="number" name="paid" class="form-control @error('name') is-invalid @enderror" id="paid" value="{{isset($admission) ? $admission->paid : ''}}" readonly>
+                                    @error('paid')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
                                     <label for="name">Discount</label>
-                                    <input type="number" name="discount" value="0" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter Name" value="{{  old('discuount') }}">
+                                    <input type="number" name="discount" value="0" class="form-control @error('name') is-invalid @enderror" id="name" readonly>
                                     @error('discount')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                     @enderror
                                 </div>
+
+
+                                <div class="form-group">
+                                    <label for="name">Due</label>
+                                    <input type="number" name="due" class="form-control @error('name') is-invalid @enderror" id="name" value="{{isset($admission) ? $admission->due : ''}}" readonly>
+                                    @error('due')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    @enderror
+                                </div>
+
                                 <div class="form-group">
                                     <label for="name">remark</label>
                                     
@@ -81,7 +131,7 @@
                                     @enderror
                                 </div>
 
-
+                                @endif
                             
                                 @if(!isset($medicine))
                                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i><span class="pl-1">Submit</span></button>
