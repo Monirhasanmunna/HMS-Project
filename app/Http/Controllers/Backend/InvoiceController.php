@@ -100,7 +100,8 @@ class InvoiceController extends Controller
             'remark'        =>$request->remark,
             'amount'        =>$request->amount,
             'discount'      =>$request->discount,
-            'net_amount'    =>($request->amount - $request->discount),
+            'net_amount'    =>($request->amount - $request->discount - $request->due),
+            'due'           => $request->due,
             'admission_date'=>$request->addmission_date
         ]);
 
@@ -118,7 +119,7 @@ class InvoiceController extends Controller
             }
             
             notify()->success('Invoice Generated');
-            return redirect()->route('app.prescription.index');
+            return redirect()->route('app.invoice.index');
         }
 
 
@@ -130,10 +131,13 @@ class InvoiceController extends Controller
                 'unit_amount'=>$request->amount
             ]);
 
-            // $pres=AdmittedPatient::where('id', $request->ref_id)->first();
-            // $pres->status='complete';
-            // $pres->save();
+            $adpatient=AdmittedPatient::where('id', $request->ref_id)->first();
+            $adpatient->status='complete';
+            $adpatient->save();
+
         }
+            notify()->success('Invoice Generated');
+            return redirect()->route('app.invoice.index');
     }
         
     }
@@ -148,12 +152,13 @@ class InvoiceController extends Controller
     {
 
         if($invoice->invoice_type=='prescription'){
+            $invoices = Invoice::all();
             $prescription=Prescription::find($invoice->ref_id);
-            return view('backend.invoice.view', compact('invoice', 'prescription'));
+            return view('backend.invoice.view', compact('invoice', 'prescription','invoices'));
         }else{
-          
+            $invoices = Invoice::all();
             $admission=AdmittedPatient::find($invoice->ref_id);
-            return view('backend.invoice.view', compact('invoice', 'admission'));
+            return view('backend.invoice.view', compact('invoice', 'admission','invoices'));
         }
        
     }

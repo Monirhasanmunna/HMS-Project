@@ -30,6 +30,7 @@ use App\Http\Controllers\Backend\RoomController;
 use App\Http\Controllers\Backend\SetupController;
 use App\Http\Controllers\Backend\User\RoleController;
 use App\Http\Controllers\Backend\User\UserController;
+use App\Http\Controllers\Backend\UserLogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -348,6 +349,13 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/edit/{id}',[RoomController::class,'edit'])->name('edit');
         Route::put('/update/{id}',[RoomController::class,'update'])->name('update');
         Route::get('/delete/{id}',[RoomController::class,'destroy'])->name('delete');
+    });
+
+
+    Route::group(['as'=>'userlog.','prefix'=>'report/user/log'],function(){
+
+        Route::any('/index',[UserLogController::class,'index'])->name('index');
+        Route::post('/delete/{id}',[UserLogController::class,'destroy'])->name('delete');
     });
     
 });

@@ -52,7 +52,9 @@
                             <td>{{$admition->paid}}</td>
                             <td>{{$admition->due}}</td>
                             <td class="text-center">
+                              @if ($admition->status != 'complete')
                               <a href="{{route('app.invoice.generate',['2',$admition->id])}}" class="btn-sm btn-info">Generate Pdf</a>
+                              @endif
                               <a href="{{Route('app.admition.edit',[$admition->id])}}" class="btn-sm btn-primary">Edit</a>
                               <a href="javascript:void(0)" onclick="patientDelete({{$admition->id}})" class="btn-sm btn-danger">Delete</a>
                             </td>

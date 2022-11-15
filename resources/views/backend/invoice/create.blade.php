@@ -106,15 +106,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Discount</label>
-                                    <input type="number" name="discount" value="0" class="form-control @error('name') is-invalid @enderror" id="name" readonly>
-                                    @error('discount')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                    @enderror
-                                </div>
-
-
-                                <div class="form-group">
                                     <label for="name">Due</label>
                                     <input type="number" name="due" class="form-control @error('name') is-invalid @enderror" id="name" value="{{isset($admission) ? $admission->due : ''}}" readonly>
                                     @error('due')

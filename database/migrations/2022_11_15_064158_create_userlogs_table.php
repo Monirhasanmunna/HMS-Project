@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admitted_patients', function (Blueprint $table) {
+        Schema::create('userlogs', function (Blueprint $table) {
             $table->id();
-            $table->integer('patient_id');
-            $table->integer('bedgroup_id');
-            $table->integer('bed_id');
-            $table->integer('paid');
-            $table->integer('due')->nullable();
-            $table->enum('status', ['new','complete'])->default('new');
+            $table->string('user_name');
+            $table->string('role');
+            $table->string('email');
+            $table->string('log_date');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admitted_patients');
+        Schema::dropIfExists('userlogs');
     }
 };

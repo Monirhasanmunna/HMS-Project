@@ -56,7 +56,6 @@
             <?php 
             foreach ($admittedPatient as $key => $addpatient) {
               $due_amount = $due_amount + $addpatient['due'];
-              $total_amount = $total_amount + $addpatient['paid'];
             }
             ?>
             <div class="small-box bg-warning">
@@ -222,23 +221,23 @@
                 <table class="table tborder">
                   <thead>
                     <tr>
-                      <th style="width: 500px;">User Name</th>
-                      <th>Last Access Time</th>
+                      <th style="width:270px;">User Name</th>
+                      <th style="width:270px;">Email</th>
+                      <th style="">Last Access Time</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach ($userlogs as $log)
+                    <?php
+                      $currentDateTime = $log->created_at;
+                      $newDateTime = date('d/m/y : h:i A', strtotime($currentDateTime));
+                    ?>
                     <tr>
-                      <td>Rafiq Ahmed</td>
-                      <td>28-09-2022 9:38</td>
+                      <td>{{$log->user_name}}</td>
+                      <td>{{$log->email}}</td>
+                      <td>{{$newDateTime}}</td>
                     </tr>
-                    <tr>
-                      <td>Rafiq Ahmed</td>
-                      <td>28-09-2022 9:38</td>
-                    </tr>
-                    <tr>
-                      <td>Rafiq Ahmed</td>
-                      <td>28-09-2022 9:38</td>
-                    </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>

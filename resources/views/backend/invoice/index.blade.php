@@ -78,9 +78,9 @@
                             <th>Doctor</th>
                             <th>Patient</th>
                             <th>Invoice Type</th>
-                            <th>Status</th>
                             <th>Amount</th>
                             <th>discount</th>
+                            <th>Due</th>
                             <th>Net Amount</th>
                             <th class="text-center" style="width: 170px">Action</th>
                           </tr>
@@ -90,12 +90,14 @@
                             $amount=0;
                             $discount=0;
                             $net_amount=0;
+                            $due       =0;
                             ?>
                         @foreach ($invoices as $key=>$inv)
                         <?php
                             $amount +=$inv->amount;
                             $discount +=$inv->discount;
                             $net_amount +=$inv->net_amount;
+                            $due +=$inv->due;
                         ?>
                         <tr>
                             <td>{{$key+1}}</td>
@@ -104,9 +106,9 @@
                             <td>{{$inv->doctor->name}}</td>
                             <td>{{$inv->patient->name}}</td>
                             <td>{{$inv->invoice_type}}</td>
-                            <td>{{$inv->status}}</td>
                             <td>{{number_format($inv->amount,2)}}</td>
                             <td>{{number_format($inv->discount,2)}}</td>
+                            <td>{{number_format($inv->due,2)}}</td>
                             <td>{{number_format($inv->net_amount,2)}}</td>
                             
                             <td class="text-center">
@@ -127,9 +129,9 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
                                 <th>{{number_format($amount,2)}}</th>
                                 <th>{{number_format($discount,2)}}</th>
+                                <th>{{number_format($due,2)}}</th>
                                 <th>{{number_format($net_amount,2)}}</th>
                                 <th></th>
                             </tr>

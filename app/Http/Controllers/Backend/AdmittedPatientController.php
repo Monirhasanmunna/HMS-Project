@@ -7,6 +7,7 @@ use App\Models\AdmittedPatient;
 use App\Models\Bed;
 use App\Models\BedGroup;
 use App\Models\Patient;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 

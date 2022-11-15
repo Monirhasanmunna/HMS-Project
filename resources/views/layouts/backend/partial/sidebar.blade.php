@@ -278,6 +278,28 @@
         </li>
 
 
+        <li class="nav-header"><span class="badge badge-primary">Invoices</span></li>
+
+        {{-- {{Request::is('app/bed*')?'activate':''}} --}}
+        <li class="nav-item">
+          <a href="#" class="nav-link"> 
+            <i class="fa-solid fa-users"></i>
+            <p>
+              Invoice
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item ml-2">
+              <a href="{{Route('app.invoice.index')}}" class="nav-link">
+                <i class="fa-solid fa-list"></i>
+                <p>Invoice List</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
         <li class="nav-header"><span class="badge badge-primary">Human Resources</span></li>
 
         {{-- {{Request::is('app/bed*')?'activate':''}} --}}
@@ -484,12 +506,6 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item ml-2">
-              <a href="{{Route('app.invoice.index')}}" class="nav-link">
-                <i class="fa-solid fa-list"></i>
-                <p>Invoice List</p>
-              </a>
-            </li>
-            <li class="nav-item ml-2">
               <a href="#" class="nav-link">
                 <i class="fa-solid fa-bars"></i>
                 <p>Financial Report</p>
@@ -537,7 +553,7 @@
         <li class="nav-header"><span class="badge badge-primary">Logs</span></li>
         
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="" class="nav-link">
             <i class="fa fa-history"></i>
             <p>
               Logs
@@ -545,16 +561,16 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item ml-2">
+            {{-- <li class="nav-item ml-2">
               <a href="#" class="nav-link">
                  <i class="fa fa-history"></i>
                 <p>Transaction Logs</p>
               </a>
-            </li>
+            </li> --}}
             <li class="nav-item ml-2">
-              <a href="#" class="nav-link">
+              <a href="{{Route('app.userlog.index')}}" class="nav-link">
                  <i class="fa fa-history"></i>
-                <p>User Login logs</p>
+                <p>User logs</p>
               </a>
             </li>
           </ul>
