@@ -4,6 +4,7 @@
 @section('content')
 <div class="content-wrapper">
     <!-- Main content -->
+    {{-- @if(Auth::user()->role->slug == 'super-admin' || Auth::user()->role->slug == 'admin') --}}
     <section class="content">
       <div class="container-fluid">
         <div class="row px-2 pt-2">
@@ -764,6 +765,13 @@
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
     </section>
+    {{-- @endif --}}
     <!-- /.content -->
+
+
+
+    {{-- @if(Auth::user()->role->slug == 'doctor' || Auth::user()->role->slug == 'assistant')
+
+    @endif --}}
   </div>
 @endsection

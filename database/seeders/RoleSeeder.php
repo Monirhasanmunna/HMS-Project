@@ -27,7 +27,7 @@ class RoleSeeder extends Seeder
             'name'      => 'Doctor',
             'slug'      => 'doctor',
             'deletable' => true
-        ]);
+        ])->permissions()->sync($permissions->pluck('id'));
 
         Role::updateOrCreate([
             'name'      => 'Assistant',

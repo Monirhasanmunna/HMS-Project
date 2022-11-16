@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('doctors', function (Blueprint $table) {
-
             $table->id();
             $table->bigInteger('room_id')->nullable();
             $table->bigInteger('followup_id')->nullable();

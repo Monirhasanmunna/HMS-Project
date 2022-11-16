@@ -24,9 +24,9 @@
             <div class="img-holder">
                 <div class="bg"></div>
                 <div class="info-holder">
+                    <img class="mb-5" src="{{asset('photos/qblogo2.png')}}" alt="">
                     <h3>Get more things done with Loggin platform.</h3>
                     <p>Access to the most powerfull tool in the entire design and web industry.</p>
-                    <img src="{{asset('backend/login/images/graphic4.svg')}}" alt="">
                 </div>
             </div>
             <div class="form-holder">

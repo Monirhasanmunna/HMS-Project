@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class,'doctor_id');
+    }
 }

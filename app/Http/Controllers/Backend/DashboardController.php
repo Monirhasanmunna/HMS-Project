@@ -9,6 +9,7 @@ use App\Models\Patient;
 use App\Models\Userlog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class DashboardController extends Controller
@@ -21,11 +22,18 @@ class DashboardController extends Controller
     public function index()
     {
         Gate::authorize('app.dashboard');
-        $invoices = Invoice::all();
-        $admittedPatient = AdmittedPatient::all();
-        $patients = Patient::all();
-        $todayspatient = Patient::whereDate('created_at',Carbon::today())->get();
-        $userlogs = Userlog::orderBy('id','DESC')->get()->take(5);
+       
+            $invoices = Invoice::all();
+            $admittedPatient = AdmittedPatient::all();
+            $patients = Patient::all();
+            $todayspatient = Patient::whereDate('created_at',Carbon::today())->get();
+            $userlogs = Userlog::orderBy('id','DESC')->get()->take(5);
+        
+        
+        // if(Auth::user()->role->slug == 'doctor'){
+        //     $user = Auth::user();
+        // }
+        
         return view('backend.dashboard',compact('invoices','admittedPatient','patients','todayspatient','userlogs'));
     }
 

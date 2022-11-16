@@ -12,10 +12,12 @@
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
+              {{Auth::user()->role->slug}}
             </p>
           </a>
         </li>
 
+        
         <li class="nav-header"><span class="badge badge-primary">User Management</span></li>
 
         <li class="nav-item">
@@ -298,7 +300,8 @@
             </li>
           </ul>
         </li>
-
+        
+        @if(Auth::user()->role->slug != 'doctor' && Auth::user()->role->slug != 'assistant')
 
         <li class="nav-header"><span class="badge badge-primary">Human Resources</span></li>
 
@@ -444,32 +447,6 @@
           </ul>
         </li>
 
-        {{-- <li class="nav-header">Settings</li>
-
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="fa-solid fa-gear"></i>
-            <p>
-              Setting
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item ml-2">
-              <a href="{{Route('app.disease.index')}}" class="nav-link">
-                <i class="fa-solid fa-bars"></i>
-                <p>Disease</p>
-              </a>
-            </li>
-            <li class="nav-item ml-2">
-              <a href="{{Route('app.blood.index')}}" class="nav-link">
-                <i class="fa-solid fa-hand-holding-heart"></i>
-                <p>Blood Group</p>
-              </a>
-            </li>
-          </ul>
-        </li> --}}
-
         <li class="nav-header"><span class="badge badge-primary">Pathology</span></li>
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -575,7 +552,9 @@
             </li>
           </ul>
         </li>
+        @endif
 
+        
         <li class="nav-header"><span class="badge badge-primary">Settings</span></li>
         <li class="nav-item">
           <a href="#" class="nav-link {{Request::is('app/setting*')?'activate':''}}">
@@ -586,12 +565,14 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+            @if(Auth::user()->role->slug != 'doctor' && Auth::user()->role->slug != 'assistant')
             <li class="nav-item ml-2">
               <a href="{{Route('app.room.index')}}" class="nav-link">
                 <i class="fa-solid fa-person-shelter"></i>
                 <p>Room List</p>
               </a>
             </li>
+            @endif
             <li class="nav-item ml-2">
               <a href="{{Route('app.holiday.index')}}" class="nav-link">
                 <i class="fa-solid fa-person-shelter"></i>
@@ -604,6 +585,7 @@
                 <p>Follow Up</p>
               </a>
             </li>
+            @if(Auth::user()->role->slug != 'doctor' && Auth::user()->role->slug != 'assistant')
             <li class="nav-item ml-2">
               <a href="{{Route('app.setup.index')}}" class="nav-link">
                 <i class="fa-solid fa-gears"></i>
@@ -612,6 +594,7 @@
                 </p>
               </a>
             </li>
+            @endif
           </ul>
         </li>
       </ul>

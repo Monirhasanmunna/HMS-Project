@@ -28,14 +28,16 @@ class UserSeeder extends Seeder
             'role_id' => Role::where('slug','doctor')->first()->id,
             'name'    => 'Doctor',
             'email'   => 'doctor@gmail.com',
-            'password'=> bcrypt(11111111)
+            'password'=> bcrypt(11111111),
+            'status'  => 1
         ]);
 
         User::updateOrCreate([
             'role_id' => Role::where('slug','assistant')->first()->id,
             'name'    => 'Assistant',
             'email'   => 'assistant@gmail.com',
-            'password'=> bcrypt(11111111)
+            'password'=> bcrypt(11111111),
+            'status'  => 1
         ]);
     }
 }

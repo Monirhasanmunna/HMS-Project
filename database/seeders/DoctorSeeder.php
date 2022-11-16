@@ -34,8 +34,7 @@ class DoctorSeeder extends Seeder
             'b_consultant_of_college'   => 'ইউটিএস মেডিকেল কলেজ এন্ড হাসপাতাল',
             'room_id'                   => 1,
             'followup_id'               => 1,
-            'holiday_id'                => 1
-
+            'holiday_id'                => 1,
         ]);
 
         Doctor::updateOrCreate([
