@@ -47,12 +47,11 @@
 
 <div class="content-wrapper">
 
-  <div class="page d-flex flex-column justify-content-between" style="min-height: 50vh;">
+  <div class="page d-flex flex-column justify-content-between" style="min-height: 50vh; ">
     <button id="printBtn" onclick="window.print()" class="btn btn-primary float-right m-4">Print</button>
     <div>
       
       <div class="row p-5 pb-0">
-        
         <div class="col">
           <h2 class="m-0">{{$prescription->doctor->name}}</h2>
           <p class="m-0"><b>{{$prescription->doctor->degrees}}</b></p>
@@ -65,7 +64,7 @@
         </div>
 
         <div class="col text-center">
-          <img style="width: 100px;height:100px;border-radius:50%" src="{{isset($setup)? asset('storage/logo/'.$setup->logo): ''}}" alt="">
+          <img style="width: 100px;height:100px;border-radius:50%" src="{{asset('photos/qblogo.png')}}" alt="">
           <p class="m-0"><span style="font-size: 25px;font-family: 'Roboto', sans-serif;color:#2C9540;">{{isset($setup)?$setup->company_name : ''}}</span></p>
         </div>
 

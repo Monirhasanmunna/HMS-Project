@@ -12,7 +12,6 @@
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
-              {{Auth::user()->role->slug}}
             </p>
           </a>
         </li>
@@ -144,6 +143,7 @@
           </ul>
         </li>
 
+        @if(Auth::user()->role->slug != 'doctor' && Auth::user()->role->slug != 'assistant')
         <li class="nav-item">
           <a href="#" class="nav-link {{Request::is('app/admition*')?'activate':''}}">
             <i class="fa-solid fa-bed-pulse"></i>
@@ -167,7 +167,7 @@
             </li>
           </ul>
         </li>
-
+        @endif
 
         <li class="nav-header"><span class="badge badge-primary">Prescription Management</span></li>
 

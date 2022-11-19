@@ -10,6 +10,7 @@ use App\Models\Disease;
 use App\Models\Doctor;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class PatientController extends Controller
@@ -22,7 +23,20 @@ class PatientController extends Controller
     public function index()
     {
         Gate::authorize('app.patient.index');
-        $patients = Patient::orderBy('id','DESC')->get();
+        if(Auth::user()->role->slug == 'doctor'){
+            //when login as doctor
+            $user_email = Auth::user()->email;
+            $doctor_id = Doctor::where('email',$user_email)->first()->id;
+            $patients = Patient::where('doctor_id',$doctor_id)->orderBy('id','DESC')->get();
+            
+        }elseif(Auth::user()->role->slug == 'assistant'){
+            //when login as assistant
+            //code comming soon
+        }else{
+            //when login as admin
+            $patients = Patient::orderBy('id','DESC')->get();
+        }
+        
         return view('backend.patient.index',compact('patients'));
     }
 

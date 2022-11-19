@@ -12,6 +12,10 @@
       </li> --}}
     </ul>
 
+    <div class="title bg-primary px-2" style="border-radius: 5px;">
+      <h4>{{$setup->company_name}}</h4>
+    </div>
+
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->

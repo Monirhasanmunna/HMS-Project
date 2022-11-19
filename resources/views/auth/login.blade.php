@@ -35,7 +35,7 @@
                         <div class="website-logo-inside">
                             <a href="#">
                                 <div class="logo">
-                                    <img class="logo-size" src="{{asset('backend/login/images/logo-light.svg')}}" alt="">
+                                    {{-- <img class="logo-size" src="{{asset('photos/qblogo3.png')}}" alt=""> --}}
                                 </div>
                             </a>
                         </div>

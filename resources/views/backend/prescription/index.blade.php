@@ -45,7 +45,7 @@
                           </thead>
                           <tbody>
                         @foreach ($prescriptions as $key=>$pres)
-                     <tr>
+                          <tr>
                             <td>{{$key+1}}</td>
                             
                             <td>{{$pres->patient->name}}</td>
@@ -60,7 +60,7 @@
                               <a href="{{route('app.invoice.generate',['1',$pres->id])}}" class="btn btn-sm btn-success" >Generate Invoice</a>
                               <a href="javascript:void(0)" onclick="presDelete({{$pres->id}})" class="btn btn-sm btn-danger">Delete</a>
                               @elseif(($pres->status=='complete') || ($pres->status=='paid') || ($pres->status=='pending'))
-                              <a href="{{route('app.invoice.show', 2)}}" class="btn btn-sm btn-success" >Invoice</a>
+                              <a href="{{route('app.invoice.show', $pres->id)}}" class="btn btn-sm btn-success" >Invoice</a>
                               @endif
                               
                             </td>

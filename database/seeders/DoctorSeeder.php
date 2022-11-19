@@ -49,7 +49,7 @@ class DoctorSeeder extends Seeder
             'nextVisit'             => 600,
             'reportOnly'            => 400,
 
-            'b_name'                    => 'ডাঃ শিরিন আক্তার',
+            'b_name'                    => 'ডাঃ শিরিন ফাতেমা',
             'b_degrees'                 => 'এমবিবিএস,এমপিসিএস,ডিজিও,এফসিপিএস',
             'b_specialist'              => 'গাইনি এন্ড অবস',
             'b_designation'             => 'কন্সাল্টেন্ট',

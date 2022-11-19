@@ -9,6 +9,7 @@ use App\Models\Invoice;
 use App\Models\InvoiceDetail;
 use App\Models\Prescription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class InvoiceController extends Controller
@@ -27,12 +28,33 @@ class InvoiceController extends Controller
         $toDate  = date('Y-m-d');
 
         $inv=Invoice::query();
-        
-        
-        if($request->filled('doctor_id')){
-            $inv->where('doctor_id',$request->get('doctor_id'));
-            $doctor_id=$request->get('doctor_id');
+
+        if(Auth::user()->role->slug == 'doctor'){
+            //get auth user email
+            $email = Auth::user()->email;
+            //check user email in doctor table and get id
+            $doctor_id = Doctor::where('email',$email)->first()->id;
+            //select doctor as get id from doctor table
+            if(isset($doctor_id)){
+                $inv->where('doctor_id',$doctor_id);
+            }
+            
+            $doctors=Doctor::where('id',$doctor_id)->get();
+
+        }elseif(Auth::user()->role->slug == 'assistant'){
+
+            //code coming soon
+
+        }else{
+            //when log in as super-admin
+            if($request->filled('doctor_id')){
+                $inv->where('doctor_id',$request->get('doctor_id'));
+                $doctor_id=$request->get('doctor_id');
+            }
+            $doctors=Doctor::all();
         }
+        
+        
         if($request->filled('invoice_type')){            
             $inv->where('invoice_type',$request->get('invoice_type'));
             $invoice_type=$request->get('invoice_type');
@@ -46,7 +68,6 @@ class InvoiceController extends Controller
         
         $inv->orderBy('id', 'desc');
         $invoices=$inv->get();
-        $doctors=Doctor::all();
         return view('backend.invoice.index', compact('invoices', 'doctors', 'invoice_type', 'doctor_id', 'fromDate', 'toDate'));
     }
 
@@ -119,7 +140,7 @@ class InvoiceController extends Controller
             }
             
             notify()->success('Invoice Generated');
-            return redirect()->route('app.invoice.index');
+            return redirect()->route('app.prescription.index');
         }
 
 
@@ -137,7 +158,7 @@ class InvoiceController extends Controller
 
         }
             notify()->success('Invoice Generated');
-            return redirect()->route('app.invoice.index');
+            return redirect()->route('app.bed.index');
     }
         
     }

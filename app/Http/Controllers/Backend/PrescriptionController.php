@@ -8,6 +8,7 @@ use App\Models\Complaint;
 use App\Models\Doctor;
 use App\Models\Eatingtime;
 use App\Models\Frequency;
+use App\Models\Invoice;
 use App\Models\MedicalTest;
 use App\Models\Medicine;
 use App\Models\Patient;
@@ -20,6 +21,7 @@ use App\Models\PrescriptionTest;
 use App\Models\Quantity;
 use App\Models\QuantityType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class PrescriptionController extends Controller
@@ -31,6 +33,7 @@ class PrescriptionController extends Controller
         $newPatient=Patient::orderBy('id', 'desc')->take(5)->get();
         $newPrescription=Prescription::orderBy('id', 'desc')->take(5)->get();
         $totalPrescription=Prescription::count();
+        
         // dd($newPatient);
         Gate::authorize('app.prescriptiondashboard.dashboard');
         return view('backend.prescription.dashboard', compact('totalPatient','newPatient','newPrescription','totalPrescription'));
@@ -44,8 +47,22 @@ class PrescriptionController extends Controller
     public function index()
     {
         Gate::authorize('app.prescription.index');
-        $prescriptions=Prescription::all();
+        if(Auth::user()->role->slug == 'doctor'){
+
+            $user_email = Auth::user()->email;
+            $doctor_id = Doctor::where('email',$user_email)->first()->id;
+            $prescriptions=Prescription::where('doctor_id',$doctor_id)->orderBy('id','DESC')->get();
+
+        }elseif(Auth::user()->role->slug == 'assistant'){
+            //code comming soon
+        }else{
+
+            $prescriptions=Prescription::all();
+            
+        }
+        
         return view('backend.prescription.index', compact('prescriptions'));
+       
     }
 
     public function view(Request $request, Prescription $prescription){
@@ -78,19 +95,35 @@ class PrescriptionController extends Controller
     public function create()
     {
         Gate::authorize('app.prescription.create');
-        $patients = Patient::all();
+        $doctor_info = '';
+        if(Auth::user()->role->slug == 'doctor'){
+            //when log in as doctor
+            $user_email = Auth::user()->email;
+            $doctor_id = Doctor::where('email',$user_email)->first()->id;
+            $patients = Patient::where('doctor_id',$doctor_id)->get();
+            $doctors = Doctor::where('email',$user_email)->get();
+            $doctor_info = Doctor::where('email',$user_email)->first();
+
+        }elseif(Auth::user()->role->slug == 'assistant'){
+            //when log in as assistant
+            //code coming soon
+
+        }else{
+            //when log in as super-admin
+            $patients = Patient::all();
+            $doctors = Doctor::all();
+        }
+
         $medicines = Medicine::all();
         $medicalTest = MedicalTest::where('status', 1)->get();
         $advice = Advice::all();
-        $doctors = Doctor::all();
         $complaints=Complaint::all();
-
         $quantities = Quantity::all();
         $qtytypies  = QuantityType::all();
         $eatingTimes = Eatingtime::all();
         $frequencies = Frequency::all();
         return view('backend.prescription.create', compact('patients', 'medicines', 'medicalTest', 'advice', 'doctors',
-        'complaints', 'quantities', 'qtytypies','eatingTimes', 'frequencies'));
+        'complaints', 'quantities', 'qtytypies','eatingTimes', 'frequencies','doctor_info'));
     }
 
     /**
@@ -102,12 +135,14 @@ class PrescriptionController extends Controller
     public function store(Request $request)
     {
         Gate::authorize('app.prescription.create');
-        // dd($request->all());
+         //dd($request->all());
         $request->validate([
             'patient_id'    => 'required',
-            'medicine'   => 'required',
+            'medicine'      => 'required',
             'doctor_id'     => 'required',  
-            'cc'            => 'required'          
+            'cc'            => 'required',
+            'med'           => 'required',
+            'next_meet'     => 'required'   
         ]);
 
 

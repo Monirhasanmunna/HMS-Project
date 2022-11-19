@@ -63,7 +63,7 @@ html, body {
 
 .website-logo .logo {
     display: inline-block;
-    background-image: url("../images/logo-light.svg");
+    background-image: url("../photos/qblogo3.png");
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -90,7 +90,7 @@ html, body {
 
 .website-logo-inside .logo {
     display: inline-block;
-    background-image: url("../images/logo-light.svg");
+    background-image: url("../photos/qblogo3.png");
     background-size: contain;
     background-repeat: no-repeat;
 }

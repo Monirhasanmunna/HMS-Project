@@ -24,13 +24,24 @@ class UserSeeder extends Seeder
             'status'  => 1
         ]);
 
+       
         User::updateOrCreate([
             'role_id' => Role::where('slug','doctor')->first()->id,
-            'name'    => 'Doctor',
-            'email'   => 'doctor@gmail.com',
+            'name'    => 'Dr.Sharmin Akter',
+            'email'   => 'sharmin@gmail.com',
             'password'=> bcrypt(11111111),
             'status'  => 1
         ]);
+
+
+        User::updateOrCreate([
+            'role_id' => Role::where('slug','doctor')->first()->id,
+            'name'    => 'Dr.Shirin Fatema',
+            'email'   => 'shirin@gmail.com',
+            'password'=> bcrypt(11111111),
+            'status'  => 1
+        ]);
+
 
         User::updateOrCreate([
             'role_id' => Role::where('slug','assistant')->first()->id,

@@ -16,7 +16,7 @@ class SetupSeeder extends Seeder
     public function run()
     {
         Setup::updateOrCreate([
-            'company_name'  => 'QB It Solution',
+            'company_name'  => 'QB Hospital Manegement System',
             'email'         => 'qb@gmail.com',
             'phone'         => '01754781245',
             'address'       => 'Chittagong',
