@@ -45,6 +45,7 @@
                             </h3>
                         </div>
                         <div class="card-body">
+                            @if(Auth::user()->role->slug == 'doctor')
                             <div class="row p-2 pb-0">
                                 <div class="col">
                                   <h2 class="m-0">{{$doctor_info->name ?? ''}}</h2>
@@ -75,6 +76,7 @@
                                 </div>
                               </div>
                               <hr>
+                              @endif
                             <div class="form-row">
                                 <div class="form-group col-12">
                                     <label>Doctor</label>
