@@ -350,9 +350,8 @@
 
 
         <li class="nav-header"><span class="badge badge-primary">Financial Activities</span></li>
-        {{-- {{Request::is('app/bed*')?'activate':''}} --}}
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link {{Request::is('app/expensecategory*')?'activate':''}}">
             <i class="fa fa-money-check"></i>
             <p>
               Financial Activities
@@ -361,7 +360,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item ml-2">
-              <a href="#" class="nav-link">
+              <a href="{{Route('app.expcategory.index')}}" class="nav-link" >
                 <i class="fa fa-money-check"></i>
                 <p>Expense Category</p>
               </a>
