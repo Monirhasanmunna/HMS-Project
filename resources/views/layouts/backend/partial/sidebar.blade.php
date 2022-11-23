@@ -366,7 +366,7 @@
               </a>
             </li>
             <li class="nav-item ml-2">
-              <a href="#" class="nav-link">
+              <a href="{{Route('app.expense.index')}}" class="nav-link">
                 <i class="fa fa-money-check"></i>
                 <p>Expense</p>
               </a>

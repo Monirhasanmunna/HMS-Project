@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\DiseaseController;
 use App\Http\Controllers\Backend\DoctorController;
 use App\Http\Controllers\Backend\EatingTimeController;
 use App\Http\Controllers\Backend\ExpenseCategoryController;
+use App\Http\Controllers\Backend\ExpenseController;
 use App\Http\Controllers\Backend\FollowUpController;
 use App\Http\Controllers\Backend\FrequencyController;
 use App\Http\Controllers\Backend\HolidayController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\Backend\SetupController;
 use App\Http\Controllers\Backend\User\RoleController;
 use App\Http\Controllers\Backend\User\UserController;
 use App\Http\Controllers\Backend\UserLogController;
+use App\Models\ExpenseCategory;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -370,6 +372,15 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/delete/{id}',[ExpenseCategoryController::class,'destroy'])->name('delete');
     });
     
+    Route::group(['as'=>'expense.','prefix'=>'account/expense'],function(){
+
+        Route::get('/index',[ExpenseController::class,'index'])->name('index');
+        Route::get('/create',[ExpenseController::class,'create'])->name('create');
+        Route::post('/store',[ExpenseController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[ExpenseController::class,'edit'])->name('edit');
+        Route::post('/update/{id}',[ExpenseController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[ExpenseController::class,'destroy'])->name('delete');
+    });
 });
 
 
