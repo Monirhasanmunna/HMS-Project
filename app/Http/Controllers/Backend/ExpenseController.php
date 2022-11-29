@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Expense;
 use App\Models\ExpenseCategory;
+use App\Models\NetIncome;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExpenseController extends Controller
 {
@@ -15,8 +17,28 @@ class ExpenseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $expenseCategories = ExpenseCategory::orderBy('id','desc')->get();
+    {   
+       // return $request->all();
+
+        $expenseCategories = ExpenseCategory::orderBy('id','desc')->get();
         $expenses = Expense::orderBy('id','desc')->get();
+
+        return view('backend.expense.index',compact('expenses','expenseCategories'));
+    }
+
+
+    public function expenseShow(Request $request)
+    {
+        $expenseCategories = ExpenseCategory::orderBy('id','desc')->get();
+        $expense        = Expense::query();
+        $from_date      = $request->fromDate;
+        $to_date        = $request->toDate;
+        $invoice_type   = $request->invoice_type;
+
+        $expenses =  $expense->whereDate('created_at','>=', $from_date)
+                        ->whereDate('created_at','<=', $to_date)
+                        ->where('expense_category_id',$invoice_type)
+                        ->get();
         return view('backend.expense.index',compact('expenses','expenseCategories'));
     }
 
@@ -44,12 +66,17 @@ class ExpenseController extends Controller
             'amount'                => 'required',
         ]);
 
-       Expense::create([
+      $exp = Expense::create([
         'name'                  => $request->name,
         'expense_category_id'   => $request->expenseCategory_id,
         'amount'                => $request->amount,
         'description'           => $request->description
        ]);
+
+        $inc = NetIncome::findOrfail(1);
+        $inc->debit = $inc->debit + $exp->amount;
+        $inc->net   = $inc->credit - $inc->debit;
+        $inc->save();
 
        notify()->success('Expense added successfully');
        return redirect()->route('app.expense.index');
@@ -93,12 +120,25 @@ class ExpenseController extends Controller
             'amount'                => 'required',
         ]);
 
-       Expense::findOrfail($request->expense_id)->update([
-        'name'                  => $request->name,
-        'expense_category_id'   => $request->expenseCategory_id,
-        'amount'                => $request->amount,
-        'description'           => $request->description
-       ]);
+
+        $exp = Expense::findOrfail($request->expense_id);
+
+        $inc = NetIncome::findOrfail(1);
+        $inc->debit = $inc->debit-$exp->amount;
+        $inc->net   = $inc->net - $inc->amount;
+        $inc->save();
+
+
+        $exp->name                  = $request->name;
+        $exp->expense_category_id   = $request->expenseCategory_id;
+        $exp->amount                = $request->amount;
+        $exp->description           = $request->description;
+        $exp->save();
+
+
+        $inc->debit = $inc->debit + $request->amount;
+        $inc->net = $inc->credit - $inc->debit;
+        $inc->save(); 
 
        notify()->success('Expense updated successfully');
        return redirect()->route('app.expense.index');

@@ -25,8 +25,8 @@
                 <div class="bg"></div>
                 <div class="info-holder">
                     <img class="mb-5" src="{{asset('photos/qblogo2.png')}}" alt="">
-                    <h3>Get more things done with Loggin platform.</h3>
-                    <p>Access to the most powerfull tool in the entire design and web industry.</p>
+                    <h3>Simple || Digital || Secure || Worldwide</h3>
+                    <p>We are at Your Side to Make Your System Faster & Easier Through Modern Technology. With Security.</p>
                 </div>
             </div>
             <div class="form-holder">
@@ -34,9 +34,7 @@
                     <div class="form-items">
                         <div class="website-logo-inside">
                             <a href="#">
-                                <div class="logo">
-                                    {{-- <img class="logo-size" src="{{asset('photos/qblogo3.png')}}" alt=""> --}}
-                                </div>
+                                <img style="width:170px;" src="{{asset('photos/qblogo3.png')}}" alt="">
                             </a>
                         </div>
                         <form method="POST" action="{{ route('login') }}">

@@ -28,13 +28,43 @@
                             <button class="btn btn-sm btn-primary mt-3 mr-3" id="expenseAdd"><i class="fa-solid fa-circle-plus"></i><span class="pl-1">Add New</span></button>
                           </span>
                         <div class="table-responsive p-3">
+                          <form action="{{route('app.expense.report')}}" method="POST">
+                            @csrf
+                        <div class="row pb-3 rb-3">
+                          <div class="col-sm-2 offset-">
+                          </div>
+                          <div class="col-sm-2">
+                            <!-- <label for="type">Type</label> -->
+                            <select name="invoice_type" id="doctor" class="form-control">
+                              <option value="#" selected hidden>--Select Once--</option>
+                              @foreach ($expenseCategories as $cat)
+                                  <option value="{{$cat->id}}">{{$cat->name}}</option>
+                              @endforeach
+                            </select>
+                            
+                          </div>
+                          <div class="col-sm-2">
+                              {{-- <label for="fromDate">From</label> --}}
+                              <input type="date" class="form-control" value="<?php echo date("Y-m-d"); ?>" placeholder="from date" name="fromDate" id="fromDate">
+                          </div>
+                          <div class="col-sm-2">
+                              <!-- <label for="toDate">to</label> -->
+                              <input type="date" class="form-control"  value="<?php echo date("Y-m-d"); ?>" placeholder="to date" name="toDate" id="toDate">
+                          </div>
+                          <div class="col-sm-2">
+                              <button class="btn btn-sm btn-success">Search</button>
+                          </div>
+                        </div>
+                      </form>
+
                           <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                             <thead class="thead-dark">
                               <tr>
                                 <th style="width: 150px">#</th>
                                 <th style="width: 350px">Name</th>
-                                <th style="width: 350px">Category</th>
-                                <th style="width: 150">Amount</th>
+                                <th style="width: 150px">Category</th>
+                                <th>Amount</th>
+                                <th>Date</th>
                                 <th class="text-center">Action</th>
                               </tr>
                             </thead>
@@ -45,6 +75,7 @@
                                 <td>{{$expense->name}}</td>
                                 <td>{{$expense->expenseCategory->name}}</td>
                                 <td>{{$expense->amount}}</td>
+                                <td>{{$expense->created_at}}</td>
                                 <td class="text-center">
                                   <a class=" btn-sm btn-primary" onclick = "editexpense({{$expense->id}})" href="javascript:void(0)"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
                                   <a class=" btn-sm btn-danger"  onclick = 'deleteexpense({{$expense->id}})' href="javascript:void(0)"><i class="fa-solid fa-trash"></i>Delete</a>
@@ -114,7 +145,7 @@
                               <div class="col-lg-12">
                                   <div class="card mb-4">
                                     <div class="modal-header bg-primary text-white">
-                                      <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-building"></i><span class="pl-1">Expense Category Edit</span></h5>
+                                      <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-building"></i><span class="pl-1">Expense Edit</span></h5>
                                       <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>

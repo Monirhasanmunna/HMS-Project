@@ -42,5 +42,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SetupSeeder::class);
         $this->call(ExpenseCategorySeeder::class);
         $this->call(ExpenseSeeder::class);
+        $this->call(NetIncomeSeeder::class);
     }
 }

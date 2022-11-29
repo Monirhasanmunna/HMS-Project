@@ -7,6 +7,7 @@ use App\Models\AdmittedPatient;
 use App\Models\Doctor;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
+use App\Models\NetIncome;
 use App\Models\Prescription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -126,6 +127,14 @@ class InvoiceController extends Controller
             'admission_date'=>$request->addmission_date
         ]);
 
+
+        $inc = NetIncome::findOrfail(1);
+        $inc->credit = $inc->credit + $invoice->net_amount;
+        $inc->net = $inc->credit - $inc->debit;
+        $inc->save();
+
+
+
         if($request->invoice_type == 'prescription') {
                 if($invoice){
                 InvoiceDetail::create([
@@ -158,7 +167,7 @@ class InvoiceController extends Controller
 
         }
             notify()->success('Invoice Generated');
-            return redirect()->route('app.bed.index');
+            return redirect()->route('app.admition.index');
     }
         
     }

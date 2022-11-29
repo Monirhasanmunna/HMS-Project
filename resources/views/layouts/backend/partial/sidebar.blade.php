@@ -371,14 +371,14 @@
                 <p>Expense</p>
               </a>
           </li>
-          <li class="nav-item ml-2">
+          {{-- <li class="nav-item ml-2">
             <a href="#" class="nav-link">
               <i class="fa fa-money-check"></i>
               <p>Income</p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item ml-2">
-            <a href="#" class="nav-link">
+            <a href="{{route('app.income.index')}}" class="nav-link">
               <i class="fa fa-money-check"></i>
               <p>Net</p>
             </a>

@@ -24,6 +24,7 @@ use App\Http\Controllers\Backend\InvoiceController;
 use App\Http\Controllers\Backend\MedicalTestController;
 use App\Http\Controllers\Backend\MedicineController;
 use App\Http\Controllers\Backend\MedicineGroupController;
+use App\Http\Controllers\Backend\NetIncomeController;
 use App\Http\Controllers\Backend\PatientController;
 use App\Http\Controllers\Backend\PrescriptionController;
 use App\Http\Controllers\Backend\QuantityController;
@@ -380,6 +381,21 @@ Route::group(['as'=>'app.','prefix'=>'app','namespace'=>'Backend','middleware'=>
         Route::get('/edit/{id}',[ExpenseController::class,'edit'])->name('edit');
         Route::post('/update/{id}',[ExpenseController::class,'update'])->name('update');
         Route::get('/delete/{id}',[ExpenseController::class,'destroy'])->name('delete');
+
+        Route::any('/report',[ExpenseController::class,'expenseShow'])->name('report');
+    });
+
+
+    Route::group(['as'=>'income.','prefix'=>'account/net/income'],function(){
+
+        Route::get('/index',[NetIncomeController::class,'index'])->name('index');
+        Route::get('/create',[NetIncomeController::class,'create'])->name('create');
+        Route::post('/store',[NetIncomeController::class,'store'])->name('store');
+        Route::get('/edit/{id}',[NetIncomeController::class,'edit'])->name('edit');
+        Route::post('/update/{id}',[NetIncomeController::class,'update'])->name('update');
+        Route::get('/delete/{id}',[NetIncomeController::class,'destroy'])->name('delete');
+
+        Route::any('/report',[NetIncomeController::class,'expenseShow'])->name('report');
     });
 });
 

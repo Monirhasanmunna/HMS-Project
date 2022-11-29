@@ -55,7 +55,7 @@
     <!-- Brand Logo -->
     <a href="{{Route('app.dashboard')}}" class="brand-link ">
       <img src="{{asset('photos/qblogo.png')}}" alt="" class="brand-image img-circle elevation-3">
-      <span class="brand-text text-white"><small>QB SOFTWARE & ENGINEERING</small></span>
+      <span class="brand-text text-white">QB Software & ENG.</span>
     </a>
 
     <!-- Sidebar -->

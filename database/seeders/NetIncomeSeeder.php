@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Expense;
+use App\Models\NetIncome;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ExpenseSeeder extends Seeder
+class NetIncomeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,10 +15,11 @@ class ExpenseSeeder extends Seeder
      */
     public function run()
     {
-        Expense::updateOrCreate([
-            'expense_category_id'   => 1,
-            'name'                  => 'Electricity Bill',
-            'amount'                => 0
+        NetIncome::updateOrcreate([
+            'particular'    => 'Total',
+            'debit'         => 0,
+            'credit'        => 0,
+            'net'           => 0
         ]);
     }
 }
